@@ -22,7 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-.svelte-kit
-.svelte-kit/
-.svelte-kit/*
