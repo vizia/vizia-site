@@ -55,6 +55,7 @@
     transition: all ease-in-out 100ms;
 
     &:hover {
+      background-color: #51afef22;
       color: #51afef;
     }
   }
