@@ -1,4 +1,7 @@
 <script lang="ts">
+  import "./styles.scss";
+  import Dropdown from "./HeaderDropdown.svelte";
+  import HeaderDropdown from "./HeaderDropdown.svelte";
 </script>
 
 <div class="header">
@@ -17,27 +20,45 @@
   </div>
 
   <div class="nav-wrapper">
-    <p>Tutorial</p>
-    <p>Docs</p>
-    <p>Examples</p>
-    <p>Blog</p>
-    <p>FAQ</p>
-    <p>About</p>
+    <a href="/tutorial">Tutorial</a>
+    <HeaderDropdown
+      dropdownName="Docs"
+      options={[
+        ["Guide", "/guide"],
+        ["Examples", "/examples"],
+        ["API", "/api"],
+      ]}
+    />
+    <a href="/blog">Blog</a>
+    <a href="/faq">FAQ</a>
+    <a href="/about">About</a>
   </div>
 </div>
 
 <style lang="scss">
+  a {
+    font-weight: 500;
+    color: white;
+    text-decoration: inherit;
+    transition: all ease-in-out 100ms;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      color: #51afef;
+    }
+  }
+
   .header {
-    height: 3rem;
+    height: 4rem;
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 4rem;
+    padding: 0px 8rem;
     gap: 0px;
 
-    background-color: #282828;
+    background-color: #1d1d1d;
   }
 
   .logo-wrapper {
@@ -47,13 +68,13 @@
     gap: 0.5rem;
 
     > img {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
     }
 
     > p {
+      margin-top: 0.25rem;
       width: auto;
-      height: 3rem;
       color: white;
       vertical-align: bottom;
       font-weight: 600;
@@ -80,16 +101,16 @@
   }
 
   .nav-wrapper {
-    width: 25rem;
+    width: 40rem;
+    height: 100%;
 
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 0;
-    gap: 1.5rem;
 
-    left: calc(50% - 12.5rem);
+    left: calc(50% - 20rem);
 
     position: absolute;
     align-self: center;

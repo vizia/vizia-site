@@ -1,9 +1,8 @@
-<script>
+<script lang="ts">
 </script>
 
-<section>
-	wassup
-</section>
+<!-- Landing Page -->
+<section>wassup</section>
 
 <style>
 </style>
