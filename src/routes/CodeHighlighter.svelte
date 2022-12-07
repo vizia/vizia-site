@@ -49,7 +49,7 @@
   textarea {
     resize: none;
     width: 100%;
-    height: 100%;
+    height: 28rem;
     border: 0;
     font-size: 1.2rem;
     padding-left: 1rem;
@@ -59,11 +59,10 @@
     background-color: #1d1d1d;
     opacity: 1;
     line-height: 1.4rem;
-    overflow: hidden;
-    overflow-x: scroll;
     scrollbar-width: initial;
-    color: #00000000;
+    color: #88888888;
     caret-color: #51afef;
+    overflow: hidden;
 
     text-overflow: clip;
     white-space: pre;
@@ -80,14 +79,15 @@
   #highlighting {
     position: absolute;
     pointer-events: none;
-    width: 100%;
-    height: 100%;
+    width: calc(65rem * 0.7);
+    height: 28rem;
     border: 0;
     font-size: 1.2rem;
     padding: 1rem;
     tab-size: 2;
     box-sizing: border-box;
     line-height: 1.4rem;
+    overflow: hidden;
 
     &:focus {
       outline: none;

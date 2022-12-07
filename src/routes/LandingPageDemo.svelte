@@ -42,7 +42,7 @@
   }
 
   .demo-preview-console-container {
-    width: 40%;
+    width: 30%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -67,25 +67,7 @@
   }
 
   .demo-code {
-    width: 80%;
-
-    // & > textarea {
-    //   width: 100%;
-    //   height: calc(100% - 2rem);
-    //   height: stretch;
-    //   background-color: #1d1d1d;
-    //   border: 2px solid transparent;
-    //   border-bottom-left-radius: 0.5rem;
-    //   text-align: start;
-    //   text-justify: auto;
-    //   padding: calc(1rem - 2px) calc(1rem - 2px);
-    //   box-sizing: border-box;
-
-    //   &:focus {
-    //     outline: none;
-    //     border: 2px solid #51afef;
-    //   }
-    // }
+    width: 70%;
   }
 
   .demo-preview {
