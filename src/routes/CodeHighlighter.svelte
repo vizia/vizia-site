@@ -1,0 +1,109 @@
+<script lang="ts">
+  import rust from "highlight.js/lib/languages/rust";
+  import hljs from "highlight.js/lib/core";
+  import "highlight.js/styles/github-dark.css";
+  hljs.registerLanguage("rust", rust);
+
+  export let code = "";
+  let highlighting: HTMLTextAreaElement;
+  let textarea: HTMLTextAreaElement;
+
+  import { createEventDispatcher, onMount } from "svelte";
+  const dispatch = createEventDispatcher();
+
+  type HighlightedCode = undefined | string;
+  let highlighted: HighlightedCode = "";
+
+  function update() {
+    highlighted = hljs.highlight(code, {
+      language: "rust",
+      ignoreIllegals: true,
+    }).value;
+    dispatch("highlight", { highlighted });
+
+    highlighting.setSelectionRange(
+      textarea.selectionStart,
+      textarea.selectionEnd
+    );
+  }
+
+  onMount(() => {
+    update();
+  });
+</script>
+
+<div>
+  <textarea
+    spellcheck="false"
+    bind:value={code}
+    on:click={update}
+    on:input={update}
+    bind:this={textarea}
+  />
+  <pre
+    contenteditable="true"
+    id="highlighting"
+    aria-hidden="true"
+    bind:innerHTML={highlighted}
+  />
+</div>
+
+<style lang="scss">
+  div {
+    width: 100%;
+    height: calc(100% - 2rem);
+    display: flex;
+  }
+
+  textarea {
+    resize: none;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    tab-size: 2;
+    box-sizing: border-box;
+    background-color: #1d1d1d;
+    opacity: 1;
+    line-height: 1.4rem;
+    overflow: hidden;
+    overflow-x: scroll;
+    scrollbar-width: initial;
+    color: #00000000;
+    caret-color: #51afef;
+
+    text-overflow: clip;
+    white-space: pre;
+
+    &::selection {
+      background-color: #424242;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  #highlighting {
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    font-size: 1.2rem;
+    padding: 1rem;
+    tab-size: 2;
+    box-sizing: border-box;
+    line-height: 1.4rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    & code {
+      white-space: pre;
+    }
+  }
+</style>

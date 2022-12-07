@@ -1,6 +1,7 @@
 <script lang="ts">
   import BgElement from "./BGElement.svelte";
   import LandingPageButton from "./LandingPageButton.svelte";
+  import LandingPageDemo from "./LandingPageDemo.svelte";
 </script>
 
 <!-- Landing Page -->
@@ -57,6 +58,7 @@
       <LandingPageButton text="Tutorial" link="/tutorial" />
     </div>
   </div>
+  <LandingPageDemo />
 </div>
 
 <style lang="scss">
