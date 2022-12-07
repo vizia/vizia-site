@@ -5,9 +5,6 @@
   hljs.registerLanguage("rust", rust);
 
   export let code = "";
-  let highlighting: HTMLTextAreaElement;
-  let textarea: HTMLTextAreaElement;
-
   import { createEventDispatcher, onMount } from "svelte";
   const dispatch = createEventDispatcher();
 
@@ -20,11 +17,6 @@
       ignoreIllegals: true,
     }).value;
     dispatch("highlight", { highlighted });
-
-    highlighting.setSelectionRange(
-      textarea.selectionStart,
-      textarea.selectionEnd
-    );
   }
 
   onMount(() => {
@@ -38,7 +30,6 @@
     bind:value={code}
     on:click={update}
     on:input={update}
-    bind:this={textarea}
   />
   <pre
     contenteditable="true"
