@@ -92,9 +92,5 @@
     &:focus {
       outline: none;
     }
-
-    & code {
-      white-space: pre;
-    }
   }
 </style>

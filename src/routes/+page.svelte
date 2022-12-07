@@ -44,6 +44,7 @@
     size={16}
     rotation={90}
   />
+  <div class="blur" />
 </div>
 <div class="overlay">
   <div class="landing-main">
@@ -62,6 +63,15 @@
 </div>
 
 <style lang="scss">
+  .blur {
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+
+    mask: linear-gradient(transparent, black 50%);
+
+    backdrop-filter: blur(8px);
+  }
   .bgs {
     position: relative;
     width: 100%;
