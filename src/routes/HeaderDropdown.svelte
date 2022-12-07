@@ -35,10 +35,12 @@
     <p>{dropdownName}</p>
   </div>
   {#if open}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
       class="dropdown-contents"
       on:pointerenter={() => hoverContainer(true)}
       on:pointerleave={() => hoverContainer(false)}
+      on:click={() => hoverContainer(false)}
     >
       {#each options as [name, link]}
         <a href={link}>{name}</a>
@@ -81,7 +83,7 @@
     width: 10rem;
 
     position: fixed;
-    top: 3rem;
+    top: 3.5rem;
     background-color: #282828;
     border-radius: 0.25rem;
 

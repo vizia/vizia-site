@@ -5,10 +5,10 @@
 </script>
 
 <div class="header">
-  <div class="logo-wrapper">
+  <a class="logo-wrapper" href="/">
     <img src="/vizia_logo.svg" class="logo" alt="Vite Logo" />
     <p>Vizia</p>
-  </div>
+  </a>
 
   <div class="links-wrapper">
     <a href="https://github.com/vizia/vizia" target="_blank" rel="noreferrer">
@@ -49,8 +49,10 @@
   }
 
   .header {
+    width: 100%;
     height: 4rem;
 
+    position: fixed;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -58,7 +60,10 @@
     padding: 0px 8rem;
     gap: 0px;
 
-    background-color: #1d1d1d;
+    background-color: #2a2a2a;
+    box-sizing: border-box;
+
+    z-index: 100;
   }
 
   .logo-wrapper {
@@ -66,6 +71,8 @@
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+
+    padding: 0.5rem;
 
     > img {
       width: 1.5rem;
@@ -93,6 +100,8 @@
       width: 1.5rem;
       height: 1.5rem;
 
+      padding: 0rem;
+
       img {
         width: 1.5rem;
         height: 1.5rem;
@@ -101,8 +110,7 @@
   }
 
   .nav-wrapper {
-    width: 40rem;
-    height: 100%;
+    width: 22rem;
 
     display: flex;
     flex-direction: row;
@@ -110,7 +118,7 @@
     align-items: center;
     padding: 0;
 
-    left: calc(50% - 20rem);
+    left: calc(50% - 11rem);
 
     position: absolute;
     align-self: center;
