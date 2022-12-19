@@ -2,12 +2,18 @@
 	"/": [
 		"src/routes/+page.ts"
 	],
-	"/tutorial": [],
-	"/docs": [],
-	"/examples": [],
-	"/blog": [],
-	"/faq": [],
 	"/about": [],
-	"/guide": [],
-	"/api": []
+	"/api": [],
+	"/blog": [],
+	"/docs": [
+		"src/routes/docs/+layout.server.ts",
+		"src/routes/docs/+layout.server.ts"
+	],
+	"/docs/[...docsPage]": [
+		"src/routes/docs/[...docsPage]/+page.ts",
+		"src/routes/docs/+layout.server.ts"
+	],
+	"/examples": [],
+	"/faq": [],
+	"/tutorial": []
 }

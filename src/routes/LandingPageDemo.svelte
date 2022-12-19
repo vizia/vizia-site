@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CodeHighlighter from "./CodeHighlighter.svelte";
+  // import CodeHighlighter from "./CodeHighlighter.svelte";
 
   export let code =
     "pub struct MyView;\n\nimpl MyView {\n\tpub fn new(cx: &mut Context) -> Handle<MyView> {\n\t\tMyView {}.build(cx, |cx| {\n\t\t\tButton::new(cx, |_| println!(“Hello from MyView!”),\n\t\t\t\t|cx| Label::new(cx, “Press Me!”));\n\t\t});\n\t}\n}\n\nimpl View for MyView {}";
@@ -10,7 +10,7 @@
     <div class="header">
       <p>basic-view.rs</p>
     </div>
-    <CodeHighlighter {code} />
+    <!-- <CodeHighlighter {code} /> -->
   </div>
 
   <div class="demo-preview-console-container">

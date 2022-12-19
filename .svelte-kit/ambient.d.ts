@@ -39,6 +39,7 @@ declare module '$env/static/private' {
 	export const npm_config_noproxy: string;
 	export const HOME: string;
 	export const CHROME_DESKTOP: string;
+	export const OLDPWD: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const DESKTOP_SESSION: string;
 	export const npm_package_json: string;
@@ -54,6 +55,7 @@ declare module '$env/static/private' {
 	export const HOMEBREW_SHELLENV_PREFIX: string;
 	export const SYSTEMD_EXEC_PID: string;
 	export const DBUS_SESSION_BUS_ADDRESS: string;
+	export const npm_config_engine_strict: string;
 	export const COLORTERM: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 	export const COLOR: string;
@@ -122,6 +124,7 @@ declare module '$env/static/private' {
 	export const NVM_RC_VERSION: string;
 	export const INIT_CWD: string;
 	export const EDITOR: string;
+	export const NODE_ENV: string;
 }
 
 /**
@@ -164,6 +167,7 @@ declare module '$env/dynamic/private' {
 		npm_config_noproxy: string;
 		HOME: string;
 		CHROME_DESKTOP: string;
+		OLDPWD: string;
 		TERM_PROGRAM_VERSION: string;
 		DESKTOP_SESSION: string;
 		npm_package_json: string;
@@ -179,6 +183,7 @@ declare module '$env/dynamic/private' {
 		HOMEBREW_SHELLENV_PREFIX: string;
 		SYSTEMD_EXEC_PID: string;
 		DBUS_SESSION_BUS_ADDRESS: string;
+		npm_config_engine_strict: string;
 		COLORTERM: string;
 		GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 		COLOR: string;
@@ -247,6 +252,8 @@ declare module '$env/dynamic/private' {
 		NVM_RC_VERSION: string;
 		INIT_CWD: string;
 		EDITOR: string;
+		NODE_ENV: string;
+		[key: `PUBLIC_${string}`]: undefined;
 		[key: string]: string | undefined;
 	}
 }
@@ -263,6 +270,6 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
-		[key: string]: string | undefined;
+		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }

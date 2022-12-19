@@ -141,7 +141,16 @@
 
       h1,
       h2 {
+        line-height: 1.33;
         text-align: center;
+      }
+
+      h1 {
+        font-weight: 700;
+      }
+
+      h2 {
+        font-weight: 400;
       }
 
       b {
