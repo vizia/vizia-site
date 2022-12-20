@@ -5,7 +5,7 @@
 	font-family: Rubik, Inter, Avenir, Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-weight: 400;
-	line-height: 24px;
+	line-height: 1.5rem;
 	font-weight: 400;
 
 	color-scheme: light dark;
@@ -19,6 +19,9 @@
 	-webkit-text-size-adjust: 100%;
 }
 
+*::selection {
+	background: #ffffff18;
+}
 // Docs styling
 
 .docs-content {
@@ -38,6 +41,7 @@
 		padding: 1rem;
 		border-radius: 0.5rem;
 		background-color: #121212;
+		box-sizing: border-box;
 	}
 }
 

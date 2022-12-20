@@ -4,7 +4,7 @@ import type { LayoutServerLoad } from './$types';
 
 export const prerender = true;
 
-const base = path.resolve("", "src/lib/docs");
+const base = path.resolve("", "src/lib");
 
 export interface Path {
     name: string

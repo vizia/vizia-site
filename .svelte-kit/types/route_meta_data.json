@@ -5,15 +5,14 @@
 	"/about": [],
 	"/api": [],
 	"/blog": [],
-	"/docs": [
-		"src/routes/docs/+layout.server.ts",
-		"src/routes/docs/+layout.server.ts"
-	],
-	"/docs/[...docsPage]": [
-		"src/routes/docs/[...docsPage]/+page.ts",
-		"src/routes/docs/+layout.server.ts"
-	],
 	"/examples": [],
 	"/faq": [],
+	"/guide": [
+		"src/routes/guide/+layout.server.ts"
+	],
+	"/guide/[...docsPage]": [
+		"src/routes/guide/[...docsPage]/+page.ts",
+		"src/routes/guide/+layout.server.ts"
+	],
 	"/tutorial": []
 }

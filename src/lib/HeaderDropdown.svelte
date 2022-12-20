@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let dropdownName = 'Dropdown';
-	export let header_link = '/';
 	export let options: [string, string][] = [
 		['Option 1', '/'],
 		['Option 2', '/']
@@ -26,14 +25,13 @@
 </script>
 
 <div class="dropdown">
-	<a
+	<div
 		class="dropdown-title"
 		on:mouseenter={() => hoverTitle(true)}
 		on:mouseleave={() => hoverTitle(false)}
-		href={header_link}
 	>
 		<p>{dropdownName}</p>
-	</a>
+	</div>
 	{#if open}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div

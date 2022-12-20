@@ -1,5 +1,4 @@
 <script lang="ts">
-	import './styles.scss';
 	import HeaderDropdown from './HeaderDropdown.svelte';
 </script>
 
@@ -22,9 +21,8 @@
 		<a href="/tutorial">Tutorial</a>
 		<HeaderDropdown
 			dropdownName="Docs"
-			header_link="/docs"
 			options={[
-				['Guide', '/docs/guide'],
+				['Guide', '/guide'],
 				['Examples', '/examples'],
 				['API', '/api']
 			]}

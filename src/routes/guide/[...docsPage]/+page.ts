@@ -4,7 +4,7 @@ import type { PageLoad } from './$types';
 
 export const load = (async ({ params, url, fetch }) => {
 
-  const response = await fetch(`${url.origin}/src/lib/docs/${params.docsPage}.md`);
+  const response = await fetch(`${url.origin}/src/lib/guide${params.docsPage === "" ? "" : "/" + params.docsPage}.md`);
   if (response.ok) {
     return {
       docsPage: params.docsPage,

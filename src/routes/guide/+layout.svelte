@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LayoutData, PageData } from './$types';
+	import type { LayoutData } from './$types';
 	import type { Path } from './+layout.server';
 
 	export let data: LayoutData;
@@ -15,7 +15,7 @@
 				{#each section.files as { name, link }}
 					<li>
 						<a
-							href={`/docs/${section.name}/${link}`}
+							href={`/${section.name}/${link}`}
 							class={data.params && data.params.docsPage == `${section.name}/${link}`
 								? 'active'
 								: ''}
