@@ -70,13 +70,6 @@
 
 <svelte:window on:scroll={highlight} on:resize={update} />
 
-<div class="docs-content">
-	<SvelteMarkdown
-		source={data.markdown}
-		renderers={{ code: CodeRenderer, tablecell: TableCellRenderer }}
-	/>
-</div>
-
 <div class="on-this-page">
 	{#if loaded}
 		<h2>On This Page</h2>
@@ -92,10 +85,18 @@
 	{/if}
 </div>
 
+<div class="docs-content">
+	<SvelteMarkdown
+		source={data.markdown}
+		renderers={{ code: CodeRenderer, tablecell: TableCellRenderer }}
+	/>
+</div>
+
 <style lang="scss">
 	.docs-content {
 		position: relative;
 		width: calc(100% - (2 * var(--sidebar-width)));
+		height: calc(100vh - 4rem);
 		margin: 0rem var(--sidebar-width);
 		padding: 2rem 4rem;
 
@@ -103,6 +104,9 @@
 		flex-direction: column;
 		gap: 1.5rem;
 		align-items: center;
+
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 
 	.on-this-page {
