@@ -109,6 +109,7 @@
 
 	.nav-wrapper {
 		width: 22rem;
+		height: 100%;
 
 		display: flex;
 		flex-direction: row;

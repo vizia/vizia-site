@@ -24,29 +24,31 @@
 	}
 </script>
 
-<p
+<div
 	class="dropdown-title"
 	on:mouseenter={() => hoverTitle(true)}
 	on:mouseleave={() => hoverTitle(false)}
 >
-	{dropdownName}
-</p>
-{#if open}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div
-		class="dropdown-contents"
-		on:pointerenter={() => hoverContainer(true)}
-		on:pointerleave={() => hoverContainer(false)}
-		on:click={() => hoverContainer(false)}
-	>
-		{#each options as [name, link]}
-			<a href={link}>{name}</a>
-		{/each}
-	</div>
-{/if}
+	<p>
+		{dropdownName}
+	</p>
+</div>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+	class="dropdown-contents"
+	class:open
+	on:pointerenter={() => hoverContainer(true)}
+	on:pointerleave={() => hoverContainer(false)}
+	on:click={() => hoverContainer(false)}
+>
+	{#each options as [name, link]}
+		<a href={link}>{name}</a>
+	{/each}
+</div>
 
 <style lang="scss">
 	.dropdown {
+		transition: all ease-in-out 100ms;
 		width: auto;
 	}
 
@@ -64,23 +66,20 @@
 
 	.dropdown-title {
 		padding: 0.5rem 1rem;
+		height: 100%;
 		cursor: pointer;
-
-		p {
-			width: auto;
-			height: 24px;
-			overflow: visible;
-		}
+		transition: all ease-in-out 100ms;
+		display: grid;
+		place-items: center;
 
 		&:hover {
-			p {
-				color: #51afef;
-			}
+			color: #51afef;
 		}
 	}
 
 	.dropdown-contents {
 		width: 10rem;
+		transition: all ease-in-out 100ms;
 
 		position: fixed;
 		top: 3.5rem;
@@ -90,14 +89,19 @@
 		display: flex;
 		flex-direction: column;
 
-		box-shadow: 0px 0.25rem 0.25rem black;
+		box-shadow: 0px 0.25rem 0.25rem #00000044;
 
 		padding: 0.5rem 0;
+		opacity: 0;
 
 		> a {
 			line-height: 1rem;
 			padding: 0.5rem 1rem;
 			height: auto;
 		}
+	}
+
+	.dropdown-contents.open {
+		opacity: 1;
 	}
 </style>
