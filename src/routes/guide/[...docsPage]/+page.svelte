@@ -4,11 +4,13 @@
 	import CodeRenderer from '$lib/renderers/CodeRenderer.svelte';
 	import TableCellRenderer from '$lib/renderers/TableCellRenderer.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
+	import { afterNavigate } from '$app/navigation';
 
 	export let data: PageData;
 
 	let loaded = false;
 
+	let hash = '';
 	let content: Element;
 	let headings: NodeListOf<Element>;
 	let positions: number[];
@@ -16,9 +18,19 @@
 
 	onMount(async () => {
 		await document.fonts.ready;
+		update();
+		highlight();
+	});
 
+	afterNavigate(() => {
+		update();
+		highlight();
+	});
+
+	function update() {
 		let content_ = document.querySelector('.docs-content');
 		if (content_) {
+			console.log('set');
 			content = content_;
 
 			let headings_ = content?.querySelectorAll('h1[id]');
@@ -32,8 +44,31 @@
 		}
 
 		loaded = true;
-	});
+	}
+
+	function highlight() {
+		const { top, bottom } = content.getBoundingClientRect();
+		let i = headings.length;
+		while (i--) {
+			if (bottom - height < 50 || positions[i] + top < 100) {
+				const heading = headings[i];
+				hash = `#${heading.id}`;
+				return;
+			}
+		}
+		hash = '';
+	}
+
+	function get_text(name: string): string {
+		let entity = document.querySelector('#' + name);
+		if (entity) {
+			return entity.textContent ? entity.textContent : '';
+		}
+		return '';
+	}
 </script>
+
+<svelte:window on:scroll={highlight} on:resize={update} />
 
 <div class="docs-content">
 	<SvelteMarkdown
@@ -44,33 +79,46 @@
 
 <div class="on-this-page">
 	{#if loaded}
-		<ul>
+		<h2>On This Page</h2>
+		<ol>
 			{#each headings as heading}
 				<li>
-					<a href={`#${heading.id}`}>
-						{heading.id}
+					<a href={`#${heading.id}`} class:active={`#${heading.id}` === hash}>
+						{get_text(heading.id)}
 					</a>
 				</li>
 			{/each}
-		</ul>
-		{#each positions as position}
-			<p>{position}</p>
-		{/each}
-		<p>{height}</p>
+		</ol>
 	{/if}
 </div>
 
 <style lang="scss">
 	.docs-content {
 		position: relative;
+		width: calc(100% - (2 * var(--sidebar-width)));
+		margin: 0rem var(--sidebar-width);
+		padding: 2rem 4rem;
+
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: center;
 	}
 
 	.on-this-page {
 		position: fixed;
-		width: 20rem;
-		margin-left: calc(100% - 20rem);
+		width: var(--sidebar-width);
+		margin-left: calc(100% - var(--sidebar-width));
 		height: 100%;
 		padding-left: 2rem;
 		padding-top: 4rem;
+
+		h2 {
+			font-size: 1rem;
+			font-weight: 600;
+			text-transform: uppercase;
+			color: #aaa;
+			letter-spacing: 0.1em;
+		}
 	}
 </style>

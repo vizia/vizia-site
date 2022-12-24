@@ -24,30 +24,32 @@
 	}
 </script>
 
-<div class="dropdown">
+<p
+	class="dropdown-title"
+	on:mouseenter={() => hoverTitle(true)}
+	on:mouseleave={() => hoverTitle(false)}
+>
+	{dropdownName}
+</p>
+{#if open}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
-		class="dropdown-title"
-		on:mouseenter={() => hoverTitle(true)}
-		on:mouseleave={() => hoverTitle(false)}
+		class="dropdown-contents"
+		on:pointerenter={() => hoverContainer(true)}
+		on:pointerleave={() => hoverContainer(false)}
+		on:click={() => hoverContainer(false)}
 	>
-		<p>{dropdownName}</p>
+		{#each options as [name, link]}
+			<a href={link}>{name}</a>
+		{/each}
 	</div>
-	{#if open}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div
-			class="dropdown-contents"
-			on:pointerenter={() => hoverContainer(true)}
-			on:pointerleave={() => hoverContainer(false)}
-			on:click={() => hoverContainer(false)}
-		>
-			{#each options as [name, link]}
-				<a href={link}>{name}</a>
-			{/each}
-		</div>
-	{/if}
-</div>
+{/if}
 
 <style lang="scss">
+	.dropdown {
+		width: auto;
+	}
+
 	a {
 		font-weight: 500;
 		color: white;
@@ -61,10 +63,10 @@
 	}
 
 	.dropdown-title {
+		padding: 0.5rem 1rem;
 		cursor: pointer;
 
 		p {
-			padding: 1rem 1rem;
 			width: auto;
 			height: 24px;
 			overflow: visible;
