@@ -2,7 +2,7 @@
 	import HeaderDropdown from './HeaderDropdown.svelte';
 </script>
 
-<div class="header">
+<nav class="header" aria-label="Primary">
 	<a class="logo-wrapper" href="/">
 		<img src="/vizia_logo.svg" class="logo" alt="Vite Logo" />
 		<p>Vizia</p>
@@ -31,7 +31,7 @@
 		<a href="/faq">FAQ</a>
 		<a href="/about">About</a>
 	</div>
-</div>
+</nav>
 
 <style lang="scss">
 	a {

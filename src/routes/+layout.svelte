@@ -19,12 +19,13 @@
 	}
 
 	main {
-		flex: 1;
+		position: relative;
+		margin: 0 auto;
+		padding-top: 4rem;
 		display: flex;
 		flex-direction: row;
 		width: 100%;
-		margin: 0 auto;
-		margin-top: 4rem;
-		box-sizing: border-box;
+		overflow: hidden;
+		background-color: #1d1d1d;
 	}
 </style>

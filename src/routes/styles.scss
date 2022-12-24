@@ -5,8 +5,9 @@
 	font-family: Rubik, Inter, Avenir, Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-weight: 400;
-	line-height: 1.5rem;
+	line-height: 1.7rem;
 	font-weight: 400;
+	box-sizing: border-box;
 
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
@@ -26,22 +27,106 @@
 
 .docs-content {
 	position: relative;
+	width: calc(100% - 40rem);
+	margin: 0rem 20rem;
+	padding: 2rem 4rem;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	align-items: center;
+
+	img {
+		padding: 2rem;
+		width: auto;
+		height: auto;
+		max-width: 100%;
+		object-fit: contain;
+	}
 
 	h1 {
+		margin-top: 2rem;
+		width: 100%;
 		font-size: 1.5rem;
 		font-weight: 600;
+		scroll-margin-top: 6rem;
+	}
+
+	h2 {
+		margin-top: 1rem;
+		width: 100%;
+		font-weight: 600;
+		font-size: 1.2rem;
+	}
+
+	h3 {
+		margin-top: 1rem;
+		width: 100%;
+		font-weight: 600;
+		font-size: 1rem;
 	}
 
 	p {
 		font-size: 1rem;
 		font-weight: 400;
+		width: 100%;
+		color: #bbb;
+
+		code {
+			padding: 0.25rem 0.25rem;
+			background-color: #121212;
+			border-radius: 0.25rem;
+		}
+	}
+
+	a {
+		code {
+			padding: 0.25rem 0.25rem;
+			background-color: #121212;
+			border-radius: 0.25rem;
+			color: #bbb;
+
+			border: 1px solid #51afef88;
+			box-sizing: content-box;
+
+			&:hover {
+				border: 1px solid #51afef;
+			}
+		}
 	}
 
 	pre {
 		padding: 1rem;
 		border-radius: 0.5rem;
-		background-color: #121212;
+		background-color: #282828;
 		box-sizing: border-box;
+		width: 100%;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: separate;
+		overflow: hidden;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+
+		background-color: #121212;
+
+		thead {
+			th {
+				font-size: 0.8rem;
+				text-transform: uppercase;
+				color: #888;
+				font-weight: 600;
+				text-align: start;
+			}
+		}
+
+		tbody {
+			td {
+				padding: 0.25rem 0rem;
+			}
+		}
 	}
 }
 
@@ -51,6 +136,7 @@
 	margin: 0;
 	padding: 0;
 	scrollbar-width: thin;
+	box-sizing: inherit;
 }
 
 body {

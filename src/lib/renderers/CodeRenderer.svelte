@@ -1,5 +1,5 @@
 <script lang="ts">
-	import './md_style.scss';
+	import '../md_style.scss';
 	import hljs from 'highlight.js';
 	import rust from 'highlight.js/lib/languages/rust';
 	hljs.registerLanguage('rust', rust);
