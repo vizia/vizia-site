@@ -37,6 +37,7 @@
 		width: var(--sidebar-width);
 		height: 100%;
 		padding: 4rem 8rem;
+		padding-right: 2rem;
 		background-color: #161616;
 		overflow-x: hidden;
 		overflow-y: auto;
