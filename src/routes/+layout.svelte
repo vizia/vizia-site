@@ -1,6 +1,6 @@
 <script>
 	import './styles.scss';
-	import Header from '$lib/Header.svelte';
+	import Header from '$lib/components/Header.svelte';
 </script>
 
 <div class="app">
@@ -25,7 +25,8 @@
 		display: flex;
 		flex-direction: row;
 		width: 100%;
+		height: 100vh;
 		overflow: hidden;
-		background-color: #1d1d1d;
+		background-color: #161616;
 	}
 </style>

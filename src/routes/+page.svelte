@@ -1,7 +1,7 @@
 <script lang="ts">
-	import BgElement from '$lib/BGElement.svelte';
-	import LandingPageButton from '$lib/LandingPageButton.svelte';
-	import LandingPageDemo from '$lib/LandingPageDemo.svelte';
+	import BgElement from '$lib/components/BGElement.svelte';
+	import LandingPageButton from '$lib/components/LandingPageButton.svelte';
+	import LandingPageDemo from '$lib/components/LandingPageDemo.svelte';
 </script>
 
 <!-- Landing Page -->

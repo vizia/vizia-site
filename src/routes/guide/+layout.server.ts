@@ -1,3 +1,4 @@
+import type { File, FileMeta } from '$lib/types';
 import fs from 'fs';
 import path from 'path'
 import type { LayoutServerLoad } from './$types';
@@ -35,20 +36,6 @@ export function parse_markdown(markdown: string): FileMeta {
 }
 
 const base = path.resolve("", "src/lib/docs/guide")
-
-interface FileMeta {
-    order: number,
-    show?: boolean
-}
-
-export interface File {
-    file_name: string,
-    path: string,
-    link: string,
-    is_dir: boolean,
-    meta?: FileMeta,
-    files: File[],
-}
 
 const DIRNAME_REGEX = /^\.?\/?(.+\/)*(.+)$/
 const FILENAME_REGEX = /^\.?\/?(.+\/)*(.+)\.(.+)$/

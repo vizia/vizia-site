@@ -1,4 +1,5 @@
 :root {
+	--header-size: 4rem;
 	--sidebar-width: 25rem;
 }
 
@@ -60,7 +61,22 @@ li {
 	}
 }
 
-.docs-content {
+.docs-content,
+.blog-post {
+	position: relative;
+	width: calc(100% - (2 * var(--sidebar-width)));
+	height: calc(100vh - var(--header-size));
+	margin: 0rem var(--sidebar-width);
+	padding: 2rem 4rem;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	align-items: center;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+
 	* {
 		width: 100%;
 	}
@@ -165,6 +181,10 @@ li {
 			}
 		}
 	}
+}
+
+.blog-post {
+	height: auto;
 }
 
 * {

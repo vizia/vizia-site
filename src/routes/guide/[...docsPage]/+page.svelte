@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
-	import CodeRenderer from '$lib/renderers/CodeRenderer.svelte';
-	import TableCellRenderer from '$lib/renderers/TableCellRenderer.svelte';
+	import CodeRenderer from '$lib/components/renderers/CodeRenderer.svelte';
+	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { afterNavigate } from '$app/navigation';
 
@@ -92,22 +92,6 @@
 </div>
 
 <style lang="scss">
-	.docs-content {
-		position: relative;
-		width: calc(100% - (2 * var(--sidebar-width)));
-		height: calc(100vh - 4rem);
-		margin: 0rem var(--sidebar-width);
-		padding: 2rem 4rem;
-
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		align-items: center;
-
-		overflow-x: hidden;
-		overflow-y: auto;
-	}
-
 	.on-this-page {
 		position: fixed;
 		width: var(--sidebar-width);

@@ -3,8 +3,13 @@
 		"src/routes/+page.ts"
 	],
 	"/about": [],
-	"/api": [],
+	"/api/blog": [
+		"src/routes/api/blog/+server.ts"
+	],
 	"/blog": [],
+	"/blog/[...blogPage]": [
+		"src/routes/blog/[...blogPage]/+page.ts"
+	],
 	"/examples": [],
 	"/faq": [],
 	"/guide": [
