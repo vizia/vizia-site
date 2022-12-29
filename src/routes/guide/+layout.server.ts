@@ -7,10 +7,10 @@ export const prerender = true;
 const META_GROUP_REGEX = /---\n([\s\S]+)\n---/gm;
 const META_REGEX = /(.+?): (.+?)$/gm;
 
-export function parse_markdown(markdown: string): [string, FileMeta] {
+export function parse_markdown(markdown: string): FileMeta {
     let meta_group = markdown.match(META_GROUP_REGEX)
     if (meta_group == null) {
-        return ["", { order: -1 }];
+        return { order: 999 };
     }
 
     let meta = meta_group[0].matchAll(META_REGEX);
@@ -30,9 +30,8 @@ export function parse_markdown(markdown: string): [string, FileMeta] {
         }
     }
 
-    markdown = markdown.replace(meta_group[0], "")
 
-    return [markdown, markdown_meta];
+    return markdown_meta;
 }
 
 const base = path.resolve("", "src/lib/guide")
@@ -131,7 +130,7 @@ export function recursive_search_dir(base_dir: string, base_link: string): File 
 
 
         let read = fs.readFileSync(base_dir).toString();
-        let meta = parse_markdown(read)[1];
+        let meta = parse_markdown(read);
         self.meta = meta
 
     }
