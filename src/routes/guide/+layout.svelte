@@ -4,7 +4,7 @@
 
 	export let data: LayoutData;
 
-	const sections = data.sections;
+	let sections = data.sections ? data.sections : [];
 
 	onMount(async () => {
 		await document.fonts.ready;
@@ -36,8 +36,7 @@
 		position: fixed;
 		width: var(--sidebar-width);
 		height: 100%;
-		padding-left: 8rem;
-		padding-top: 4rem;
+		padding: 4rem 8rem;
 		background-color: #161616;
 		overflow-x: hidden;
 		overflow-y: auto;
@@ -53,6 +52,17 @@
 		.space {
 			width: 100%;
 			height: 3rem;
+		}
+
+		ol {
+			gap: 0;
+			li {
+				display: flex;
+				a {
+					width: 100%;
+					height: 100%;
+				}
+			}
 		}
 	}
 </style>

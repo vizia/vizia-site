@@ -4,14 +4,10 @@ import type { LayoutServerLoad } from './$types';
 
 export const prerender = true;
 
-interface MarkdownMeta {
-    order: number
-}
-
 const META_GROUP_REGEX = /---\n([\s\S]+)\n---/gm;
 const META_REGEX = /(.+?): (.+?)$/gm;
 
-export function parse_markdown(markdown: string): [string, MarkdownMeta] {
+export function parse_markdown(markdown: string): [string, FileMeta] {
     let meta_group = markdown.match(META_GROUP_REGEX)
     if (meta_group == null) {
         return ["", { order: -1 }];
@@ -19,7 +15,7 @@ export function parse_markdown(markdown: string): [string, MarkdownMeta] {
 
     let meta = meta_group[0].matchAll(META_REGEX);
 
-    let markdown_meta: MarkdownMeta = { order: -1 };
+    let markdown_meta: FileMeta = { order: -1 };
     for (const match of meta) {
         let element = match[1];
         let data = match[2];
@@ -41,12 +37,17 @@ export function parse_markdown(markdown: string): [string, MarkdownMeta] {
 
 const base = path.resolve("", "src/lib/guide")
 
+interface FileMeta {
+    order: number,
+    show?: boolean
+}
+
 export interface File {
     file_name: string,
     path: string,
     link: string,
     is_dir: boolean,
-    meta?: MarkdownMeta,
+    meta?: FileMeta,
     files: File[],
 }
 
@@ -54,7 +55,7 @@ const DIRNAME_REGEX = /^\.?\/?(.+\/)*(.+)$/
 const FILENAME_REGEX = /^\.?\/?(.+\/)*(.+)\.(.+)$/
 const EXTENSION_REGEX = /\..+$/
 
-export function recursive_search_dir(base_dir: string, base_link: string): File {
+export function recursive_search_dir(base_dir: string, base_link: string): File | null {
 
     let self: File = {
         file_name: "base",
@@ -71,19 +72,37 @@ export function recursive_search_dir(base_dir: string, base_link: string): File 
         let dirs = fs.readdirSync(base_dir)
         let files: File[] = [];
 
+        let meta_file = `${base_dir}/meta.json`
+        self.meta = JSON.parse(fs.readFileSync(meta_file).toString()) as FileMeta
+
+
+        if (self.meta.show !== undefined && self.meta.show === false) {
+            return null
+        }
         let filename_regex = base_dir.match(DIRNAME_REGEX)
         let file_name = filename_regex ? filename_regex[2] : ""
 
         self.file_name = file_name;
 
+        if (dirs.length == 0) {
+            return null
+        }
+
         for (let i = 0; i < dirs.length; i++) {
             let dir = dirs[i];
             let extension = dir.match(EXTENSION_REGEX)
+
+            let next = null
             if (extension) {
                 dir = dir.replace(extension[0], "")
-                files.push(recursive_search_dir(`${base_dir}/${dir}${extension}`, `${base_link}/${dir}`))
+                next = recursive_search_dir(`${base_dir}/${dir}${extension}`, `${base_link}/${dir}`)
             } else {
-                files.push(recursive_search_dir(`${base_dir}/${dir}`, `${base_link}/${dir}`))
+                next = recursive_search_dir(`${base_dir}/${dir}`, `${base_link}/${dir}`)
+            }
+
+            if (next !== null) {
+                files.push(next)
+
             }
 
         }
@@ -99,6 +118,7 @@ export function recursive_search_dir(base_dir: string, base_link: string): File 
         let file_name = filename_regex ? filename_regex[2] : ""
         let extension = filename_regex ? filename_regex[3] : ""
         if (extension != "md") {
+            return null
         }
 
         file_name = file_name.trim().replaceAll("-", " ");
@@ -124,20 +144,20 @@ export const load = ((url) => {
 
     const sections = recursive_search_dir(base, "/guide")
 
-    sections.files.forEach(section => {
-        section.files.sort((a, b) => {
-            let a_order = a.meta ? a.meta.order : 500;
-            let b_order = b.meta ? b.meta.order : 500;
 
-            return a_order - b_order
-        })
+    let sort_fn = (a: File, b: File) => {
+        let a_order = a.meta ? a.meta.order : 500;
+        let b_order = b.meta ? b.meta.order : 500;
 
+        return a_order - b_order
+    }
 
+    sections?.files.sort(sort_fn).forEach(section => {
+        section.files.sort(sort_fn)
     });
-
 
     return {
         params: url.params,
-        sections: sections.files
+        sections: sections?.files
     };
 }) satisfies LayoutServerLoad

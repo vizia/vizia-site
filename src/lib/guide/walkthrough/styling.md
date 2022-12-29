@@ -72,7 +72,7 @@ HStack::new(cx, |cx| {
 });
 ```
 
-![The above code, rendered. It looks like the text "onetwothree"](../img/hstack-1.png)
+<img src="../img/hstack-1.png" alt='The above code, rendered. It looks like the text "onetwothree"'/>
 
 How about adding spacing, so it looks like three distinct elements?
 If you're familiar with HTML and CSS, you will know about the concepts of margin and padding.
@@ -86,7 +86,7 @@ label {
 }
 ```
 
-![The above code, rendered. It looks like the text "one two three"](../img/hstack-2.png)
+<img src="../img/hstack-2.png" alt='The above code, rendered. It looks like the text "one two three"'/>
 
 Space can be applied to just one side using the `left`, `right`, `top`, and `bottom` styles.
 
@@ -105,11 +105,11 @@ label {
 }
 ```
 
-![The above code, rendered. The three labels are laid out evenly across the center of the screen, arranging themselves proportionally within the window as it is resized](../img/hstack-3.gif)
+<img src="../img/hstack-3.gif" alt='The above code, rendered. The three labels are laid out evenly across the center of the screen, arranging themselves proportionally within the window as it is resized'/>
 
 Some final notes:
 
-1) Names are converted between CSS selectors (snake_case), CSS attributes (kebab-case), rust methods (snake_case), and rust types (PascalCase) in the expected way.
-2) We'll go in depth into the layout system and how it works later.
-3) Vizia's layout system is inspired by [Subform](https://subformapp.com/). If you're interested in a talk describing the motivation behind its departures from HTML, you can watch [this video](https://www.deconstructconf.com/2017/kevin-lynagh-choosing-features).
-4) You may notice that in the final gif there is twice as much space between each element as between the elements and their parent, since each between-area now has two stretch units applied to it, one from the side of each adjacent child. This is exactly the problem that `col-between` solves :)
+1. Names are converted between CSS selectors (snake_case), CSS attributes (kebab-case), rust methods (snake_case), and rust types (PascalCase) in the expected way.
+2. We'll go in depth into the layout system and how it works later.
+3. Vizia's layout system is inspired by [Subform](https://subformapp.com/). If you're interested in a talk describing the motivation behind its departures from HTML, you can watch [this video](https://www.deconstructconf.com/2017/kevin-lynagh-choosing-features).
+4. You may notice that in the final gif there is twice as much space between each element as between the elements and their parent, since each between-area now has two stretch units applied to it, one from the side of each adjacent child. This is exactly the problem that `col-between` solves :)

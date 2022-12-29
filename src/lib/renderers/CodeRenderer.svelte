@@ -7,7 +7,7 @@
 	export let lang: string;
 	export let text: string;
 
-	if (lang != 'none') {
+	if (lang !== '' && lang !== 'none') {
 		text = hljs.highlight(text, {
 			language: lang,
 			ignoreIllegals: true

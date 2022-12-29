@@ -7,7 +7,7 @@ Vizia is a _reactive UI framework_.
 This means that there is a _very_ strict separation between models - that is, the data that you would like to manipulate as a user of your app - and views - that is, the presentation of that data, the way the interface looks and acts.
 These two parts communicate with each other, and Vizia forces you to make this communication explicit.
 
-![Messages flowing between the model (top) and the view (bottom). The model says to the view "The interface should display 4", the view says to the model "The data should update to 5", and the model says to the view "The interface should display 5"](../img/model-view.png)
+<img src="../../img/model-view.png" alt='Messages flowing between the model (top) and the view (bottom). The model says to the view "The interface should display 4", the view says to the model "The data should update to 5", and the model says to the view "The interface should display 5"'/>
 
 The downward communication is called a _binding_, since the view is bound to reflect the model, and the upward communication is called an _event_, since it represents an instance of something happening that needs to be responded to.
 
@@ -21,7 +21,7 @@ With all this in mind we can introduce Vizia's core abstraction.
 Vizia lets you build a tree where each node has one view and any number of models attached.
 In this world, bindings are attributes of an edge between two nodes, associated with some model further up the tree.
 
-![A tree of models, views, and bindings. Some nodes have just a view and some have a model and a view. Some edges between nodes have a binding.](../img/model-view-tree.png)
+<img src="../img/model-view-tree.png" alt='A tree of models, views, and bindings. Some nodes have just a view and some have a model and a view. Some edges between nodes have a binding.'/>
 
 Events are not shown in this tree because events are transient - they start at some view, travel up the tree parent to parent until they reach a model or view which can handle them, and then disappear after being handled.
 
@@ -38,7 +38,7 @@ This app has a model (the current number), a binding (to that number), two event
 
 Here's what the tree will look like:
 
-![Another tree of models, views, and bindings, this time with labels. The root node has two boxes, one labeled "Window" and one labeled "Model". This node has three children, labeled "Label", "Button", and "Button". There is a binding on the edge between the root and the Label](../img/counter-tree.png)
+<img src="../img/counter-tree.png" alt='Another tree of models, views, and bindings, this time with labels. The root node has two boxes, one labeled "Window" and one labeled "Model". This node has three children, labeled "Label", "Button", and "Button". There is a binding on the edge between the root and the Label'/>
 
 Let's write it!
 
@@ -104,10 +104,10 @@ fn main() {
 
 Here's what it looks like!
 
-![A screen recording of the above application, with a mouse clicking the increment and decrement buttons to change a number](../img/counter.gif)
+<img src="../img/counter.gif" alt='A screen recording of the above application, with a mouse clicking the increment and decrement buttons to change a number'/>
 
 A couple of things to note:
 
-1) `cx` is passed absolutely everywhere, and always passed back to you as the first argument of each of your closures. This is the way a Vizia application is!
-2) I lied a little bit; there are actually 6 views, since a button has no text of its own and instead has child views to render its contents.
-3) Thanks to how ergonomic rust's closures are, the tree structure of our code actually matches pretty closely with our conceptual tree structure! Pretty cool!
+1. `cx` is passed absolutely everywhere, and always passed back to you as the first argument of each of your closures. This is the way a Vizia application is!
+2. I lied a little bit; there are actually 6 views, since a button has no text of its own and instead has child views to render its contents.
+3. Thanks to how ergonomic rust's closures are, the tree structure of our code actually matches pretty closely with our conceptual tree structure! Pretty cool!

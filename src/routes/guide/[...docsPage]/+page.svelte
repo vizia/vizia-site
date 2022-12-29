@@ -30,7 +30,6 @@
 	function update() {
 		let content_ = document.querySelector('.docs-content');
 		if (content_) {
-			console.log('set');
 			content = content_;
 
 			let headings_ = content?.querySelectorAll('h1[id]');

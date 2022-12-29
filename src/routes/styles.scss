@@ -61,6 +61,9 @@ li {
 }
 
 .docs-content {
+	* {
+		width: 100%;
+	}
 	img {
 		padding: 2rem;
 		width: auto;
@@ -71,7 +74,6 @@ li {
 
 	h1 {
 		margin-top: 2rem;
-		width: 100%;
 		font-size: 1.5rem;
 		font-weight: 600;
 		scroll-margin-top: 6rem;
@@ -79,14 +81,12 @@ li {
 
 	h2 {
 		margin-top: 1rem;
-		width: 100%;
 		font-weight: 600;
 		font-size: 1.2rem;
 	}
 
 	h3 {
 		margin-top: 1rem;
-		width: 100%;
 		font-weight: 600;
 		font-size: 1rem;
 	}
@@ -94,7 +94,6 @@ li {
 	p {
 		font-size: 1rem;
 		font-weight: 400;
-		width: 100%;
 		color: #bbb;
 
 		code {
@@ -125,11 +124,12 @@ li {
 		border-radius: 0.5rem;
 		background-color: #282828;
 		box-sizing: border-box;
-		width: 100%;
+		overflow-x: scroll;
+		overflow-y: visible;
+		flex-shrink: 0;
 	}
 
 	table {
-		width: 100%;
 		border-collapse: separate;
 		overflow: hidden;
 		padding: 0.5rem 1rem;
@@ -150,6 +150,18 @@ li {
 		tbody {
 			td {
 				padding: 0.25rem 0rem;
+			}
+		}
+	}
+
+	ol,
+	ul {
+		li {
+			display: inline flow-root list-item;
+			margin-left: 1rem;
+
+			&::marker {
+				color: #666;
 			}
 		}
 	}
