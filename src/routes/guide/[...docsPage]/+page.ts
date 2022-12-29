@@ -18,7 +18,7 @@ function parse_markdown(markdown: string): string {
 
 export const load = (async ({ params, url, fetch }) => {
 
-  const response = await fetch(`${url.origin}/src/lib/guide/${params.docsPage === "" ? "index" : "/" + params.docsPage}.md`);
+  const response = await fetch(`${url.origin}/src/lib/docs/guide/${params.docsPage === "" ? "index" : "/" + params.docsPage}.md`);
   if (response.ok) {
 
     let markdown = await response.text();

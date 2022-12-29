@@ -34,7 +34,7 @@ export function parse_markdown(markdown: string): FileMeta {
     return markdown_meta;
 }
 
-const base = path.resolve("", "src/lib/guide")
+const base = path.resolve("", "src/lib/docs/guide")
 
 interface FileMeta {
     order: number,
