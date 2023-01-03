@@ -29,7 +29,7 @@ Once the changes are ready to take effect on the public website, all we have to 
 npm run build
 ```
 
-This will update the `/build/` folder and thus, updating the website thanks to Github Pages.
+This will create the `/build/` folder, which is the folder that is linked to Github Pages.
 
 You can also preview the production build with `npm run preview`.
 
