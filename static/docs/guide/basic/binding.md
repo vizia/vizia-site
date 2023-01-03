@@ -64,7 +64,7 @@ This trait defines a `Source` type and a `Target` type, and a `view` function wh
 
 ## View Binding
 
-Some views accept a [lens](./lenses.md), as well as a value, as an input. When provided a lens, the view sets up a binding to the data.
+Some views accept a [lens](#lenses), as well as a value, as an input. When provided a lens, the view sets up a binding to the data.
 
 For example, the `Label` view accepts a lens to any type which implements `ToString`:
 
@@ -88,7 +88,7 @@ Note the `Lens` derive, which allows us to bind to a field of the model data. Wh
 
 There is a special container view in Vizia called the `Binding` view. This view binds to some data and will remove and then rebuild its contents if the data changes.
 
-The following code produces the same result as passing the lens directly to the label, however, the binding view will rebuild the label when the name changes, which is unnecessary. The binding view is useful for [constructing views conditionally](conditional_views.md).
+The following code produces the same result as passing the lens directly to the label, however, the binding view will rebuild the label when the name changes, which is unnecessary. The binding view is useful for [constructing views conditionally](#conditional-views).
 
 ```rust
 pub struct Person {
@@ -171,7 +171,7 @@ fn main() {
 
 > Note that in this example we're assuming that the string is not empty.
 
-<img src="../img/stylesheet.png" alt="" width="400"/>
+<img src="../docs_img/stylesheet.png alt="" width="400"/>
 
 Now when the name field of the model changes the label will update to display the new first letter.
 

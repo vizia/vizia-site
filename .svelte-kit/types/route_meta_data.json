@@ -1,23 +1,42 @@
 {
 	"/": [
-		"src/routes/+page.ts"
+		"src/routes/+layout.ts",
+		"src/routes/+layout.ts"
 	],
-	"/about": [],
-	"/api/blog": [
-		"src/routes/api/blog/+server.ts"
+	"/about": [
+		"src/routes/+layout.ts"
 	],
-	"/blog": [],
+	"/blog": [
+		"src/routes/+layout.ts"
+	],
 	"/blog/[...blogPage]": [
-		"src/routes/blog/[...blogPage]/+page.ts"
+		"src/routes/blog/[...blogPage]/+page.ts",
+		"src/routes/+layout.ts"
 	],
-	"/examples": [],
-	"/faq": [],
+	"/examples": [
+		"src/routes/+layout.ts"
+	],
+	"/faq": [
+		"src/routes/+layout.ts"
+	],
+	"/get-blogs": [
+		"src/routes/get-blogs/+server.ts"
+	],
+	"/get-guides": [
+		"src/routes/get-guides/+server.ts"
+	],
 	"/guide": [
-		"src/routes/guide/+layout.server.ts"
+		"src/routes/guide/+layout.ts",
+		"src/routes/+layout.ts",
+		"src/routes/guide/+layout.ts",
+		"src/routes/+layout.ts"
 	],
 	"/guide/[...docsPage]": [
 		"src/routes/guide/[...docsPage]/+page.ts",
-		"src/routes/guide/+layout.server.ts"
+		"src/routes/guide/+layout.ts",
+		"src/routes/+layout.ts"
 	],
-	"/tutorial": []
+	"/tutorial": [
+		"src/routes/+layout.ts"
+	]
 }

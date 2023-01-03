@@ -8,7 +8,7 @@ The position and size of a view is determined by its layout properties. Vizia us
 
 ## Layout Type
 
-By default, children of a view will be arranged one after another in a vertical stack. The `layout-type` property can be used to choose between a vertical `Column` stack, a horizontal `Row` stack, or a [`Grid`](grid.md).
+By default, children of a view will be arranged one after another in a vertical stack. The `layout-type` property can be used to choose between a vertical `Column` stack, a horizontal `Row` stack, or a `Grid`.
 
 ```rust
 // The `HStack` container will arrange its children in a row.
@@ -142,7 +142,7 @@ If we had specified the hstack width to be `Auto`, then the computed width would
 
 The spacing of an element determines its position relative to its normal stack position if parent-directed, or relative to the top left of its parent if self directed.
 
-The space is specified with [`Units`](units.md) and is conceptually similar to margins.
+The space is specified with `Units` and is conceptually similar to margins.
 
 The spacing can be specified for individual sides using the `left`, `right`, `top`, and `bottom` properties. For example:
 

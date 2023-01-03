@@ -6,7 +6,7 @@
 	let posts: Post[];
 
 	onMount(async () => {
-		const data = await fetch('api/blog', {
+		const data = await fetch('/get-blogs', {
 			method: 'GET'
 		});
 		let json = await data.json();

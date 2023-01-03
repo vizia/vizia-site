@@ -23,8 +23,8 @@
 			dropdownName="Docs"
 			options={[
 				['Guide', '/guide'],
-				['Examples', '/examples'],
-				['API', '/api']
+				['Examples', '/examples']
+				// ['API', '/api']
 			]}
 		/>
 		<a href="/blog">Blog</a>

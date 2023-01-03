@@ -12,6 +12,7 @@ pub struct AppData {
     count: i32,
 }
 ```
+
 The `Lens` derive macro generates for us a lens to each field of the application data. A lens is like a key which we can use to bind the UI controls to pieces of the application data.
 
 To modify the application data we need to define some events which can be emitted by the UI views:
@@ -72,9 +73,8 @@ Application::new(|cx|{
 }).run();
 ```
 
-Each button takes two closures. 
+Each button takes two closures.
 
-The first allows us to provide an action which will occur when the button is pressed. In this case we emit the relevant event, which will propagate up the tree to the application data model. 
+The first allows us to provide an action which will occur when the button is pressed. In this case we emit the relevant event, which will propagate up the tree to the application data model.
 
-The second closure allows us to customize what will be shown on top of the button to indicate its action. In this case we provide a label view with some appropriate text. 
-
+The second closure allows us to customize what will be shown on top of the button to indicate its action. In this case we provide a label view with some appropriate text.

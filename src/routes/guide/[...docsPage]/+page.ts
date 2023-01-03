@@ -1,4 +1,3 @@
-
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
@@ -16,9 +15,10 @@ function parse_markdown(markdown: string): string {
 }
 
 
-export const load = (async ({ params, url, fetch }) => {
+export const load = (async ({ params, fetch }) => {
 
-  const response = await fetch(`${url.origin}/src/lib/docs/guide/${params.docsPage === "" ? "index" : "/" + params.docsPage}.md`);
+  console.log("> " + params.docsPage)
+  const response = await fetch(`/docs/guide${params.docsPage === "" ? "index" : "/" + params.docsPage}.md`);
   if (response.ok) {
 
     let markdown = await response.text();
@@ -26,6 +26,10 @@ export const load = (async ({ params, url, fetch }) => {
       docsPage: params.docsPage,
       markdown: parse_markdown(markdown)
     };
+  } else {
+    console.log(`/docs/guide${params.docsPage === "" ? "index" : "/" + params.docsPage}.md`)
+    console.log(response)
+    console.log("================")
   }
 
   throw error(404, "Not found")

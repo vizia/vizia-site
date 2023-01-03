@@ -1,14 +1,14 @@
-import type { File, FileMeta } from '$lib/types';
+import type { RequestHandler } from "./$types";
+import type { FileMeta, File } from '$lib/types';
 import fs from 'fs';
 import path from 'path'
-import type { LayoutServerLoad } from './$types';
+import { json } from "@sveltejs/kit";
 
-export const prerender = true;
 
 const META_GROUP_REGEX = /---\n([\s\S]+)\n---/gm;
 const META_REGEX = /(.+?): (.+?)$/gm;
 
-export function parse_markdown(markdown: string): FileMeta {
+function parse_markdown(markdown: string): FileMeta {
     let meta_group = markdown.match(META_GROUP_REGEX)
     if (meta_group == null) {
         return { order: 999 };
@@ -35,13 +35,12 @@ export function parse_markdown(markdown: string): FileMeta {
     return markdown_meta;
 }
 
-const base = path.resolve("", "src/lib/docs/guide")
 
 const DIRNAME_REGEX = /^\.?\/?(.+\/)*(.+)$/
 const FILENAME_REGEX = /^\.?\/?(.+\/)*(.+)\.(.+)$/
 const EXTENSION_REGEX = /\..+$/
 
-export function recursive_search_dir(base_dir: string, base_link: string): File | null {
+function recursive_search_dir(base_dir: string, base_link: string): File | null {
 
     let self: File = {
         file_name: "base",
@@ -126,8 +125,10 @@ export function recursive_search_dir(base_dir: string, base_link: string): File 
 
 }
 
-export const load = ((url) => {
+const base = path.resolve("", "static/docs/guide")
 
+
+export const GET = (async () => {
     const sections = recursive_search_dir(base, "/guide")
 
 
@@ -142,8 +143,7 @@ export const load = ((url) => {
         section.files.sort(sort_fn)
     });
 
-    return {
-        params: url.params,
-        sections: sections?.files
-    };
-}) satisfies LayoutServerLoad
+
+    return json(sections)
+
+}) satisfies RequestHandler

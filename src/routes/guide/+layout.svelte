@@ -18,10 +18,7 @@
 			<ol>
 				{#each section.files as { file_name, path, link }}
 					<li>
-						<a
-							href={link}
-							class={data.params && `/guide/${data.params.docsPage}` == link ? 'active' : ''}
-						>
+						<a href={link} class={`/guide/${data.docsPage}` == link ? 'active' : ''}>
 							{file_name}
 						</a>
 					</li>

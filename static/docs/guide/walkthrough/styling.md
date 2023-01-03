@@ -72,7 +72,7 @@ HStack::new(cx, |cx| {
 });
 ```
 
-<img src="../img/hstack-1.png" alt='The above code, rendered. It looks like the text "onetwothree"'/>
+<img src="/docs_img/hstack-1.png" alt='The above code, rendered. It looks like the text "onetwothree"'/>
 
 How about adding spacing, so it looks like three distinct elements?
 If you're familiar with HTML and CSS, you will know about the concepts of margin and padding.
@@ -86,7 +86,7 @@ label {
 }
 ```
 
-<img src="../img/hstack-2.png" alt='The above code, rendered. It looks like the text "one two three"'/>
+<img src="/docs_img/hstack-2.png" alt='The above code, rendered. It looks like the text "one two three"'/>
 
 Space can be applied to just one side using the `left`, `right`, `top`, and `bottom` styles.
 
@@ -105,7 +105,7 @@ label {
 }
 ```
 
-<img src="../img/hstack-3.gif" alt='The above code, rendered. The three labels are laid out evenly across the center of the screen, arranging themselves proportionally within the window as it is resized'/>
+<img src="/docs_img/hstack-3.gif" alt='The above code, rendered. The three labels are laid out evenly across the center of the screen, arranging themselves proportionally within the window as it is resized'/>
 
 Some final notes:
 

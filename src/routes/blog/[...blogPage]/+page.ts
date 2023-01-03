@@ -1,3 +1,4 @@
+export const prerender = 'auto'
 
 import type { PostMeta } from '$lib/types';
 import { error } from '@sveltejs/kit';
@@ -56,7 +57,7 @@ function parse_markdown(markdown: string): [string, PostMeta | undefined] {
 
 export const load = (async ({ params, url, fetch }) => {
 
-  const response = await fetch(`${url.origin}/src/lib/blog/${params.blogPage}/index.md`);
+  const response = await fetch(`/blog/${params.blogPage}/index.md`);
   if (response.ok) {
     let markdown_text = await response.text();
     let parsed = parse_markdown(markdown_text)

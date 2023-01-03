@@ -4,8 +4,6 @@ import fs from 'fs';
 import path from 'path'
 import { json } from "@sveltejs/kit";
 
-export const prerender = true;
-
 const META_GROUP_REGEX = /---\n([\s\S]+)\n---/gm;
 const META_REGEX = /(.+?): (.+?)$/gm;
 
@@ -44,7 +42,7 @@ export function get_meta(markdown: string): PostMeta | undefined {
     return markdown_meta;
 }
 
-const base = path.resolve("", "src/lib/blog")
+const base = path.resolve("", "static/blog")
 
 export function search_posts(base_dir: string): Post[] {
 

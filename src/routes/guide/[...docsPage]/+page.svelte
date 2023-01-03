@@ -99,13 +99,5 @@
 		height: 100%;
 		padding-left: 2rem;
 		padding-top: 4rem;
-
-		h2 {
-			font-size: 1rem;
-			font-weight: 600;
-			text-transform: uppercase;
-			color: #aaa;
-			letter-spacing: 0.1em;
-		}
 	}
 </style>

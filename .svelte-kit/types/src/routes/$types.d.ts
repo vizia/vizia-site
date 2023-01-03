@@ -9,13 +9,13 @@ type OutputDataShape<T> = MaybeWithVoid<Omit<App.PageData, RequiredKeys<T>> & Pa
 type EnsureDefined<T> = T extends null | undefined ? {} : T;
 type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends U ? keyof U : never> = U extends unknown ? { [P in Exclude<A, keyof U>]?: never } & U : never;
 type PageParentData = EnsureDefined<LayoutData>;
-type LayoutRouteId = RouteId | "/" | "/about" | "/blog" | "/blog/[...blogPage]" | "/examples" | "/faq" | "/guide/[...docsPage]" | "/tutorial" | null
+type LayoutRouteId = RouteId | "/" | "/about" | "/blog" | "/blog/[...blogPage]" | "/examples" | "/faq" | "/guide" | "/guide/[...docsPage]" | "/tutorial" | null
 type LayoutParams = RouteParams & { blogPage?: string,docsPage?: string }
 type LayoutParentData = EnsureDefined<{}>;
 
 export type PageServerData = null;
-export type PageLoad<OutputData extends OutputDataShape<PageParentData> = OutputDataShape<PageParentData>> = Kit.Load<RouteParams, PageServerData, PageParentData, OutputData, RouteId>;
-export type PageLoadEvent = Parameters<PageLoad>[0];
-export type PageData = Expand<Omit<PageParentData, keyof PageParentData & EnsureDefined<PageServerData>> & OptionalUnion<EnsureDefined<PageParentData & EnsureDefined<PageServerData>>>>;
+export type PageData = Expand<PageParentData>;
 export type LayoutServerData = null;
-export type LayoutData = Expand<LayoutParentData>;
+export type LayoutLoad<OutputData extends OutputDataShape<LayoutParentData> = OutputDataShape<LayoutParentData>> = Kit.Load<LayoutParams, LayoutServerData, LayoutParentData, OutputData, LayoutRouteId>;
+export type LayoutLoadEvent = Parameters<LayoutLoad>[0];
+export type LayoutData = Expand<Omit<LayoutParentData, keyof LayoutParentData & EnsureDefined<LayoutServerData>> & OptionalUnion<EnsureDefined<LayoutParentData & EnsureDefined<LayoutServerData>>>>;

@@ -4,14 +4,14 @@ order: 3
 
 # Styling
 
-Styling refers to modifying the visual properties of a view, such as its background, border, font, etc. A full list of available style properties can be found on the [style properties](./style_properties.md) page.
+Styling refers to modifying the visual properties of a view, such as its background, border, font, etc. A full list of available style properties can be found on the [style properties](#style-properties) page.
 
 There are two methods for styling views in Vizia:
 
-1. [Inline](./inline.md) - which applies style properties directly to a single view.
-2. [Shared](./shared.md) - which uses CSS rules to apply styling to any views which match the rules.
+1. [Inline](#inline-styling-style-modifiers) - which applies style properties directly to a single view.
+2. [Shared](#shared-styling) - which uses CSS rules to apply styling to any views which match the rules.
 
-## Inline Styling (Style Modifiers)
+# Inline Styling (Style Modifiers)
 
 Inline styling refers to applying style modifiers directly on views in Rust code.
 
@@ -33,13 +33,13 @@ Element::new(cx).background_color(Color::red());
 
 > Note: Inline style properties override any shared styling which targets the same view.
 
-### Property Binding
+## Property Binding
 
-As initially shown in the [modifiers section](../views/modifiers.md), and detailed in the [property binding section](../binding/property_binding.md), most style modifiers accept a lens as input, which sets up a binding to the corresponding model data.
+As initially shown in the [modifiers section](/guide/basic/views#modifiers), and detailed in the [property binding section](/guide/basic/binding#property-binding), most style modifiers accept a lens as input, which sets up a binding to the corresponding model data.
 
 When the model data changes (usually in response to an event), the property bound to the data will update accordingly.
 
-## Shared Styling
+# Shared Styling
 
 Shared styling uses Cascading Style Sheets (CSS) to apply style rules to multiple views simultaneously. A CSS string can be defined within a rust file as a constant, or within an external CSS file.
 
@@ -144,7 +144,7 @@ hstack label {
 }
 ```
 
-will select any `Label` which has an `HStack` as an ancestor further up the [tree](../views/view_tree.md).
+will select any `Label` which has an `HStack` as an ancestor further up the [tree](/guide/basic/view_tree).
 
 - `child (>)`
 

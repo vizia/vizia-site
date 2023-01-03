@@ -1,5 +1,7 @@
-import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/kit/vite';
+import adapter from '@sveltejs/adapter-static' // https://github.com/sveltejs/kit/tree/master/packages/adapter-static
+
+const dev = process.argv.includes('dev');
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -8,7 +10,17 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			pages: 'build',
+			paths: {
+				base: dev ? '' : '/vizia-site',
+			},
+			assets: 'build',
+			fallback: null,
+			precompress: false,
+			strict: true,
+			appDir: 'internal',
+		})
 	}
 };
 

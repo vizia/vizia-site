@@ -13,7 +13,7 @@ pub struct AppData {
 impl Model for AppData {}
 ```
 
-Next, we'll add the `List` view and pass it a lens to the vector of people. Then, we'll add the `PersonView` to the list constructor closure. The `List` iterates over the people in the bound vector and builds a `PersonView` for each item. 
+Next, we'll add the `List` view and pass it a lens to the vector of people. Then, we'll add the `PersonView` to the list constructor closure. The `List` iterates over the people in the bound vector and builds a `PersonView` for each item.
 
 The closure passed to the list constructor provides a context as well as an index and a lens to each item. We use this `item` lens, which has a target of `Person`, to construct the `PersonView`.
 
@@ -38,7 +38,7 @@ Application::new(|cx|{
             },
         ],
     }.build(cx);
-    
+
     List::new(cx, AppData::people, |cx, index, item|{
         PersonView::new(cx, item);
     })
@@ -51,4 +51,4 @@ Application::new(|cx|{
 
 This produces the following output:
 
-<img src="../img/list.png" alt="" width="400"/>
+<img src="../docs_img/list.png alt="" width="400"/>

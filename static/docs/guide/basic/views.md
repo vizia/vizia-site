@@ -4,7 +4,7 @@ order: 2
 
 # Views
 
-Views are used to visually present [model data](./models.md) and to act as controls which, when interacted with, send events to mutate model data. They are the building blocks of a GUI.
+Views are used to visually present [model data](/guide/basic/models) and to act as controls which, when interacted with, send events to mutate model data. They are the building blocks of a GUI.
 
 For example, the `Label` view is used to display a text string:
 
@@ -20,7 +20,7 @@ fn main() {
 }
 ```
 
-<img src="/img/hello_world.png" alt="A window with its size set to 400 by 200 with a label displaying 'Hello World'" width="400"/>
+<img src="/docs_img/hello_world.png" alt="A window with its size set to 400 by 200 with a label displaying 'Hello World'" width="400"/>
 
 The first argument to the constructor of the label is a mutable reference to `Context`, shortened to `cx`. This allows the view to build itself into the application and is ubiquitous to all views.
 
@@ -57,7 +57,7 @@ fn main() {
 }
 ```
 
-> In the above example a `Slider` view needs a value from a model to bind to. This will be covered in the [binding](/binding/binding.md) section of this guide.
+> In the above example a `Slider` view needs a value from a model to bind to. This will be covered in the [binding](/guide/basic/binding) section of this guide.
 
 The modifier types in the following subsections are applicable to all views.
 
@@ -78,7 +78,7 @@ fn main() {
 }
 ```
 
-<img src="/img/label_background_color.png" alt="" width="400"/>
+<!-- <img src="/docs_img/label_background_color.png" alt="" width="400"/> -->
 
 ## Layout Modifiers
 
@@ -163,7 +163,7 @@ fn main() {
 
 ## Property Binding
 
-Although we haven't introduced the concepts of [models](/models/models.md), [lenses](/binding/lenses.md), and [binding](/binding/binding.md) yet, for completeness it's worth mentioning that many modifiers also accept a lens as well as a value. When a lens is supplied to a modifier, a binding is set up which will update the modifier property when the bound to model data changes.
+Although we haven't introduced the concepts of [models](/guide/basic/models), [lenses](/guide/basic/binding#lenses), and [binding](/guide/basic/binding) yet, for completeness it's worth mentioning that many modifiers also accept a lens as well as a value. When a lens is supplied to a modifier, a binding is set up which will update the modifier property when the bound to model data changes.
 
 ```rust
 use vizia::prelude::*;
@@ -224,7 +224,7 @@ fn main() {
 }
 ```
 
-<img src="/img/vstack.png" alt="" width="400"/>
+<img src="/docs_img/vstack.png" alt="" width="400"/>
 
 While a `HStack` container will arrange its contents into a horizontal row:
 
@@ -245,7 +245,7 @@ fn main() {
 }
 ```
 
-<img src="/img/hstack.png" alt="" width="400"/>
+<img src="/docs_img/hstack.png" alt="" width="400"/>
 
 # The View Tree
 
@@ -265,8 +265,8 @@ Application::new(|cx|{
 
 For example, for the code above the view tree can be depicted with the following diagram:
 
-<img src="/img/basic_tree.svg" alt="Diagram of a basic view tree depicting a Window view with a child HStack view with two child Label views." width="320"/>
+<img src="/docs_img/basic_tree.svg" alt="Diagram of a basic view tree depicting a Window view with a child HStack view with two child Label views." width="320"/>
 
-The `Window` is the _parent_ of the `HStack`, while the `HStack` is the _parent_ of both the `Label`s. Therefore, the `Window` is an _ancestor_ of the `Label`s. This terminology is important for [selector](/styling/stylesheets.md) matching during styling.
+The `Window` is the _parent_ of the `HStack`, while the `HStack` is the _parent_ of both the `Label`s. Therefore, the `Window` is an _ancestor_ of the `Label`s. This terminology is important for [selector](/guide/basic/styling#stylesheets) matching during styling.
 
 The view tree is iterated by Vizia in order to perform styling, layout, and rendering (amongst other things). Therefore, it can be useful to visualize the view tree when specifying style and layout properties to determine how they will affect ancestor and descendant views.

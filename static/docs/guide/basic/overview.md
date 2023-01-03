@@ -1,6 +1,6 @@
 # Overview
 
-This chapter covers the basic concepts of Vizia, some of which are demonstrated in the [walkthrough](../walkthrough/introduction.md), but in more detail.
+This chapter covers the basic concepts of Vizia, some of which are demonstrated in the walkthrough, but in more detail.
 
 # Reactive UI
 
@@ -10,12 +10,10 @@ A reactive UI then is a feedback loop of application state change and visual ele
 
 In Vizia, this pattern can be broken down into four concepts:
 
- 1. **Models** - Data representing the state of an application.
- 2. **Views** - The visual elements which present the application state as a graphical user interface.
- 3. **Binding** - The link between model data and views which causes them to update when the data changes.
- 4. **Events** - Messages which views send to models to trigger changes to the data.
-
-
+1.  **Models** - Data representing the state of an application.
+2.  **Views** - The visual elements which present the application state as a graphical user interface.
+3.  **Binding** - The link between model data and views which causes them to update when the data changes.
+4.  **Events** - Messages which views send to models to trigger changes to the data.
 
 <!-- In Vizia, views **bind** to models so that they update when the application data changes. Views send **events** to models to change the data. -->
 
@@ -23,4 +21,3 @@ In Vizia, this pattern can be broken down into four concepts:
 Views in Vizia are composed to form a tree.
 
 This view tree is then used to determine the size and position of elements, as well as the order that elements should be rendered into the window. -->
-
