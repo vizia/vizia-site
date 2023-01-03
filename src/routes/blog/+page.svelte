@@ -2,24 +2,20 @@
 	import BlogPost from '$lib/components/BlogPost.svelte';
 	import type { Post } from '$lib/types';
 	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
 
-	let posts: Post[];
+	export let data: PageData;
 
 	onMount(async () => {
-		const data = await fetch('/get-blogs', {
-			method: 'GET'
-		});
-		let json = await data.json();
-		posts = json as Post[];
+		await document.fonts.ready;
 	});
 </script>
 
 <div class="blogs">
 	<h1>Blogs</h1>
-	{#if posts}
-		<BlogPost post={posts[0]} />
-		<div class="blogs-grid" style="--items: {posts.length}">
-			{#each posts.splice(1) as post}
+	{#if data.posts}
+		<div class="blogs-grid" style="--items: {data.posts.length}">
+			{#each data.posts as post}
 				<BlogPost {post} />
 			{/each}
 		</div>

@@ -44,7 +44,7 @@
 				width: 8rem;
 				text-align: center;
 				padding: 0.25rem 0;
-				font-weight: bold;
+				font-weight: 600;
 				z-index: 10;
 				transition: color 250ms ease;
 			}
@@ -76,7 +76,7 @@
 			}
 
 			& > p {
-				color: #000;
+				color: #fff;
 			}
 		}
 	}

@@ -15,7 +15,6 @@ function parse_markdown(markdown: string): string {
 }
 
 export const load = (async ({ params, fetch }) => {
-	console.log('> ' + params.docsPage);
 	const response = await fetch(
 		`/docs/guide${params.docsPage === '' ? 'index' : '/' + params.docsPage}.md`
 	);
@@ -25,10 +24,6 @@ export const load = (async ({ params, fetch }) => {
 			docsPage: params.docsPage,
 			markdown: parse_markdown(markdown)
 		};
-	} else {
-		console.log(`/docs/guide${params.docsPage === '' ? 'index' : '/' + params.docsPage}.md`);
-		console.log(response);
-		console.log('================');
 	}
 
 	throw error(404, 'Not found');

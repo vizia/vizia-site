@@ -7,10 +7,25 @@
 
 	export let offset_x = 0;
 	export let offset_y = 0;
+
+	$: hovered = true;
+
+	function abs(n: number) {
+		if (n < 0) {
+			return n * -1;
+		}
+		return n;
+	}
+
+	const intervalTime = abs(offset_y) * 500 + abs(offset_x) * 7500 + 1000;
+
+	setInterval(() => {
+		hovered = !hovered;
+	}, intervalTime);
 </script>
 
 <div
-	class="bg-element {type} {side}"
+	class="bg-element {type} {side} {hovered ? 'hover' : ''}"
 	style="--color: {color}; --size: {size}rem; --offset_x: {offset_x * 8}rem; --offset_y: {offset_y *
 		8}rem;
    rotate: {rotation}deg; "
@@ -23,13 +38,13 @@
 
 		width: var(--size);
 		height: var(--size);
-		left: calc(50% - var(--size) + 44rem + var(--offset_x));
+		left: calc(50% - var(--size) / 2 + var(--offset_x) + 30%);
 		top: calc(var(--size) + 10rem - var(--offset_y));
 
 		transition: all ease-in-out 1s;
 
 		&.left {
-			left: calc(50% - var(--size) - 36rem + var(--offset_x));
+			left: calc(50% - var(--size) / 2 + var(--offset_x) - 30%);
 		}
 
 		&:before {
@@ -51,7 +66,7 @@
 			opacity: 50%;
 		}
 
-		&:hover:before {
+		&.hover:before {
 			background-position: 0% 0%;
 			opacity: 100%;
 		}

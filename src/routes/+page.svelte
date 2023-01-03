@@ -25,14 +25,18 @@
 			Declarative <b>GUI Framework</b>
 			for <b>any</b> kind of applications.
 		</h1>
-		<h2>Combine versatility, modularity and speed in one</h2>
+		<p>Combine versatility, modularity and speed in one</p>
 
 		<div class="actions-container">
-			<LandingPageButton text="Get Started" link="/" style="gradient" />
+			<LandingPageButton
+				text="Get Started"
+				link="/guide/introduction/getting_started#getting-started"
+				style="gradient"
+			/>
 			<LandingPageButton text="Tutorial" link="/tutorial" />
 		</div>
 	</div>
-	<LandingPageDemo />
+	<!-- <LandingPageDemo /> -->
 </div>
 
 <style lang="scss">
@@ -61,29 +65,13 @@
 			top: 0px;
 			position: absolute;
 			background-image: radial-gradient(
-					30% 1000% at calc(50% - 40rem) 40rem,
+					25% 1000% at calc(20%) 0,
 					hsl(0deg 83% 63%) 0%,
-					hsla(352deg, 75%, 61%, 0.88) 11%,
-					hsla(344deg, 67%, 59%, 0.77) 22%,
-					hsla(335deg, 58%, 57%, 0.66) 33%,
-					hsla(323deg, 50%, 54%, 0.55) 44%,
-					hsla(308deg, 42%, 51%, 0.44) 56%,
-					hsla(289deg, 44%, 52%, 0.33) 67%,
-					hsla(272deg, 55%, 56%, 0.22) 78%,
-					hsla(257deg, 68%, 59%, 0.11) 89%,
 					hsla(241deg, 83%, 63%, 0) 100%
 				),
 				radial-gradient(
-					30% 1000% at calc(50% + 40rem) 40rem,
+					25% 1000% at calc(80%) 0,
 					hsl(204deg 83% 63%) 0%,
-					hsla(208deg, 83%, 63%, 0.88) 11%,
-					hsla(213deg, 83%, 64%, 0.77) 22%,
-					hsla(217deg, 83%, 64%, 0.66) 33%,
-					hsla(221deg, 83%, 64%, 0.55) 44%,
-					hsla(224deg, 83%, 64%, 0.44) 56%,
-					hsla(228deg, 83%, 64%, 0.33) 67%,
-					hsla(231deg, 83%, 64%, 0.22) 78%,
-					hsla(235deg, 83%, 63%, 0.11) 89%,
 					hsla(238deg, 83%, 63%, 0) 100%
 				);
 			transition: background-color 250ms ease;
@@ -104,26 +92,24 @@
 
 		.landing-main {
 			width: 50rem;
-			height: 40rem;
+			padding: 10rem 0;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 
-			gap: 3rem;
+			gap: 1rem;
 
-			h1,
-			h2 {
-				line-height: 1.33;
+			h1 {
+				font-size: 2.5rem;
+				line-height: 3rem;
 				text-align: center;
 			}
 
-			h1 {
-				font-weight: 700;
-			}
-
-			h2 {
-				font-weight: 400;
+			p {
+				font-size: 1.2rem;
+				color: #ffffff88;
+				margin-bottom: 1rem;
 			}
 
 			b {
@@ -131,6 +117,7 @@
 				color: transparent;
 				background-clip: text;
 				-webkit-background-clip: text;
+				font-weight: 600;
 			}
 
 			.actions-container {

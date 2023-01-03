@@ -1,10 +1,6 @@
-export const prerender = true
-
-import type { RequestHandler } from './$types';
 import type { Post, PostMeta } from '$lib/types';
-import fs from 'fs';
-import path from 'path';
-import { json } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
+import type { PageLoad } from './$types';
 
 const META_GROUP_REGEX = /---\n([\s\S]+)\n---/gm;
 const META_REGEX = /(.+?): (.+?)$/gm;
@@ -43,28 +39,29 @@ function get_meta(markdown: string): PostMeta | undefined {
 	return markdown_meta;
 }
 
-const base = path.resolve('', 'static/blog');
-
-function search_posts(base_dir: string): Post[] {
-	const posts: Post[] = [];
-
-	const post_dirs = fs.readdirSync(base_dir);
-
-	for (let i = 0; i < post_dirs.length; i++) {
-		const post = post_dirs[i];
-		const markdown = fs.readFileSync(`${base_dir}/${post}/index.md`).toString();
-		const meta = get_meta(markdown);
-
-		posts.push({
-			path: post,
-			meta: meta
-		});
+function parse_markdown(markdown: string): [string, PostMeta | undefined] {
+	const meta_group = markdown.match(META_GROUP_REGEX);
+	if (meta_group == null) {
+		return [markdown, undefined];
 	}
 
-	return posts;
+	const markdown_meta = get_meta(markdown);
+	markdown = markdown.replace(meta_group[0], '');
+
+	return [markdown, markdown_meta];
 }
 
-export const GET = (async () => {
-	const posts = search_posts(base);
-	return json(posts);
-}) satisfies RequestHandler;
+export const load = (async ({ params, fetch }) => {
+
+	const response = await fetch(`/get-blogs`);
+	if (response.ok) {
+		const json = await response.json();
+		const posts = json as Post[];
+		return {
+			blogPage: params.blogPage,
+			posts: posts
+		};
+	}
+
+	throw error(404, 'Not found');
+}) satisfies PageLoad;

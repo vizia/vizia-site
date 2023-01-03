@@ -3,7 +3,13 @@
 	import CodeRenderer from '$lib/components/renderers/CodeRenderer.svelte';
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
+	import { onMount } from 'svelte';
+
 	export let data: PageData;
+
+	onMount(async () => {
+		await document.fonts.ready;
+	});
 </script>
 
 <div class="blog-post-wrapper">
