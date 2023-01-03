@@ -8,7 +8,7 @@
 	export let offset_x = 0;
 	export let offset_y = 0;
 
-	$: hovered = true;
+	$: hovered = (offset_x + offset_y) % 2 == 0;
 
 	function abs(n: number) {
 		if (n < 0) {

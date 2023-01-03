@@ -3,35 +3,7 @@ import type { FileMeta, File } from '$lib/types';
 import fs from 'fs';
 import path from 'path';
 import { json } from '@sveltejs/kit';
-
-const META_GROUP_REGEX = /---\n([\s\S]+)\n---/gm;
-const META_REGEX = /(.+?): (.+?)$/gm;
-
-function parse_markdown(markdown: string): FileMeta {
-	const meta_group = markdown.match(META_GROUP_REGEX);
-	if (meta_group == null) {
-		return { order: 999 };
-	}
-
-	const meta = meta_group[0].matchAll(META_REGEX);
-
-	const markdown_meta: FileMeta = { order: -1 };
-	for (const match of meta) {
-		const element = match[1];
-		const data = match[2];
-
-		switch (element) {
-			case 'order':
-				markdown_meta.order = Number(data);
-				break;
-
-			default:
-				break;
-		}
-	}
-
-	return markdown_meta;
-}
+import { parse_doc_markdown } from '$lib/doc';
 
 const DIRNAME_REGEX = /^\.?\/?(.+\/)*(.+)$/;
 const FILENAME_REGEX = /^\.?\/?(.+\/)*(.+)\.(.+)$/;
@@ -106,8 +78,8 @@ function recursive_search_dir(base_dir: string, base_link: string): File | null 
 		self.link = base_link;
 
 		const read = fs.readFileSync(base_dir).toString();
-		const meta = parse_markdown(read);
-		self.meta = meta;
+		const meta = parse_doc_markdown(read);
+		self.meta = meta[1];
 	}
 
 	return self;

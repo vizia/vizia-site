@@ -1,6 +1,5 @@
 <script lang="ts">
 	import BlogPost from '$lib/components/BlogPost.svelte';
-	import type { Post } from '$lib/types';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 

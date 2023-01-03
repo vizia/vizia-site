@@ -4,6 +4,13 @@ This is the official repository containing the [Vizia](https://github.com/vizia/
 
 The website was created using the `create-svelte` template found [here](https://github.com/sveltejs/kit/tree/master/packages/create-svelte)
 
+## To-Do List:
+
+- [ ] Update Landing Page to containg important information
+- [ ] Fill FAQ section
+- [ ] Fill About section
+- [ ] Fill Tutorial section
+
 ## Developing
 
 Developing the website is pretty easy. First, install the dependency manager `npm` (or `yarn`) and execute the following command:

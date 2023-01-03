@@ -1,7 +1,6 @@
 <script lang="ts">
 	import BgElement from '$lib/components/BGElement.svelte';
 	import LandingPageButton from '$lib/components/LandingPageButton.svelte';
-	import LandingPageDemo from '$lib/components/LandingPageDemo.svelte';
 </script>
 
 <!-- Landing Page -->
@@ -16,7 +15,7 @@
 	<BgElement color="#51afef" side="right" offset_x={0} offset_y={2} type="circle" rotation={180} />
 	<BgElement color="#efcc51" side="right" offset_x={-1} offset_y={0} type="circle" rotation={-90} />
 	<BgElement color="#51afef" side="right" offset_x={0} offset_y={0} />
-	<BgElement color="#efcc51" side="right" offset_x={0} offset_y={0} size={16} rotation={90} />
+	<BgElement color="#efcc51" side="right" offset_x={-0.5} offset_y={0} size={16} rotation={90} />
 	<div class="blur" />
 </div>
 <div class="overlay">
