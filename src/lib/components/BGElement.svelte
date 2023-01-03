@@ -7,8 +7,6 @@
 
 	export let offset_x = 0;
 	export let offset_y = 0;
-
-	$: hover = false;
 </script>
 
 <div
@@ -16,12 +14,6 @@
 	style="--color: {color}; --size: {size}rem; --offset_x: {offset_x * 8}rem; --offset_y: {offset_y *
 		8}rem;
    rotate: {rotation}deg; "
-	on:mouseenter={() => {
-		hover = true;
-	}}
-	on:mouseleave={() => {
-		hover = false;
-	}}
 />
 
 <style lang="scss">

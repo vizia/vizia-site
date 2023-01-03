@@ -16,7 +16,7 @@
 		{#if section.is_dir}
 			<h2>{section.file_name}</h2>
 			<ol>
-				{#each section.files as { file_name, path, link }}
+				{#each section.files as { file_name, link }}
 					<li>
 						<a href={link} class={`/guide/${data.docsPage}` == link ? 'active' : ''}>
 							{file_name}

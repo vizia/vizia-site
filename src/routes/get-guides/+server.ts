@@ -1,149 +1,133 @@
-import type { RequestHandler } from "./$types";
+import type { RequestHandler } from './$types';
 import type { FileMeta, File } from '$lib/types';
 import fs from 'fs';
-import path from 'path'
-import { json } from "@sveltejs/kit";
-
+import path from 'path';
+import { json } from '@sveltejs/kit';
 
 const META_GROUP_REGEX = /---\n([\s\S]+)\n---/gm;
 const META_REGEX = /(.+?): (.+?)$/gm;
 
 function parse_markdown(markdown: string): FileMeta {
-    let meta_group = markdown.match(META_GROUP_REGEX)
-    if (meta_group == null) {
-        return { order: 999 };
-    }
+	const meta_group = markdown.match(META_GROUP_REGEX);
+	if (meta_group == null) {
+		return { order: 999 };
+	}
 
-    let meta = meta_group[0].matchAll(META_REGEX);
+	const meta = meta_group[0].matchAll(META_REGEX);
 
-    let markdown_meta: FileMeta = { order: -1 };
-    for (const match of meta) {
-        let element = match[1];
-        let data = match[2];
+	const markdown_meta: FileMeta = { order: -1 };
+	for (const match of meta) {
+		const element = match[1];
+		const data = match[2];
 
-        switch (element) {
-            case "order":
-                markdown_meta.order = Number(data);
-                break;
+		switch (element) {
+			case 'order':
+				markdown_meta.order = Number(data);
+				break;
 
-            default:
-                break;
-        }
-    }
+			default:
+				break;
+		}
+	}
 
-
-    return markdown_meta;
+	return markdown_meta;
 }
 
-
-const DIRNAME_REGEX = /^\.?\/?(.+\/)*(.+)$/
-const FILENAME_REGEX = /^\.?\/?(.+\/)*(.+)\.(.+)$/
-const EXTENSION_REGEX = /\..+$/
+const DIRNAME_REGEX = /^\.?\/?(.+\/)*(.+)$/;
+const FILENAME_REGEX = /^\.?\/?(.+\/)*(.+)\.(.+)$/;
+const EXTENSION_REGEX = /\..+$/;
 
 function recursive_search_dir(base_dir: string, base_link: string): File | null {
+	const self: File = {
+		file_name: 'base',
+		path: base_dir,
+		link: base_link,
+		is_dir: true,
+		files: []
+	};
 
-    let self: File = {
-        file_name: "base",
-        path: base_dir,
-        link: base_link,
-        is_dir: true,
-        files: []
-    }
+	if (fs.statSync(base_dir).isDirectory()) {
+		// Directory
 
+		const dirs = fs.readdirSync(base_dir);
+		const files: File[] = [];
 
-    if (fs.statSync(base_dir).isDirectory()) {
-        // Directory
+		const meta_file = `${base_dir}/meta.json`;
+		self.meta = JSON.parse(fs.readFileSync(meta_file).toString()) as FileMeta;
 
-        let dirs = fs.readdirSync(base_dir)
-        let files: File[] = [];
+		if (self.meta.show !== undefined && self.meta.show === false) {
+			return null;
+		}
+		const filename_regex = base_dir.match(DIRNAME_REGEX);
+		const file_name = filename_regex ? filename_regex[2] : '';
 
-        let meta_file = `${base_dir}/meta.json`
-        self.meta = JSON.parse(fs.readFileSync(meta_file).toString()) as FileMeta
+		self.file_name = file_name;
 
+		if (dirs.length == 0) {
+			return null;
+		}
 
-        if (self.meta.show !== undefined && self.meta.show === false) {
-            return null
-        }
-        let filename_regex = base_dir.match(DIRNAME_REGEX)
-        let file_name = filename_regex ? filename_regex[2] : ""
+		for (let i = 0; i < dirs.length; i++) {
+			let dir = dirs[i];
+			const extension = dir.match(EXTENSION_REGEX);
 
-        self.file_name = file_name;
+			let next = null;
+			if (extension) {
+				dir = dir.replace(extension[0], '');
+				next = recursive_search_dir(`${base_dir}/${dir}${extension}`, `${base_link}/${dir}`);
+			} else {
+				next = recursive_search_dir(`${base_dir}/${dir}`, `${base_link}/${dir}`);
+			}
 
-        if (dirs.length == 0) {
-            return null
-        }
+			if (next !== null) {
+				files.push(next);
+			}
+		}
 
-        for (let i = 0; i < dirs.length; i++) {
-            let dir = dirs[i];
-            let extension = dir.match(EXTENSION_REGEX)
+		self.files = files;
+	} else {
+		// File
+		self.is_dir = false;
 
-            let next = null
-            if (extension) {
-                dir = dir.replace(extension[0], "")
-                next = recursive_search_dir(`${base_dir}/${dir}${extension}`, `${base_link}/${dir}`)
-            } else {
-                next = recursive_search_dir(`${base_dir}/${dir}`, `${base_link}/${dir}`)
-            }
+		const filename_regex = base_dir.match(FILENAME_REGEX);
 
-            if (next !== null) {
-                files.push(next)
+		let file_name = filename_regex ? filename_regex[2] : '';
+		const extension = filename_regex ? filename_regex[3] : '';
+		if (extension != 'md') {
+			return null;
+		}
 
-            }
+		file_name = file_name.trim().replaceAll('-', ' ');
+		file_name = file_name.trim().replaceAll('_', ' ');
+		file_name = file_name.charAt(0).toUpperCase() + file_name.substring(1);
 
-        }
+		self.file_name = file_name;
+		self.path = base_dir;
+		self.link = base_link;
 
-        self.files = files
+		const read = fs.readFileSync(base_dir).toString();
+		const meta = parse_markdown(read);
+		self.meta = meta;
+	}
 
-    } else {
-        // File
-        self.is_dir = false;
-
-        let filename_regex = base_dir.match(FILENAME_REGEX)
-
-        let file_name = filename_regex ? filename_regex[2] : ""
-        let extension = filename_regex ? filename_regex[3] : ""
-        if (extension != "md") {
-            return null
-        }
-
-        file_name = file_name.trim().replaceAll("-", " ");
-        file_name = file_name.trim().replaceAll("_", " ");
-        file_name = file_name.charAt(0).toUpperCase() + file_name.substring(1);
-
-        self.file_name = file_name
-        self.path = base_dir
-        self.link = base_link
-
-
-        let read = fs.readFileSync(base_dir).toString();
-        let meta = parse_markdown(read);
-        self.meta = meta
-
-    }
-
-    return self
-
+	return self;
 }
 
-const base = path.resolve("", "static/docs/guide")
-
+const base = path.resolve('', 'static/docs/guide');
 
 export const GET = (async () => {
-    const sections = recursive_search_dir(base, "/guide")
+	const sections = recursive_search_dir(base, '/guide');
 
+	const sort_fn = (a: File, b: File) => {
+		const a_order = a.meta ? a.meta.order : 500;
+		const b_order = b.meta ? b.meta.order : 500;
 
-    let sort_fn = (a: File, b: File) => {
-        let a_order = a.meta ? a.meta.order : 500;
-        let b_order = b.meta ? b.meta.order : 500;
+		return a_order - b_order;
+	};
 
-        return a_order - b_order
-    }
+	sections?.files.sort(sort_fn).forEach((section) => {
+		section.files.sort(sort_fn);
+	});
 
-    sections?.files.sort(sort_fn).forEach(section => {
-        section.files.sort(sort_fn)
-    });
-
-
-    return json(sections)
-
-}) satisfies RequestHandler
+	return json(sections);
+}) satisfies RequestHandler;
