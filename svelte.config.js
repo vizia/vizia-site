@@ -18,7 +18,7 @@ const config = {
 				// base: dev ? '/' : '/vizia-site'
 				base: '/vizia-site'
 			},
-			assets: 'static',
+			assets: 'build',
 			fallback: null,
 			precompress: false,
 			strict: true,
