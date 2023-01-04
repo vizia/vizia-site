@@ -2,8 +2,6 @@
 	import { base } from '$app/paths';
 	import BgElement from '$lib/components/BGElement.svelte';
 	import LandingPageButton from '$lib/components/LandingPageButton.svelte';
-
-	console.log(base);
 </script>
 
 <!-- Landing Page -->
@@ -32,10 +30,10 @@
 		<div class="actions-container">
 			<LandingPageButton
 				text="Get Started"
-				link="/guide/introduction/getting_started#getting-started"
+				link="{base}/guide/introduction/getting_started#getting-started"
 				style="gradient"
 			/>
-			<LandingPageButton text="Tutorial" link="/tutorial" />
+			<LandingPageButton text="Tutorial" link="{base}/tutorial" />
 		</div>
 	</div>
 	<!-- <LandingPageDemo /> -->
