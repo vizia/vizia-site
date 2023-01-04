@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
+	import { base } from '$app/paths';
 
 	export let data: LayoutData;
 
@@ -18,7 +19,7 @@
 			<ol>
 				{#each section.files as { file_name, link }}
 					<li>
-						<a href={link} class={`/guide/${data.docsPage}` == link ? 'active' : ''}>
+						<a href="{base}{link}" class={`${base}/guide/${data.docsPage}` == link ? 'active' : ''}>
 							{file_name}
 						</a>
 					</li>

@@ -1,1 +1,0 @@
-import{e as r}from"./index-1885ff30.js";const a=async({params:o,fetch:t})=>{const e=await t("/get-guides",{method:"GET"});if(e.ok){const s=await e.json();return{docsPage:o.docsPage?o.docsPage:[],sections:s.files}}throw r(404,"Not found")},c=Object.freeze(Object.defineProperty({__proto__:null,load:a},Symbol.toStringTag,{value:"Module"}));export{c as _,a as l};

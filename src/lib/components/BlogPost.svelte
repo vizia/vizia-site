@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { Post } from '$lib/types';
+	import { base } from '$app/paths';
 
 	export let post: Post;
 	let img = post.meta?.landing_image;
 </script>
 
-<a class="post" style={`--bg: url("${img ? img : ''}");`} href={`blog/${post.path}`}>
+<a class="post" style={`--bg: url("${img ? img : ''}");`} href="{base}blog/{post.path}">
 	<h1>{post.meta?.title}</h1>
 	<p>{post.meta?.date}</p>
 </a>

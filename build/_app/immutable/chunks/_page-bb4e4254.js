@@ -1,1 +1,0 @@
-import{e as s}from"./index-1885ff30.js";const e=async({fetch:t})=>{const o=await t("/get-blogs");if(o.ok)return{posts:await o.json()};throw s(404,"Not found")},c=Object.freeze(Object.defineProperty({__proto__:null,load:e},Symbol.toStringTag,{value:"Module"}));export{c as _,e as l};

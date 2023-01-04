@@ -1,9 +1,10 @@
 <script lang="ts">
 	import HeaderDropdown from './HeaderDropdown.svelte';
+	import { base } from '$app/paths';
 </script>
 
 <nav class="header" aria-label="Primary">
-	<a class="logo-wrapper" href="/">
+	<a class="logo-wrapper" href="{base}/">
 		<img src="/vizia_logo.svg" class="logo" alt="Vite Logo" />
 		<p>Vizia</p>
 	</a>
@@ -18,18 +19,18 @@
 	</div>
 
 	<div class="nav-wrapper">
-		<a href="/tutorial">Tutorial</a>
+		<a href="{base}/tutorial">Tutorial</a>
 		<HeaderDropdown
 			dropdownName="Docs"
 			options={[
-				['Guide', '/guide'],
-				['Examples', '/examples']
+				['Guide', `${base}/guide`],
+				['Examples', `${base}/examples`]
 				// ['API', '/api']
 			]}
 		/>
-		<a href="/blog">Blog</a>
-		<a href="/faq">FAQ</a>
-		<a href="/about">About</a>
+		<a href="{base}/blog">Blog</a>
+		<a href="{base}/faq">FAQ</a>
+		<a href="{base}/about">About</a>
 	</div>
 </nav>
 
