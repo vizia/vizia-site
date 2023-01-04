@@ -37,6 +37,15 @@ jobs:
         with:
           # Upload entire repository
           path: './build/'
+      - name: Build & Deploy
+        run: |
+          export DEPLOY=true
+          [ "$GITHUB_EVENT_NAME" != "pull_request" ] && rm -rf docs/_app/
+          yarn install
+          version=$(yarn version --patch --no-git-tag-version | grep "New version" | cut -d':' -f 2)
+          yarn build
+          yarn run lint
+          cd ..
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
