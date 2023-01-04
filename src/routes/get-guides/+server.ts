@@ -1,9 +1,9 @@
 import type { RequestHandler } from './$types';
 import type { FileMeta, File } from '$lib/types';
 import fs from 'fs';
-import path from 'path';
 import { json } from '@sveltejs/kit';
 import { parse_doc_markdown } from '$lib/doc';
+import { base } from '$app/paths';
 
 const DIRNAME_REGEX = /^\.?\/?(.+\/)*(.+)$/;
 const FILENAME_REGEX = /^\.?\/?(.+\/)*(.+)\.(.+)$/;
@@ -85,10 +85,10 @@ function recursive_search_dir(base_dir: string, base_link: string): File | null 
 	return self;
 }
 
-const base = path.resolve('', 'static/docs/guide');
+const base_dir = 'static/docs/guide';
 
 export const GET = (async () => {
-	const sections = recursive_search_dir(base, '/guide');
+	const sections = recursive_search_dir(base_dir, `${base}/guide`);
 
 	const sort_fn = (a: File, b: File) => {
 		const a_order = a.meta ? a.meta.order : 500;

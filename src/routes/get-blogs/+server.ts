@@ -3,11 +3,9 @@ export const prerender = true;
 import type { RequestHandler } from './$types';
 import type { Post } from '$lib/types';
 import fs from 'fs';
-import path from 'path';
 import { json } from '@sveltejs/kit';
 import { get_post_meta } from '$lib/post';
 
-const base = path.resolve('', 'static/blog');
 
 function search_posts(base_dir: string): Post[] {
 	const posts: Post[] = [];
@@ -28,6 +26,7 @@ function search_posts(base_dir: string): Post[] {
 	return posts;
 }
 
+const base = 'static/blog';
 export const GET = (async () => {
 	const posts = search_posts(base);
 	return json(posts);

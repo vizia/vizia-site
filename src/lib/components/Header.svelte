@@ -1,4 +1,7 @@
 <script lang="ts">
+	import GithubLogo from '$lib/assets/Github.svg';
+	import DiscordLogo from '$lib/assets/Discord.svg';
+
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import { base } from '$app/paths';
 </script>
@@ -11,10 +14,10 @@
 
 	<div class="links-wrapper">
 		<a href="https://github.com/vizia/vizia" target="_blank" rel="noreferrer">
-			<img src="/Github.svg" class="logo" alt="Github Logo" />
+			<img src={GithubLogo} class="logo" alt="Github Logo" />
 		</a>
 		<a href="https://discord.gg/e3k9TZqrps" target="_blank" rel="noreferrer">
-			<img src="/Discord.svg" class="logo" alt="Discord Logo" />
+			<img src={DiscordLogo} class="logo" alt="Discord Logo" />
 		</a>
 	</div>
 
