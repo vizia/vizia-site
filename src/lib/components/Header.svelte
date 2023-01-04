@@ -8,7 +8,7 @@
 
 <nav class="header" aria-label="Primary">
 	<a class="logo-wrapper" href="{base}/">
-		<img src="/vizia_logo.svg" class="logo" alt="Vite Logo" />
+		<img src="/vizia_logo.svg" class="logo" alt="Vizia Logo" />
 		<p>Vizia</p>
 	</a>
 
