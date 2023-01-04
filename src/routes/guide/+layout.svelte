@@ -34,8 +34,7 @@
 <style lang="scss">
 	.table-of-contents {
 		position: fixed;
-		width: 25%;
-		min-width: var(--sidebar-width);
+		width: var(--sidebar-width);
 		height: 100%;
 		padding: 4rem 8rem;
 		padding-right: 2rem;

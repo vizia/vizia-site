@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import BgElement from '$lib/components/BGElement.svelte';
 	import LandingPageButton from '$lib/components/LandingPageButton.svelte';
+
+	console.log(base);
 </script>
 
 <!-- Landing Page -->
