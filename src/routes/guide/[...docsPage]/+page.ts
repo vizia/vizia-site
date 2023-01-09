@@ -1,10 +1,11 @@
+import { base } from '$app/paths';
 import { parse_doc_markdown } from '$lib/doc';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params, fetch }) => {
 	const response = await fetch(
-		`/docs/guide${params.docsPage === '' ? 'index' : '/' + params.docsPage}.md`
+		`${base}/docs/guide${params.docsPage === '' ? 'index' : '/' + params.docsPage}.md`
 	);
 	if (response.ok) {
 		const markdown = await response.text();

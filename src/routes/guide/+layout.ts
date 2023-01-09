@@ -1,9 +1,10 @@
 import { error } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';
 import type { File } from '$lib/types';
+import { base } from '$app/paths';
 
 export const load = (async ({ params, fetch }) => {
-	const response = await fetch('/get-guides', {
+	const response = await fetch(`${base}/get-guides`, {
 		method: 'GET'
 	});
 

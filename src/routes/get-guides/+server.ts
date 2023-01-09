@@ -88,7 +88,7 @@ function recursive_search_dir(base_dir: string, base_link: string): File | null 
 const base_dir = 'static/docs/guide';
 
 export const GET = (async () => {
-	const sections = recursive_search_dir(base_dir, `${base}/guide`);
+	const sections = recursive_search_dir(base_dir, `/guide`);
 
 	const sort_fn = (a: File, b: File) => {
 		const a_order = a.meta ? a.meta.order : 500;

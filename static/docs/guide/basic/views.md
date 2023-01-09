@@ -20,7 +20,7 @@ fn main() {
 }
 ```
 
-<img src="/docs_img/hello_world.png" alt="A window with its size set to 400 by 200 with a label displaying 'Hello World'" width="400"/>
+![A window with its size set to 400 by 200 with a label displaying 'Hello World'" width="400](/docs_img/hello_world.png)
 
 The first argument to the constructor of the label is a mutable reference to `Context`, shortened to `cx`. This allows the view to build itself into the application and is ubiquitous to all views.
 
@@ -78,7 +78,7 @@ fn main() {
 }
 ```
 
-<!-- <img src="/docs_img/label_background_color.png" alt="" width="400"/> -->
+<!-- ![" width="400](/docs_img/label_background_color.png) -->
 
 ## Layout Modifiers
 
@@ -224,7 +224,7 @@ fn main() {
 }
 ```
 
-<img src="/docs_img/vstack.png" alt="" width="400"/>
+![" width="400](/docs_img/vstack.png)
 
 While a `HStack` container will arrange its contents into a horizontal row:
 
@@ -245,7 +245,7 @@ fn main() {
 }
 ```
 
-<img src="/docs_img/hstack.png" alt="" width="400"/>
+![" width="400](/docs_img/hstack.png)
 
 # The View Tree
 
@@ -265,7 +265,7 @@ Application::new(|cx|{
 
 For example, for the code above the view tree can be depicted with the following diagram:
 
-<img src="/docs_img/basic_tree.svg" alt="Diagram of a basic view tree depicting a Window view with a child HStack view with two child Label views." width="320"/>
+![Diagram of a basic view tree depicting a Window view with a child HStack view with two child Label views." width="320](/docs_img/basic_tree.svg)
 
 The `Window` is the _parent_ of the `HStack`, while the `HStack` is the _parent_ of both the `Label`s. Therefore, the `Window` is an _ancestor_ of the `Label`s. This terminology is important for [selector](/guide/basic/styling#stylesheets) matching during styling.
 

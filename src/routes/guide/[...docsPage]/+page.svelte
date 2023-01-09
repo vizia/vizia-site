@@ -5,6 +5,8 @@
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { afterNavigate } from '$app/navigation';
+	import ImageRenderer from '$lib/components/renderers/ImageRenderer.svelte';
+	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
 
 	export let data: PageData;
 
@@ -87,7 +89,12 @@
 <div class="docs-content">
 	<SvelteMarkdown
 		source={data.markdown}
-		renderers={{ code: CodeRenderer, tablecell: TableCellRenderer }}
+		renderers={{
+			code: CodeRenderer,
+			tablecell: TableCellRenderer,
+			image: ImageRenderer,
+			link: LinkRenderer
+		}}
 	/>
 </div>
 

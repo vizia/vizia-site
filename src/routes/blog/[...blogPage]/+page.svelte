@@ -4,6 +4,8 @@
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
+	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
 
 	export let data: PageData;
 
@@ -23,11 +25,15 @@
 	</div>
 
 	<!-- svelte-ignore a11y-img-redundant-alt -->
-	<img class="post-img" src={data.meta?.landing_image} alt="An image that reflects the blog post" />
+	<img
+		class="post-img"
+		src={base + data.meta?.landing_image}
+		alt="An image that reflects the blog post"
+	/>
 	<div class="blog-post">
 		<SvelteMarkdown
 			source={data.markdown}
-			renderers={{ code: CodeRenderer, tablecell: TableCellRenderer }}
+			renderers={{ code: CodeRenderer, tablecell: TableCellRenderer, link: LinkRenderer }}
 		/>
 	</div>
 </div>
