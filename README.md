@@ -10,6 +10,7 @@ The website was created using the `create-svelte` template found [here](https://
 - [ ] Fill FAQ section
 - [ ] Fill About section
 - [ ] Fill Tutorial section
+- [ ] Responsive design
 
 ## Developing
 
