@@ -14,6 +14,9 @@ Fusce dolor id purus tellus dignissim sed eget. Ornare dolor accumsan semper viv
 
 Malesuada dignissim ante elit sed molestie sit vestibulum vitae. Erat pretium montes nulla tortor pulvinar vitae aliquam sit semper. Fermentum fames eu eget quisque sodales tincidunt. Sit quis in quis quisque nisi elementum. Malesuada massa non pellentesque lorem. Nisl venenatis curabitur in mauris tincidunt.
 
-```
-Some code here maybe?
+```rust
+$// file: /file/over/here
+fn hello() {
+    println!("Hello there!");
+}
 ```

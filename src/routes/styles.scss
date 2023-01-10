@@ -10,7 +10,7 @@
 	font-family: Rubik, Inter, Avenir, Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-weight: 400;
-	line-height: 1.8rem;
+	line-height: 1.5rem;
 	font-weight: 400;
 	box-sizing: border-box;
 
@@ -112,36 +112,60 @@ h3 {
 		color: #bbb;
 
 		code {
-			padding: 0.25rem 0.25rem;
-			background-color: #282828;
+			padding: 0 0.25rem;
+			background-color: #323232;
 			border-radius: 0.25rem;
 		}
 	}
 
 	a {
 		code {
-			padding: 0.25rem 0.25rem;
-			background-color: #282828;
+			padding: 0 0.25rem;
+			background-color: #323232;
 			border-radius: 0.25rem;
-			color: #bbb;
+			color: #51afefbb;
 
-			border: 1px solid #51afef88;
 			box-sizing: content-box;
 
 			&:hover {
-				border: 1px solid #51afef;
+				color: #51afef;
 			}
 		}
 	}
 
-	pre {
-		padding: 1rem;
+	.code-with-file {
+		background-color: #323232;
 		border-radius: 0.5rem;
+		overflow: hidden;
+
+		.header {
+			padding: 0.25rem 1rem;
+			p {
+				color: #888;
+			}
+		}
+
+		pre {
+			padding: 1rem;
+			border-radius: 0;
+			background-color: #282828;
+			box-sizing: border-box;
+			overflow-x: scroll;
+			overflow-y: visible;
+			flex-shrink: 0;
+			line-height: 1.4rem;
+		}
+	}
+
+	pre {
+		border-radius: 0.5rem;
+		padding: 1rem;
 		background-color: #282828;
 		box-sizing: border-box;
 		overflow-x: scroll;
 		overflow-y: visible;
 		flex-shrink: 0;
+		line-height: 1.4rem;
 	}
 
 	table {
