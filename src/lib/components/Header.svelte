@@ -64,7 +64,7 @@
 
 		box-shadow: 0 0 1rem #00000044;
 
-		background-color: #2a2a2a;
+		background-color: var(--background-tertiary);
 		box-sizing: border-box;
 
 		z-index: 100;

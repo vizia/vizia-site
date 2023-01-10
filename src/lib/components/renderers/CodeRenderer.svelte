@@ -38,12 +38,14 @@
 </script>
 
 {#if attrs.has('file')}
-	<div class="code-with-file">
+	<div class="codeblock">
 		<div class="header">
 			<p>{attrs.get('file')}</p>
 		</div>
 		<pre class={lang}><code class={'language-' + lang}>{@html text}</code></pre>
 	</div>
 {:else}
-	<pre class={lang}><code class={'language-' + lang}>{@html text}</code></pre>
+	<div class="codeblock">
+		<pre class={lang}><code class={'language-' + lang}>{@html text}</code></pre>
+	</div>
 {/if}

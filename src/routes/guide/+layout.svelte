@@ -30,37 +30,3 @@
 </nav>
 
 <slot />
-
-<style lang="scss">
-	.table-of-contents {
-		position: fixed;
-		width: var(--sidebar-width);
-		height: calc(100% - var(--header-size));
-		padding: 4rem 8rem;
-		padding-top: 0;
-		background-color: #161616;
-		overflow-x: hidden;
-		overflow-y: auto;
-
-		h2 {
-			font-size: 1rem;
-			font-weight: 600;
-			text-transform: uppercase;
-			color: #aaa;
-			letter-spacing: 0.1em;
-
-			margin-top: 3rem;
-		}
-
-		ol {
-			gap: 0.25rem;
-			li {
-				display: flex;
-				a {
-					width: 100%;
-					height: 100%;
-				}
-			}
-		}
-	}
-</style>
