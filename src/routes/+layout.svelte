@@ -25,8 +25,8 @@
 		display: flex;
 		flex-direction: row;
 		width: 100%;
-		height: 100vh;
 		overflow: hidden;
 		background-color: #1d1d1d;
+		min-height: 100vh;
 	}
 </style>

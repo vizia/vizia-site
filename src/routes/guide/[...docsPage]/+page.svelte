@@ -30,7 +30,7 @@
 	});
 
 	function update() {
-		let content_ = document.querySelector('.docs-content');
+		let content_ = document.querySelector('.page-content');
 		if (content_) {
 			content = content_;
 
@@ -41,7 +41,7 @@
 				const style = getComputedStyle(heading);
 				return heading.getBoundingClientRect().top - parseFloat(style.scrollMarginTop) - top;
 			});
-			height = window.innerHeight - 64; /* bottom banner height */
+			height = window.innerHeight - 64;
 		}
 
 		loaded = true;
@@ -69,7 +69,7 @@
 	}
 </script>
 
-<svelte:window on:scroll={highlight} on:resize={update} />
+<svelte:window on:resize={update} on:scroll={highlight} />
 
 <div class="on-this-page">
 	{#if loaded}
@@ -86,7 +86,7 @@
 	{/if}
 </div>
 
-<div class="docs-content">
+<div class="page-content">
 	<SvelteMarkdown
 		source={data.markdown}
 		renderers={{
@@ -102,9 +102,8 @@
 	.on-this-page {
 		position: fixed;
 		width: var(--sidebar-width);
-		margin-left: calc(100% - var(--sidebar-width));
-		height: 100%;
-		padding-left: 2rem;
+		padding-left: 4rem;
 		padding-top: 4rem;
+		left: calc(100% - var(--sidebar-width));
 	}
 </style>

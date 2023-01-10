@@ -27,6 +27,7 @@
 		"src/routes/get-guides/+server.ts"
 	],
 	"/guide": [
+		"src/routes/guide/+page.ts",
 		"src/routes/guide/+layout.ts",
 		"src/routes/+layout.ts",
 		"src/routes/guide/+layout.ts",

@@ -25,7 +25,6 @@
 					</li>
 				{/each}
 			</ol>
-			<div class="space" />
 		{/if}
 	{/each}
 </nav>
@@ -36,9 +35,9 @@
 	.table-of-contents {
 		position: fixed;
 		width: var(--sidebar-width);
-		height: 100%;
+		height: calc(100% - var(--header-size));
 		padding: 4rem 8rem;
-		padding-right: 2rem;
+		padding-top: 0;
 		background-color: #161616;
 		overflow-x: hidden;
 		overflow-y: auto;
@@ -49,11 +48,8 @@
 			text-transform: uppercase;
 			color: #aaa;
 			letter-spacing: 0.1em;
-		}
 
-		.space {
-			width: 100%;
-			height: 3rem;
+			margin-top: 3rem;
 		}
 
 		ol {
