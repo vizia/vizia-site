@@ -15,7 +15,7 @@
 	box-sizing: border-box;
 
 	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
+	color: #fff;
 	background-color: #181818;
 
 	font-synthesis: none;
@@ -80,17 +80,22 @@ h3 {
 	font-size: 1rem;
 }
 
+.on-this-page {
+	background-color: #1d1d1d;
+}
+
 .page-content,
 .blog-post {
+	background-color: #1d1d1d;
 	flex: 1;
 	padding: 2rem 4rem;
 	padding-top: 5rem;
 
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 1rem;
 	align-items: center;
-	padding-right: var(--sidebar-width);
+	margin-right: var(--sidebar-width);
 	margin-left: var(--sidebar-width);
 
 	overflow-x: hidden;

@@ -53,7 +53,7 @@
 		}
 
 		ol {
-			gap: 0;
+			gap: 0.25rem;
 			li {
 				display: flex;
 				a {

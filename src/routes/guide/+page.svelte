@@ -111,6 +111,7 @@
 	.on-this-page {
 		position: fixed;
 		width: var(--sidebar-width);
+		height: 100%;
 		padding-left: 4rem;
 		padding-top: 4rem;
 		left: calc(100% - var(--sidebar-width));
