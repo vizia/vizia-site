@@ -11,8 +11,13 @@ export interface Post {
 
 export interface FileMeta {
 	order: number;
+	title: string;
 	show?: boolean;
 }
+
+export const fileMetaAttrs = [
+	"order", "title", "show"
+]
 
 export interface File {
 	file_name: string;

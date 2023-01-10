@@ -11,7 +11,8 @@ export function get_doc_meta(markdown: string): FileMeta | undefined {
 
 	const meta = meta_group[0].matchAll(META_REGEX);
 
-	const markdown_meta: FileMeta = { order: -1 };
+
+	const markdown_meta: FileMeta = { order: -1, title: "" };
 	for (const match of meta) {
 		const element = match[1];
 		const data = match[2];
@@ -19,6 +20,10 @@ export function get_doc_meta(markdown: string): FileMeta | undefined {
 		switch (element) {
 			case 'order':
 				markdown_meta.order = Number(data);
+				break;
+
+			case 'title':
+				markdown_meta.title = data;
 				break;
 
 			default:

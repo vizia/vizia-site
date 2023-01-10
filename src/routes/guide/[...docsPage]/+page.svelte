@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import CodeRenderer from '$lib/components/renderers/CodeRenderer.svelte';
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
@@ -87,6 +87,9 @@
 </div>
 
 <div class="page-content">
+	{#if data.markdown_meta?.title}
+		<h1 class="title" id={data.markdown_meta.title.toLowerCase()}>{data.markdown_meta.title}</h1>
+	{/if}
 	<SvelteMarkdown
 		source={data.markdown}
 		renderers={{
@@ -99,6 +102,12 @@
 </div>
 
 <style lang="scss">
+	.title {
+		font-size: 2.5rem;
+		font-weight: 600;
+		margin-bottom: 3rem;
+	}
+
 	.on-this-page {
 		position: fixed;
 		width: var(--sidebar-width);

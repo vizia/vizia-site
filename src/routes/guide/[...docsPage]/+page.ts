@@ -7,11 +7,14 @@ export const load = (async ({ params, fetch }) => {
 	const response = await fetch(
 		`${base}/docs/guide${params.docsPage === '' ? 'index' : '/' + params.docsPage}.md`
 	);
+
 	if (response.ok) {
 		const markdown = await response.text();
+		const [parsed_markdown, markdown_meta] = parse_doc_markdown(markdown);
 		return {
 			docsPage: params.docsPage,
-			markdown: parse_doc_markdown(markdown)[0]
+			markdown: parsed_markdown,
+			markdown_meta: markdown_meta
 		};
 	}
 
