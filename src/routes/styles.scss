@@ -1,4 +1,7 @@
 :root {
+	--accent: #51afef;
+	--accent-light: #51afef;
+
 	--background-main: #1a1a1a;
 	--background-secondary: #242424;
 	--background-tertiary: #323232;
@@ -56,7 +59,8 @@ ol {
 
 li {
 	display: block;
-	a {
+	a,
+	p {
 		color: #888;
 
 		&:hover {
@@ -64,11 +68,11 @@ li {
 		}
 
 		&.active {
-			color: #51afef;
+			color: --accent;
 		}
 
 		&.active:hover {
-			color: #51afef;
+			color: --accent;
 		}
 	}
 }
@@ -98,7 +102,7 @@ h3 {
 	height: calc(100% - var(--header-size));
 	padding: 4rem 8rem;
 	padding-top: 0;
-	background-color: var(--background-main);
+	background-color: var(--background-secondary);
 	overflow-x: hidden;
 	overflow-y: auto;
 
@@ -119,6 +123,33 @@ h3 {
 			a {
 				width: 100%;
 				height: 100%;
+			}
+		}
+	}
+}
+
+.tutorial-content {
+	p {
+		font-size: 1rem;
+		font-weight: 400;
+		color: #bbb;
+
+		code {
+			padding: 0.125rem 0.5rem;
+			background-color: var(--background-code);
+			border-radius: 0.25rem;
+			color: #ffffbbdd;
+		}
+	}
+
+	ol,
+	ul {
+		li {
+			display: inline flow-root list-item;
+			margin-left: 1rem;
+
+			&::marker {
+				color: #666;
 			}
 		}
 	}
@@ -174,7 +205,7 @@ h3 {
 			padding: 0.125rem 0.5rem;
 			background-color: var(--background-code);
 			border-radius: 0.25rem;
-			color: #51afef;
+			color: --accent;
 		}
 	}
 
@@ -256,7 +287,7 @@ body {
 
 a {
 	font-weight: 500;
-	color: #51afef;
+	color: --accent;
 	text-decoration: inherit;
 }
 a:hover {
