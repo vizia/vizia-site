@@ -9,9 +9,11 @@ export const load = (async ({ params, fetch }) => {
 	);
 	if (response.ok) {
 		const markdown = await response.text();
+		const [parsed_markdown, markdown_meta] = parse_doc_markdown(markdown);
 		return {
 			docsPage: [],
-			markdown: parse_doc_markdown(markdown)[0]
+			markdown: parsed_markdown,
+			markdown_meta: markdown_meta
 		};
 	}
 

@@ -1,0 +1,33 @@
+{
+    "title": "Tutorial One",
+    "steps": [
+        {
+            "fileName": "index.md",
+            "codeFileName": "step_one.rs"
+        },
+        {
+            "stepTitle": "Step One",
+            "fileName": "step_one.md",
+            "codeFileName": "step_one.rs"
+        },
+        {
+            "stepTitle": "Step Two",
+            "fileName": "step_two.md",
+            "codeFileName": "step_one.rs",
+            "codeHighlight": [
+                {
+                    "type": "basic",
+                    "line": 0,
+                    "start": 0,
+                    "end": 8
+                },
+                {
+                    "type": "error",
+                    "line": 1,
+                    "start": 7,
+                    "end": 16
+                }
+            ]
+        }
+    ]
+}

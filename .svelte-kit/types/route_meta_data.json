@@ -26,6 +26,9 @@
 	"/get-guides": [
 		"src/routes/get-guides/+server.ts"
 	],
+	"/get-tutorials": [
+		"src/routes/get-tutorials/+server.ts"
+	],
 	"/guide": [
 		"src/routes/guide/+page.ts",
 		"src/routes/guide/+layout.ts",
@@ -39,6 +42,14 @@
 		"src/routes/+layout.ts"
 	],
 	"/tutorial": [
+		"src/routes/tutorial/+layout.ts",
+		"src/routes/+layout.ts",
+		"src/routes/tutorial/+layout.ts",
+		"src/routes/+layout.ts"
+	],
+	"/tutorial/[...tutorialPage]": [
+		"src/routes/tutorial/[...tutorialPage]/+page.ts",
+		"src/routes/tutorial/+layout.ts",
 		"src/routes/+layout.ts"
 	]
 }

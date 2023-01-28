@@ -27,3 +27,26 @@ export interface File {
 	meta?: FileMeta;
 	files: File[];
 }
+
+
+export interface Tutorial {
+	title: string,
+	dir: string,
+	steps: TutorialStep[]
+}
+
+export interface TutorialStep {
+	stepTitle: string,
+	fileName: string, // Filename of the markdown of the step (in the same directory)
+	codeFileName: string, // Filename of the code of the step (in the same directory)
+	codeHighlight: StepCodeHighlight[]
+	data: string
+	codeData: string
+}
+
+export interface StepCodeHighlight {
+	type: string,
+	line: number,
+	start: number,
+	end: number
+}
