@@ -16,16 +16,28 @@
             "codeFileName": "step_one.rs",
             "codeHighlight": [
                 {
-                    "type": "basic",
+                    "type": "range",
+                    "highlightType": "basic",
                     "line": 0,
                     "start": 0,
                     "end": 8
                 },
                 {
-                    "type": "error",
+                    "type": "range",
+                    "highlightType": "error",
                     "line": 1,
                     "start": 7,
                     "end": 16
+                },
+                {
+                    "type": "regex",
+                    "highlightType": "basic",
+                    "regex": "usize"
+                },
+                {
+                    "type": "line",
+                    "highlightType": "error",
+                    "line": 2
                 }
             ]
         }

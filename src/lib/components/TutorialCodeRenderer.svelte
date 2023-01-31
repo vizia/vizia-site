@@ -34,8 +34,8 @@
 <div class="codeblock">
 	<pre class={lang}><code class={'language-' + lang}>{@html textHightlighted}</code></pre>
 	{#if highlight && highlight.length != 0}
-		{#each highlight as { start, type, end, line }}
-			<div class={type} style="--left: {start}; --width: {end - start}; --line: {line};" />
+		{#each highlight as { start, highlightType, end, line }}
+			<div class={highlightType} style="--left: {start}; --width: {end - start}; --line: {line};" />
 		{/each}
 		{#each disabledRanges as { start, end, line }}
 			<div class="disabled" style="--left: {start}; --width: {end - start}; --line: {line};" />

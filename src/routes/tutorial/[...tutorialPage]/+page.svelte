@@ -37,7 +37,7 @@
 			{#if step.stepTitle}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<li on:click={() => selectStep(i)} class={currentStep == i ? 'active' : ''}>
-					<p>{step.stepTitle}</p>
+					<p>{i}. {step.stepTitle}</p>
 				</li>
 			{/if}
 		{/each}
@@ -62,7 +62,7 @@
 			<h2 class="title">{data.tutorial.title}</h2>
 		{/if}
 		<SvelteMarkdown
-			source={currentStepDetails.data}
+			source={currentStepDetails.markdownData}
 			renderers={{
 				code: CodeRenderer,
 				tablecell: TableCellRenderer,
