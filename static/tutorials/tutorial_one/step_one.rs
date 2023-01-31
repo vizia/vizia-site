@@ -3,4 +3,5 @@ struct Highlight {
     line: usize,
     start: usize,
     length: usize,
+    length: usize,
 }

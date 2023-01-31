@@ -48,11 +48,12 @@
 		position: relative;
 
 		div {
+			--height-padding: 4px;
 			position: absolute;
-			height: 1.55rem;
+			height: calc(1.5rem - var(--height-padding));
 			left: calc(var(--left) * 0.5em * 1.2);
 			width: calc(var(--width) * 0.5em * 1.2);
-			top: calc(var(--line) * 1.55rem);
+			top: calc(var(--line) * 1.5rem + var(--line) * 0.05rem + var(--height-padding) * 0.5);
 			border-radius: 0.25rem;
 			pointer-events: none;
 		}
