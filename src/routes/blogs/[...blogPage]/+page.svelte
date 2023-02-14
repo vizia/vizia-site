@@ -17,19 +17,14 @@
 <div class="blog-post-wrapper">
 	<div class="blog-post-info">
 		<h1>
-			{data.meta?.title}
+			{data.blogPageMeta.title}
 		</h1>
 		<p>
-			{data.meta?.date}
+			{data.blogPageMeta.date}
 		</p>
 	</div>
 
-	<!-- svelte-ignore a11y-img-redundant-alt -->
-	<img
-		class="post-img"
-		src={base + data.meta?.landing_image}
-		alt="An image that reflects the blog post"
-	/>
+	<img class="post-img" src={base + data.blogPageMeta.image} />
 	<div class="blog-post">
 		<SvelteMarkdown
 			source={data.markdown}

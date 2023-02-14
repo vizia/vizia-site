@@ -1,17 +1,22 @@
 import { base } from '$app/paths';
-import { parse_post_markdown } from '$lib/post';
+import type { BlogPost } from '$lib/types';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params, fetch }) => {
-	const response = await fetch(`${base}/blogs/${params.blogPage}/index.md`);
-	if (response.ok) {
-		const markdown_text = await response.text();
-		const parsed = parse_post_markdown(markdown_text);
+	const pathToFetchFile = `${base}/blogs/${params.blogPage}/index.md`
+	const pathToFetchMeta = `${base}/blogs/${params.blogPage}/index.json`
+
+	const responseMarkdown = await fetch(pathToFetchFile);
+	const responseMeta = await fetch(pathToFetchMeta);
+
+	if (responseMarkdown.ok && responseMeta.ok) {
+		const markdown = await responseMarkdown.text();
+		const meta = JSON.parse(await responseMeta.text()) as BlogPost;
 		return {
 			blogPage: params.blogPage,
-			markdown: parsed[0],
-			meta: parsed[1]
+			markdown: markdown,
+			blogPageMeta: meta
 		};
 	}
 

@@ -1,12 +1,11 @@
-export interface PostMeta {
+export interface BlogPost {
 	date: string;
 	title: string;
-	landing_image: string;
-}
-
-export interface Post {
+	author: string;
+	image: string;
+	type: string;
+	markdown?: string;
 	path: string;
-	meta?: PostMeta;
 }
 
 export interface FileMeta {
