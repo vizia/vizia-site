@@ -5,6 +5,7 @@
 	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import TutorialCodeRenderer from '$lib/components/renderers/TutorialCodeRenderer.svelte';
+	import { parseHighlight } from '$lib/highlight';
 	import type { DropdownItem, Item } from '$lib/types';
 	import { onMount } from 'svelte';
 	import SvelteMarkdown from 'svelte-markdown';
@@ -15,6 +16,7 @@
 	let currentStep: number[] = [1];
 	let currentStepDetails: Item | null = null;
 	let dropdownItems: DropdownItem[] = [];
+	let processedCodeHighlight = [];
 
 	onMount(() => {
 		selectStep([1]);
@@ -36,6 +38,11 @@
 		} else {
 			currentStepDetails = data.tutorial.items[0];
 		}
+
+		processedCodeHighlight =
+			currentStepDetails.codeHighlight
+				?.map((v) => parseHighlight(currentStepDetails?.codeData ?? '', v))
+				.flat() ?? [];
 	}
 
 	function processDropdownItems() {
@@ -56,6 +63,10 @@
 		}
 
 		return item;
+	}
+
+	$: {
+		console.log({ currentStepDetails });
 	}
 </script>
 
@@ -81,7 +92,7 @@
 		<TutorialCodeRenderer
 			lang="rust"
 			text={currentStepDetails.codeData ?? ''}
-			highlight={currentStepDetails.processedCodeHighlight ?? []}
+			highlight={processedCodeHighlight}
 		/>
 	{/if}
 </div>
