@@ -6,7 +6,7 @@
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import TutorialCodeRenderer from '$lib/components/renderers/TutorialCodeRenderer.svelte';
 	import { parseHighlight } from '$lib/highlight';
-	import type { DropdownItem, Item } from '$lib/types';
+	import type { DropdownItem, Item, StepCodeHighlight } from '$lib/types';
 	import { onMount } from 'svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import type { PageData } from './$types';
@@ -16,7 +16,7 @@
 	let currentStep: number[] = [1];
 	let currentStepDetails: Item | null = null;
 	let dropdownItems: DropdownItem[] = [];
-	let processedCodeHighlight = [];
+	let processedCodeHighlight: StepCodeHighlight[] = [];
 
 	onMount(() => {
 		selectStep([1]);
