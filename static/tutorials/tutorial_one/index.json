@@ -1,5 +1,6 @@
 {
     "title": "Tutorial One",
+    "description": "In this tutorial we're going to show you how to do some amazing stuff with Vizia",
     "items": [
         {
             "markdownFileName": "index.md",

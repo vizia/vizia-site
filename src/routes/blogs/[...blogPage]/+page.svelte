@@ -22,6 +22,10 @@
 		<p>
 			{data.blogPageMeta.date}
 		</p>
+
+		<h2>
+			{data.blogPageMeta.author}
+		</h2>
 	</div>
 
 	<img class="post-img" src={base + data.blogPageMeta.image} />
@@ -52,12 +56,18 @@
 		z-index: 2;
 		display: flex;
 		flex-direction: column;
+		gap: 0.5rem;
 
-		h1 {
+		h1,
+		h2 {
 			width: 100%;
 			font-size: 2.5rem;
 			font-weight: 600;
 			text-align: center;
+		}
+
+		h2 {
+			font-size: 1.5rem;
 		}
 
 		p {

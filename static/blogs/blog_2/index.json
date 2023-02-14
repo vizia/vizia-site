@@ -3,5 +3,6 @@
     "title": "BlogPost 2",
     "author": "test author",
     "image": "/blogs_img/image.png",
+    "description": "A short description explaining what the blog is about",
     "type": "update"
 }

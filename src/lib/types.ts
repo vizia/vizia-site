@@ -1,6 +1,7 @@
 export interface BlogPost {
 	date: string;
 	title: string;
+	description: string;
 	author: string;
 	image: string;
 	type: string;
@@ -42,6 +43,7 @@ export interface HighlightUnprocessed {
 
 export interface Tutorial {
 	title: string,
+	description: string,
 	dir: string,
 	items: Item[];
 }

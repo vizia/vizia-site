@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TutorialPost from '$lib/components/TutorialPost.svelte';
+	import Card from '$lib/components/Card.svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
@@ -13,11 +13,9 @@
 <div class="tutorials">
 	<h1>Tutorials</h1>
 	{#if data.tutorials}
-		<div class="tutorials-grid" style="--items: {data.tutorials.length}">
-			{#each data.tutorials as tutorial}
-				<TutorialPost {tutorial} />
-			{/each}
-		</div>
+		{#each data.tutorials as tutorial}
+			<Card {tutorial} />
+		{/each}
 	{/if}
 </div>
 
@@ -32,15 +30,5 @@
 		h1 {
 			font-weight: 600;
 		}
-	}
-
-	.tutorials-grid {
-		display: grid;
-		height: fit-content;
-
-		grid-template-rows: repeat(calc((var(--items) - 1) / 2), 1fr);
-		grid-template-columns: 1fr 1fr;
-
-		grid-gap: 1rem;
 	}
 </style>
