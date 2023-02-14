@@ -18,7 +18,7 @@ This repository doesn't currently allow PRs because of it's rapidly evolving dev
 
 ## Developing
 
-Developing the website is pretty easy. First, install the dependency manager `npm` (or `yarn`) and execute the following command:
+Developing the website is pretty easy. Install the dependency manager `npm` (or `yarn`) and execute the following command:
 
 ```bash
 npm run dev
