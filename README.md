@@ -4,6 +4,10 @@ This is the official repository containing the [Vizia](https://github.com/vizia/
 
 The website was created using the `create-svelte` template found [here](https://github.com/sveltejs/kit/tree/master/packages/create-svelte)
 
+## ⚠️ Important Note ⚠️
+
+This repository doesn't currently allow PRs because of it's rapidly evolving development and constant overhauls
+
 ## To-Do List:
 
 - [ ] Update Landing Page to containg important information

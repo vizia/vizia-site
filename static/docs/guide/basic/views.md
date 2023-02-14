@@ -40,17 +40,20 @@ use vizia::prelude::*;
 
 #[derive(Lens)]
 pub struct AppData {
-    value: 20.0,
+    value: f32,
 }
 
+impl Model for AppData {}
+
 fn main() {
-    Application::new(|cx|{
-        Slider::new(cx, AppData::value)
-            .range(0.0100.0);
+    Application::new(|cx| {
+        AppData { value: 20.0 }.build(cx);
+        Slider::new(cx, AppData::value).range(0.0..100.0);
     })
     .inner_size((400, 100))
     .run();
 }
+
 ```
 
 > In the above example a `Slider` view needs a value from a model to bind to. This will be covered in the [binding](/guide/basic/binding) section of this guide.
@@ -141,14 +144,18 @@ use vizia::prelude::*;
 
 #[derive(Lens)]
 pub struct AppData {
-    value: 20.0,
+    value: f32,
 }
 
+impl Model for AppData {}
+
 fn main() {
-    Application::new(|cx|{
+    Application::new(|cx| {
+        AppData { value: 20.0 }.build(cx);
         Slider::new(cx, AppData::value)
-            .range(0.0100.0)
+            range(0.0..100.0)
             .name("custom name");
+        Slider::new(cx, AppData::value).range(0.0..100.0);
     })
     .inner_size((400, 100))
     .run();
