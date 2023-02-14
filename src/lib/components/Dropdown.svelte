@@ -9,8 +9,6 @@
 	export let level = 0;
 	export let open = true;
 	export let linkOnClick = false;
-
-	export let selectedIndex: number[] = [];
 	export let indexStack: number[] = [];
 	export let enumerate = false;
 
@@ -63,7 +61,6 @@
 				header={item.name}
 				link={item.link}
 				{enumerate}
-				{selectedIndex}
 				{linkOnClick}
 				indexStack={[...indexStack, i + 1]}
 				{onClick}

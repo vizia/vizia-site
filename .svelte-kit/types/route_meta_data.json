@@ -30,6 +30,7 @@
 		"src/routes/get-tutorials/+server.ts"
 	],
 	"/guide": [
+		"src/routes/guide/+page.ts",
 		"src/routes/+layout.ts"
 	],
 	"/guide/[...docsPage]": [

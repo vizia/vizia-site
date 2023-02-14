@@ -109,7 +109,6 @@
 			items={item.items}
 			header={item.name}
 			link={item.link}
-			selectedIndex={currentStep}
 			indexStack={[i + 1]}
 			linkOnClick={true}
 			matcher={(i, h, link) => {

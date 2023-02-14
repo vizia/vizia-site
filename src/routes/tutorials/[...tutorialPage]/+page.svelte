@@ -12,12 +12,12 @@
 
 	export let data: PageData;
 
-	let currentStep: number[] = [];
+	let currentStep: number[] = [1];
 	let currentStepDetails: Item | null = null;
 	let dropdownItems: DropdownItem[] = [];
 
 	onMount(() => {
-		selectStep([]);
+		selectStep([1]);
 
 		processDropdownItems();
 	});
@@ -65,10 +65,12 @@
 			items={item.items}
 			header={item.name}
 			enumerate={true}
-			selectedIndex={currentStep}
 			indexStack={[i + 1]}
 			onClick={(i) => {
 				selectStep(i);
+			}}
+			matcher={(i, h, l) => {
+				return i.toString() === currentStep.toString();
 			}}
 		/>
 	{/each}
