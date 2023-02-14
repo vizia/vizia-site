@@ -112,7 +112,6 @@
 			indexStack={[i + 1]}
 			linkOnClick={true}
 			matcher={(i, h, link) => {
-				console.log(link);
 				return link === matchDocPage;
 			}}
 		/>

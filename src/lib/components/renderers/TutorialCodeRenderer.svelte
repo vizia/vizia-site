@@ -13,8 +13,6 @@
 	let disabledRanges: StepCodeHighlight[] = [];
 	let textHightlighted = '';
 
-	console.log(highlight);
-
 	$: {
 		if (highlight) {
 			disabledRanges = inverse_ranges(highlight, text);

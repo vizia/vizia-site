@@ -26,7 +26,5 @@ export const GET = (async () => {
 		posts.push(blogPost);
 	}
 
-	console.log({ posts })
-
 	return json(posts);
 }) satisfies RequestHandler;

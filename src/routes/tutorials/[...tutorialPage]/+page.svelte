@@ -64,10 +64,6 @@
 
 		return item;
 	}
-
-	$: {
-		console.log({ currentStepDetails });
-	}
 </script>
 
 <nav class="table-of-contents">

@@ -8,8 +8,6 @@
 	onMount(async () => {
 		await document.fonts.ready;
 	});
-
-	console.log({ data });
 </script>
 
 <div class="blogs">
