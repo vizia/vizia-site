@@ -13,7 +13,7 @@ This repository doesn't currently allow PRs because of it's rapidly evolving dev
 - [ ] Update Landing Page to containg important information
 - [ ] Fill FAQ section
 - [ ] Fill About section
-- [ ] Fill Tutorial section
+- [x] Fill Tutorial section
 - [ ] Responsive design
 
 ## Developing
