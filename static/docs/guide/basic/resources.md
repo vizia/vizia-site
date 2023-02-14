@@ -1,7 +1,3 @@
----
-order: 10
----
-
 # Resources
 
 # Custom Fonts

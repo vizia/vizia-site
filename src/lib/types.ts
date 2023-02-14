@@ -10,7 +10,6 @@ export interface Post {
 }
 
 export interface FileMeta {
-	order: number;
 	title: string;
 	show?: boolean;
 }
@@ -29,19 +28,6 @@ export interface File {
 }
 
 
-export interface TutorialUnparsed {
-	title: string,
-	dir: string,
-	steps: TutorialStepUnparsed[]
-}
-
-export interface TutorialStepUnparsed {
-	stepTitle: string,
-	fileName: string, // Filename of the markdown of the step (in the same directory)
-	codeFileName: string, // Filename of the code of the step (in the same directory)
-	codeHighlight: HighlightUnprocessed[]
-}
-
 export const highlightTypes = [
 	"range", "regex", "line"
 ]
@@ -58,16 +44,19 @@ export interface HighlightUnprocessed {
 export interface Tutorial {
 	title: string,
 	dir: string,
-	steps: TutorialStep[];
+	items: Item[];
 }
 
-export interface TutorialStep {
-	stepTitle: string,
-	fileName: string,
-	codeFileName: string,
-	codeHighlight: StepCodeHighlight[],
-	markdownData: string,
-	codeData: string
+
+export interface Item {
+	title: string,
+	markdownFileName: string,
+	codeFileName?: string,
+	codeHighlight?: HighlightUnprocessed[],
+	processedCodeHighlight?: StepCodeHighlight[]
+	markdownData?: string,
+	codeData?: string
+	items: Item[]
 }
 
 export interface StepCodeHighlight {
@@ -77,3 +66,9 @@ export interface StepCodeHighlight {
 	end: number
 }
 
+export interface DropdownItem {
+	name: string,
+	link?: string,
+	indexStack?: number[],
+	items: DropdownItem[]
+}

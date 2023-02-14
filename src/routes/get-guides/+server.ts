@@ -1,9 +1,9 @@
 import type { RequestHandler } from './$types';
-import type { FileMeta, File } from '$lib/types';
+import type { FileMeta, File, Item } from '$lib/types';
 import fs from 'fs';
 import { json } from '@sveltejs/kit';
 import { parse_doc_markdown } from '$lib/doc';
-import { base } from '$app/paths';
+import path from "path"
 
 const DIRNAME_REGEX = /^\.?\/?(.+\/)*(.+)$/;
 const FILENAME_REGEX = /^\.?\/?(.+\/)*(.+)\.(.+)$/;
@@ -85,21 +85,10 @@ function recursive_search_dir(base_dir: string, base_link: string): File | null 
 	return self;
 }
 
-const base_dir = 'static/docs/guide';
+const base = 'static/docs/guide';
 
 export const GET = (async () => {
-	const sections = recursive_search_dir(base_dir, `/guide`);
+	let guides = JSON.parse(fs.readFileSync(path.join(base, "index.json")).toString()) as Item[]
 
-	const sort_fn = (a: File, b: File) => {
-		const a_order = a.meta ? a.meta.order : 500;
-		const b_order = b.meta ? b.meta.order : 500;
-
-		return a_order - b_order;
-	};
-
-	sections?.files.sort(sort_fn).forEach((section) => {
-		section.files.sort(sort_fn);
-	});
-
-	return json(sections);
+	return json(guides);
 }) satisfies RequestHandler;

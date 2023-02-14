@@ -1,0 +1,126 @@
+[
+    {
+        "title": "Welcome",
+        "markdownFileName": "intro.md",
+        "items": [
+            {
+                "title": "Pre-requisites",
+                "markdownFileName": "prerequisites.md"
+            },
+            {
+                "title": "Architecture",
+                "markdownFileName": "architecture.md"
+            }
+        ]
+    },
+    {
+        "title": "Introduction",
+        "markdownFileName": "introduction/foreword.md",
+        "items": [
+            {
+                "title": "Getting Started",
+                "markdownFileName": "introduction/getting_started.md"
+            },
+            {
+                "title": "Quick Start",
+                "markdownFileName": "introduction/quickstart.md"
+            }
+        ]
+    },
+    {
+        "title": "Basic",
+        "markdownFileName": "basic/basic.md",
+        "items": [
+            {
+                "title": "Application",
+                "markdownFileName": "basic/application.md"
+            },
+            {
+                "title": "Views",
+                "markdownFileName": "basic/views.md"
+            },
+            {
+                "title": "Styling",
+                "markdownFileName": "basic/styling.md"
+            },
+            {
+                "title": "Layout",
+                "markdownFileName": "basic/layout.md"
+            },
+            {
+                "title": "Models",
+                "markdownFileName": "basic/models.md"
+            },
+            {
+                "title": "Binding",
+                "markdownFileName": "basic/binding.md"
+            },
+            {
+                "title": "Events",
+                "markdownFileName": "basic/events.md"
+            },
+            {
+                "title": "Custom Views",
+                "markdownFileName": "basic/custom_views.md"
+            },
+            {
+                "title": "Environment",
+                "markdownFileName": "basic/environment.md"
+            },
+            {
+                "title": "Resources",
+                "markdownFileName": "basic/resources.md"
+            },
+            {
+                "title": "Animation",
+                "markdownFileName": "basic/animation.md"
+            },
+            {
+                "title": "Localization",
+                "markdownFileName": "basic/localization.md"
+            },
+            {
+                "title": "Accesibility",
+                "markdownFileName": "basic/accessibility.md"
+            },
+            {
+                "title": "Keymap",
+                "markdownFileName": "basic/keymap.md"
+            },
+            {
+                "title": "List",
+                "markdownFileName": "basic/list.md"
+            },
+            {
+                "title": "Overview",
+                "markdownFileName": "basic/overview.md"
+            },
+            {
+                "title": "View Event Handling",
+                "markdownFileName": "basic/view_event_handling.md"
+            },
+            {
+                "title": "View Model Data",
+                "markdownFileName": "basic/view_model_data.md"
+            },
+            {
+                "title": "View Tree",
+                "markdownFileName": "basic/view_tree.md"
+            }
+        ]
+    },
+    {
+        "title": "Advanced",
+        "markdownFileName": "advanced/advanced.md",
+        "items": [
+            {
+                "title": "Custom Views",
+                "markdownFileName": "advanced/custom_views.md"
+            },
+            {
+                "title": "Localization",
+                "markdownFileName": "advanced/localization"
+            }
+        ]
+    }
+]

@@ -17,6 +17,7 @@ export const load = (async ({ params, fetch }) => {
 			}
 		})
 
+
 		if (!tutorial) {
 			throw error(404, 'Not found');
 		}

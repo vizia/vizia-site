@@ -1,7 +1,3 @@
----
-order: 4
----
-
 # Layout
 
 The position and size of a view is determined by its layout properties. Vizia uses a custom layout system called [morphorm](https://github.com/vizia/morphorm).

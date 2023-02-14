@@ -34,7 +34,7 @@
 				link="{base}/guide/introduction/getting_started#getting-started"
 				style="gradient"
 			/>
-			<LandingPageButton text="Tutorial" link="{base}/tutorial" />
+			<LandingPageButton text="Tutorials" link="{base}/tutorials" />
 		</div>
 	</div>
 	<!-- <LandingPageDemo /> -->

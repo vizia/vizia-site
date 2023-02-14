@@ -1,7 +1,3 @@
----
-order: 5
----
-
 # Models
 
 Application data in Vizia is stored in models. Views can then bind to the data in these models in order to react to changes in the data.

@@ -1,7 +1,3 @@
----
-order: 12
----
-
 # Localization
 
 Localization refers to the adaption of an application to meet the language, cultural, and other requirements of a specific target locale.

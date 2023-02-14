@@ -102,8 +102,8 @@ h3 {
 	position: fixed;
 	width: var(--sidebar-width);
 	height: calc(100% - var(--header-size));
-	padding: 4rem 8rem;
-	padding-top: 0;
+	padding: 2rem 8rem;
+	padding-right: 0.5rem;
 	background-color: var(--background-secondary);
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -214,20 +214,21 @@ h3 {
 	.codeblock {
 		border-radius: 0.5rem;
 		overflow: hidden;
-		background-color: var(--background-code);
 		overflow-x: scroll;
 		overflow-y: visible;
 		flex-shrink: 0;
 
 		.header {
-			background-color: var(--background-code-header);
+			background-color: var(--background-code);
 			padding: 0.25rem 1rem;
+			margin-bottom: 2px;
 			p {
 				color: #888;
 			}
 		}
 
 		pre {
+			background-color: var(--background-code);
 			border-radius: 0;
 		}
 	}

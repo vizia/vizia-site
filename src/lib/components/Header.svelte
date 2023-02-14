@@ -22,7 +22,7 @@
 	</div>
 
 	<div class="nav-wrapper">
-		<a href="{base}/tutorial">Tutorial</a>
+		<a href="{base}/tutorials">Tutorials</a>
 		<HeaderDropdown
 			dropdownName="Docs"
 			options={[
@@ -31,7 +31,7 @@
 				// ['API', '/api']
 			]}
 		/>
-		<a href="{base}/blog">Blog</a>
+		<a href="{base}/blogs">Blogs</a>
 		<a href="{base}/faq">FAQ</a>
 		<a href="{base}/about">About</a>
 	</div>

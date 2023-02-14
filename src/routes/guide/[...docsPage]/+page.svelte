@@ -7,6 +7,8 @@
 	import { afterNavigate } from '$app/navigation';
 	import ImageRenderer from '$lib/components/renderers/ImageRenderer.svelte';
 	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
+	import type { DropdownItem, Item } from '$lib/types';
+	import Dropdown from '$lib/components/Dropdown.svelte';
 
 	export let data: PageData;
 
@@ -18,10 +20,15 @@
 	let positions: number[];
 	let height: number;
 
+	let dropdownItems: DropdownItem[] = [];
+	let currentStep: number[] = [];
+	$: matchDocPage = `guide/${data.docsPage}`;
+
 	onMount(async () => {
 		await document.fonts.ready;
 		update();
 		highlight();
+		processDropdownItems();
 	});
 
 	afterNavigate(() => {
@@ -67,9 +74,51 @@
 		}
 		return '';
 	}
+
+	function processDropdownItems() {
+		dropdownItems = [];
+
+		for (const step of data.items) {
+			dropdownItems.push(processDropdownItem(step));
+		}
+	}
+
+	function processDropdownItem(step: Item): DropdownItem {
+		let rPath = /(.+?)\.md/.exec(step.markdownFileName)?.[1];
+		let item: DropdownItem = {
+			name: step.title,
+			items: [],
+			link: `guide/${rPath}`
+		};
+
+		if (step.items) {
+			for (const subStep of step.items) {
+				item.items.push(processDropdownItem(subStep));
+			}
+		}
+
+		return item;
+	}
 </script>
 
 <svelte:window on:resize={update} on:scroll={highlight} />
+
+<nav class="table-of-contents">
+	{#each dropdownItems as item, i}
+		<Dropdown
+			items={item.items}
+			header={item.name}
+			link={item.link}
+			selectedIndex={currentStep}
+			indexStack={[i + 1]}
+			linkOnClick={true}
+			matcher={(i, h, link) => {
+				console.log(link);
+				return link === matchDocPage;
+			}}
+		/>
+	{/each}
+</nav>
 
 <div class="on-this-page">
 	{#if loaded}
@@ -87,8 +136,10 @@
 </div>
 
 <div class="page-content">
-	{#if data.markdown_meta?.title}
-		<h1 class="title" id={data.markdown_meta.title.toLowerCase()}>{data.markdown_meta.title}</h1>
+	{#if data.markdownMeta}
+		<h1 class="title" id={data.markdownMeta.title.toLowerCase()}>
+			{data.markdownMeta.title}
+		</h1>
 	{/if}
 	<SvelteMarkdown
 		source={data.markdown}
@@ -115,5 +166,9 @@
 		padding-left: 4rem;
 		padding-top: 4rem;
 		left: calc(100% - var(--sidebar-width));
+	}
+
+	a.active {
+		color: var(--accent);
 	}
 </style>

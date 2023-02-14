@@ -4,7 +4,7 @@
 	import rust from 'highlight.js/lib/languages/rust';
 	hljs.registerLanguage('rust', rust);
 
-	export let lang: string;
+	export let lang: string = 'none';
 	export let text: string;
 	export let attrs: Map<string, string> = new Map();
 

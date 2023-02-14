@@ -1,3 +1,0 @@
-# Welcome to the Guide!
-
-This is a guide... whatever whatever...

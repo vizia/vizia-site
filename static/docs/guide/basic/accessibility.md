@@ -1,7 +1,3 @@
----
-order: 13
----
-
 # Accessibility
 
 ## Keyboard Navigation and Control

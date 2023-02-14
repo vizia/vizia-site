@@ -1,7 +1,7 @@
 ---
 date: 12/12/2022
 title: Whatever here
-landing_image: /blog_img/image.png
+landing_image: /blogs_img/image.png
 ---
 
 # Whatever here

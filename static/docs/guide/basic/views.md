@@ -1,7 +1,3 @@
----
-order: 2
----
-
 # Views
 
 Views are used to visually present [model data](/guide/basic/models) and to act as controls which, when interacted with, send events to mutate model data. They are the building blocks of a GUI.

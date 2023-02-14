@@ -5,16 +5,22 @@ import type { Post } from '$lib/types';
 import fs from 'fs';
 import { json } from '@sveltejs/kit';
 import { get_post_meta } from '$lib/post';
+import { getItems } from '$lib/search';
+import path from "path"
 
+const base = 'static/blogs';
 
-function search_posts(base_dir: string): Post[] {
-	const posts: Post[] = [];
+export const GET = (async () => {
 
-	const post_dirs = fs.readdirSync(base_dir);
+	let files = getItems("blogs")
 
-	for (let i = 0; i < post_dirs.length; i++) {
-		const post = post_dirs[i];
-		const markdown = fs.readFileSync(`${base_dir}/${post}/index.md`).toString();
+	let posts: Post[] = [];
+
+	for (const post of files) {
+
+		let basePath = path.join(base, post)
+
+		const markdown = fs.readFileSync(path.join(basePath, "index.md")).toString();
 		const meta = get_post_meta(markdown);
 
 		posts.push({
@@ -23,11 +29,5 @@ function search_posts(base_dir: string): Post[] {
 		});
 	}
 
-	return posts;
-}
-
-const base = 'static/blog';
-export const GET = (async () => {
-	const posts = search_posts(base);
 	return json(posts);
 }) satisfies RequestHandler;

@@ -6,7 +6,7 @@
 	let img = `${post.meta?.landing_image}`;
 </script>
 
-<a class="post" style={`--bg: url("${img ? base + img : ''}");`} href="{base}/blog/{post.path}">
+<a class="post" style={`--bg: url("${img ? base + img : ''}");`} href="{base}/blogs/{post.path}">
 	<h1>{post.meta?.title}</h1>
 	<p>{post.meta?.date}</p>
 </a>

@@ -1,7 +1,3 @@
----
-order: 2
----
-
 # Getting Started
 
 ## Installing Rust

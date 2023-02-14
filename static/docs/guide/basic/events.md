@@ -1,7 +1,3 @@
----
-order: 7
----
-
 # Events
 
 Events are used to communicate actions to update model or view data.

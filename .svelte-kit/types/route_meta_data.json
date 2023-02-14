@@ -6,12 +6,12 @@
 	"/about": [
 		"src/routes/+layout.ts"
 	],
-	"/blog": [
-		"src/routes/blog/+page.ts",
+	"/blogs": [
+		"src/routes/blogs/+page.ts",
 		"src/routes/+layout.ts"
 	],
-	"/blog/[...blogPage]": [
-		"src/routes/blog/[...blogPage]/+page.ts",
+	"/blogs/[...blogPage]": [
+		"src/routes/blogs/[...blogPage]/+page.ts",
 		"src/routes/+layout.ts"
 	],
 	"/examples": [
@@ -30,26 +30,21 @@
 		"src/routes/get-tutorials/+server.ts"
 	],
 	"/guide": [
-		"src/routes/guide/+page.ts",
-		"src/routes/guide/+layout.ts",
-		"src/routes/+layout.ts",
-		"src/routes/guide/+layout.ts",
 		"src/routes/+layout.ts"
 	],
 	"/guide/[...docsPage]": [
 		"src/routes/guide/[...docsPage]/+page.ts",
-		"src/routes/guide/+layout.ts",
 		"src/routes/+layout.ts"
 	],
-	"/tutorial": [
-		"src/routes/tutorial/+layout.ts",
+	"/tutorials": [
+		"src/routes/tutorials/+layout.ts",
 		"src/routes/+layout.ts",
-		"src/routes/tutorial/+layout.ts",
+		"src/routes/tutorials/+layout.ts",
 		"src/routes/+layout.ts"
 	],
-	"/tutorial/[...tutorialPage]": [
-		"src/routes/tutorial/[...tutorialPage]/+page.ts",
-		"src/routes/tutorial/+layout.ts",
+	"/tutorials/[...tutorialPage]": [
+		"src/routes/tutorials/[...tutorialPage]/+page.ts",
+		"src/routes/tutorials/+layout.ts",
 		"src/routes/+layout.ts"
 	]
 }

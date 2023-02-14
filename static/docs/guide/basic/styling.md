@@ -1,7 +1,3 @@
----
-order: 3
----
-
 # Styling
 
 Styling refers to modifying the visual properties of a view, such as its background, border, font, etc. A full list of available style properties can be found on the [style properties](#style-properties) page.

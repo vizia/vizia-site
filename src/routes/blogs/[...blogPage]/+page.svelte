@@ -49,11 +49,11 @@
 	}
 
 	.blog-post-info {
-		position: absolute;
+		position: relative;
 		left: 50%;
 		border-radius: 0.5rem;
 		transform: translate(-50%, 0);
-		margin-top: 6rem;
+		margin: 2rem 0;
 		z-index: 2;
 		display: flex;
 		flex-direction: column;
@@ -77,7 +77,6 @@
 		position: relative;
 		width: calc(100% - 2 * var(--sidebar-width));
 		margin: 0 var(--sidebar-width);
-		margin-top: 4rem;
 		box-shadow: 0 0 1rem #00000044;
 	}
 

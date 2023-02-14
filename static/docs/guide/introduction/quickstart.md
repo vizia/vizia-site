@@ -1,7 +1,3 @@
----
-order: 3
----
-
 # Quickstart
 
 ## Creating a new project

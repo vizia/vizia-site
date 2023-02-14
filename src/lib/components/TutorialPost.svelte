@@ -5,7 +5,7 @@
 	export let tutorial: Tutorial;
 </script>
 
-<a class="tutorial" href="{base}/tutorial/{tutorial.dir}">
+<a class="tutorial" href="{base}/tutorials/{tutorial.dir}">
 	<h1>{tutorial.title}</h1>
 </a>
 

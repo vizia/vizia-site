@@ -1,7 +1,3 @@
----
-order: 1
----
-
 # Foreword
 
 Welcome to the Vizia book!

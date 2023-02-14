@@ -1,7 +1,3 @@
----
-order: 6
----
-
 # Data Binding
 
 Data binding is the concept of linking model data to views, so that when the model data is changed, the views observing this data update in response.
