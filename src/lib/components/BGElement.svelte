@@ -1,12 +1,15 @@
 <script lang="ts">
-	export let size = 8;
+	const size = 6;
+
 	export let color = '#51afef';
-	export let side: 'left' | 'right' = 'left';
 	export let type: 'circle' | 'square' = 'square';
 	export let rotation = 0;
 
 	export let offset_x = 0;
 	export let offset_y = 0;
+
+	export let size_x = size;
+	export let size_y = size;
 
 	$: hovered = (offset_x + offset_y) % 2 == 0;
 
@@ -17,7 +20,7 @@
 		return n;
 	}
 
-	const intervalTime = abs(offset_y) * 500 + abs(offset_x) * 7500 + 1000;
+	const intervalTime = abs(offset_y) * 200 + abs(offset_x) * 1500 + 2000;
 
 	setInterval(() => {
 		hovered = !hovered;
@@ -25,35 +28,47 @@
 </script>
 
 <div
-	class="bg-element {type} {side} {hovered ? 'hover' : ''}"
-	style="--color: {color}; --size: {size}rem; --offset_x: {offset_x * 8}rem; --offset_y: {offset_y *
-		8}rem;
-   rotate: {rotation}deg; "
+	class="bg-element {type} {hovered ? 'hover' : ''}"
+	style="--color: {color}; --offset_x: {offset_x}; --offset_y: {offset_y};
+   rotate: {rotation}deg; --size_x: {size_x}rem; --size_y: {size_y}rem;"
 />
 
 <style lang="scss">
 	.bg-element {
+		--size: 6rem;
+
 		pointer-events: all;
 		position: absolute;
 
-		width: var(--size);
-		height: var(--size);
-		left: calc(50% - var(--size) / 2 + var(--offset_x) + 30%);
-		top: calc(var(--size) + 10rem - var(--offset_y));
+		width: var(--size_x);
+		height: var(--size_y);
+		left: calc(-50% + var(--size) / 2 + var(--offset_x) * var(--size) + 4 * var(--size));
+		top: calc(var(--size) + 10rem - var(--offset_y) * var(--size));
+
+		background: linear-gradient(
+			to left,
+			rgba(84, 81, 239, 0) 0%,
+			var(--color) 50%,
+			var(--color) 100%
+		);
+		background-position: 100% 100%;
+		background-size: 200% 200%;
+		transition: background-position 250ms ease;
 
 		transition: all ease-in-out 1s;
+		opacity: 20%;
 
-		&.left {
-			left: calc(50% - var(--size) / 2 + var(--offset_x) - 30%);
+		&.hover {
+			background-position: 0% 0%;
+			opacity: 100%;
 		}
 
-		&:before {
+		&::after {
 			content: '';
-			height: 100%;
 			width: 100%;
-			left: 0px;
-			top: 0px;
+			height: 100%;
 			position: absolute;
+
 			background: linear-gradient(
 				to left,
 				rgba(84, 81, 239, 0) 0%,
@@ -63,16 +78,20 @@
 			background-position: 100% 100%;
 			background-size: 200% 200%;
 			transition: background-position 250ms ease;
-			opacity: 50%;
+
+			transition: all ease-in-out 1s;
+
+			filter: blur(128px);
+
+			background-blend-mode: luminosity;
 		}
 
-		&.hover:before {
-			background-position: 0% 0%;
-			opacity: 100%;
+		&.circle::after {
+			border-radius: calc(var(--size) / 2);
 		}
 	}
 
-	.circle:before {
-		border-radius: 50%;
+	.circle {
+		border-radius: calc(var(--size) / 2);
 	}
 </style>

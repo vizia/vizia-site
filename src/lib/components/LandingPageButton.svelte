@@ -1,13 +1,11 @@
 <script lang="ts">
 	export let text = '';
 	export let link = '';
-	export let style: 'normal' | 'gradient' = 'normal';
+	export let style: 'normal' | 'accent' = 'normal';
 </script>
 
-<a on:click href={link}>
-	<div class={style}>
-		<p>{text}</p>
-	</div>
+<a on:click class={style} href={link}>
+	<p>{text}</p>
 </a>
 
 <style lang="scss">
@@ -15,68 +13,33 @@
 		pointer-events: all;
 		width: auto;
 
-		& > div {
-			position: relative;
-			width: auto;
-			height: 2.5rem;
-			padding: 0 2rem;
+		padding: 0.125rem 1rem;
+		background-color: var(--c-3);
+		border: 1px solid var(--border-color);
+		border-radius: 0.5rem;
 
-			display: flex;
-			align-items: center;
+		> p {
+			color: var(--c-6);
+			min-width: 8rem;
+			padding: 0.25rem 0;
+			font-weight: 600;
+			transition: color 250ms ease;
+			text-align: center;
+		}
 
-			transition: all ease-in-out 0.1s;
+		&.accent {
+			background-color: var(--c-6);
 
-			&:before {
-				content: '';
-				height: 100%;
-				width: 100%;
-				left: 0px;
-				top: 0px;
-				position: absolute;
-				background: #343434;
-				border-radius: 2rem;
-				transition: background-color 250ms ease;
-			}
-
-			& > p {
-				font-size: 1.2rem;
-				color: #888;
-				width: 8rem;
-				text-align: center;
-				padding: 0.25rem 0;
-				font-weight: 600;
-				z-index: 10;
-				transition: color 250ms ease;
-			}
-
-			&:hover {
-				& > p {
-					color: #fff;
-				}
-
-				&:before {
-					background: #484848;
-				}
+			> p {
+				color: var(--c-1);
 			}
 		}
 
-		& > div.gradient {
-			&:before {
-				background: linear-gradient(to right, #a2daff 0%, #51afef 33%, #51afef 66%, #5451ef 100%);
+		&:hover {
+			background-color: var(--c-2);
 
-				background-position: 100% 100%;
-				background-size: 300% 300%;
-				transition: background-position 250ms ease;
-				content: '';
-				z-index: 1;
-			}
-
-			&:hover:before {
-				background-position: 0% 0%;
-			}
-
-			& > p {
-				color: #fff;
+			&.accent {
+				background-color: var(--c-5);
 			}
 		}
 	}

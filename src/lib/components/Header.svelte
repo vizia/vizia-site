@@ -7,37 +7,65 @@
 </script>
 
 <nav class="header" aria-label="Primary">
-	<a class="logo-wrapper" href="{base}/">
-		<img src="{base}/vizia_logo.svg" class="logo" alt="Vizia Logo" />
-		<p>Vizia</p>
-	</a>
-
-	<div class="links-wrapper">
-		<a href="https://github.com/vizia/vizia" target="_blank" rel="noreferrer">
-			<img src={GithubLogo} class="logo" alt="Github Logo" />
+	<div class="wrapper">
+		<a class="logo-wrapper" href="{base}/">
+			<img src="{base}/vizia_logo.svg" class="logo" alt="Vizia Logo" />
 		</a>
-		<a href="https://discord.gg/e3k9TZqrps" target="_blank" rel="noreferrer">
-			<img src={DiscordLogo} class="logo" alt="Discord Logo" />
-		</a>
-	</div>
 
-	<div class="nav-wrapper">
-		<a href="{base}/tutorials">Tutorials</a>
-		<HeaderDropdown
-			dropdownName="Docs"
-			options={[
-				['Guide', `${base}/guide`],
-				['Examples', `${base}/examples`]
-				// ['API', '/api']
-			]}
-		/>
-		<a href="{base}/blogs">Blogs</a>
-		<a href="{base}/faq">FAQ</a>
-		<a href="{base}/about">About</a>
+		<div class="links-wrapper">
+			<a href="https://github.com/vizia/vizia" target="_blank" rel="noreferrer">
+				<img src={GithubLogo} class="logo" alt="Github Logo" />
+			</a>
+			<a href="https://discord.gg/e3k9TZqrps" target="_blank" rel="noreferrer">
+				<img src={DiscordLogo} class="logo" alt="Discord Logo" />
+			</a>
+		</div>
+
+		<div class="nav-wrapper">
+			<a href="{base}/tutorials">Tutorials</a>
+			<HeaderDropdown
+				dropdownName="Docs"
+				options={[
+					['Guide', `${base}/guide`],
+					['Examples', `${base}/examples`]
+					// ['API', '/api']
+				]}
+			/>
+			<a href="{base}/blogs">Blogs</a>
+			<a href="{base}/faq">FAQ</a>
+			<a href="{base}/about">About</a>
+		</div>
 	</div>
 </nav>
 
 <style lang="scss">
+	.header {
+		width: 100%;
+		height: var(--header-size);
+
+		position: fixed;
+		display: flex;
+		justify-content: center;
+		flex-direction: row;
+		padding: 0 2rem;
+
+		box-sizing: border-box;
+
+		border-bottom: 1px solid var(--border-color);
+
+		z-index: 100;
+
+		.wrapper {
+			width: 100%;
+			height: var(--header-size);
+			max-width: var(--page-width);
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+
 	a {
 		font-weight: 500;
 		color: white;
@@ -48,26 +76,6 @@
 		&:hover {
 			color: #51afef;
 		}
-	}
-
-	.header {
-		width: 100%;
-		height: var(--header-size);
-
-		position: fixed;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0px 8rem;
-		gap: 0px;
-
-		box-shadow: 0 0 1rem #00000044;
-
-		background-color: var(--background-tertiary);
-		box-sizing: border-box;
-
-		z-index: 100;
 	}
 
 	.logo-wrapper {
