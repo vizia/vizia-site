@@ -1,12 +1,21 @@
 <script lang="ts">
 	import GithubLogo from '$lib/assets/Github.svg';
 	import DiscordLogo from '$lib/assets/Discord.svg';
+	import HamburgerMenu from '$lib/assets/HamburgerMenu.svg';
 
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import { base } from '$app/paths';
+
+	export let border = false;
+
+	let hamMenuOpen = false;
+
+	function hamMenuClick() {
+		hamMenuOpen = !hamMenuOpen;
+	}
 </script>
 
-<nav class="header" aria-label="Primary">
+<div class="header {border ? 'border' : ''} " aria-label="Primary">
 	<div class="wrapper">
 		<a class="logo-wrapper" href="{base}/">
 			<img src="{base}/vizia_logo.svg" class="logo" alt="Vizia Logo" />
@@ -21,7 +30,7 @@
 			</a>
 		</div>
 
-		<div class="nav-wrapper">
+		<nav class="nav-wrapper">
 			<a href="{base}/tutorials">Tutorials</a>
 			<HeaderDropdown
 				dropdownName="Docs"
@@ -34,36 +43,59 @@
 			<a href="{base}/blogs">Blogs</a>
 			<a href="{base}/faq">FAQ</a>
 			<a href="{base}/about">About</a>
-		</div>
+		</nav>
+
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<img class="ham-menu-icon logo" src={HamburgerMenu} alt="=" on:click={() => hamMenuClick()} />
 	</div>
-</nav>
+</div>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="ham-menu {hamMenuOpen ? 'open' : ''}" on:click={() => (hamMenuOpen = false)}>
+	<a href="{base}/tutorials">Tutorials</a>
+	<a href="{base}/guide">Guide</a>
+	<a href="{base}/examples">Examples</a>
+	<a href="{base}/blogs">Blogs</a>
+	<a href="{base}/faq">FAQ</a>
+	<a href="{base}/about">About</a>
+	<div class="ham-menu-wrapper">
+		<a href="https://github.com/vizia/vizia" target="_blank" rel="noreferrer">
+			<img src={GithubLogo} class="logo" alt="Github Logo" />
+		</a>
+		<a href="https://discord.gg/e3k9TZqrps" target="_blank" rel="noreferrer">
+			<img src={DiscordLogo} class="logo" alt="Discord Logo" />
+		</a>
+	</div>
+</div>
 
 <style lang="scss">
 	.header {
 		width: 100%;
-		height: var(--header-size);
 
 		position: fixed;
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
-		padding: 0 2rem;
 
 		box-sizing: border-box;
 
-		border-bottom: 1px solid var(--border-color);
-
 		z-index: 100;
 
-		.wrapper {
-			width: 100%;
-			height: var(--header-size);
-			max-width: var(--page-width);
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
+		&.border {
+			border-bottom: 1px solid var(--border-color);
 		}
+	}
+
+	.wrapper {
+		width: 100%;
+		padding: 0 2rem;
+		margin: 0 auto;
+		height: var(--header-size);
+		max-width: var(--page-width);
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	a {
@@ -90,20 +122,9 @@
 			width: 1.5rem;
 			height: 1.5rem;
 		}
-
-		> p {
-			margin-top: 0.25rem;
-			width: auto;
-			color: white;
-			vertical-align: bottom;
-			font-weight: 600;
-			display: flex;
-			align-items: center;
-		}
 	}
 
 	.links-wrapper {
-		display: flex;
 		flex-direction: row;
 		align-items: center;
 		gap: 0.5rem;
@@ -125,7 +146,6 @@
 		width: 22rem;
 		height: 100%;
 
-		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
@@ -135,5 +155,74 @@
 
 		position: absolute;
 		align-self: center;
+	}
+
+	.ham-menu-icon {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		height: fit-content;
+
+		padding: 0.5rem;
+		cursor: pointer;
+	}
+
+	.ham-menu {
+		position: absolute;
+		top: var(--header-size);
+		height: calc(100% - var(--header-size));
+		background-color: #121212cc;
+		z-index: 999;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 1rem;
+		padding: 2rem;
+
+		left: 100vw;
+
+		transition: all ease-in-out var(--short-transition);
+
+		backdrop-filter: blur(4px);
+
+		&.open {
+			left: 0;
+		}
+	}
+
+	@media (min-width: 0) {
+		.links-wrapper {
+			display: none;
+		}
+
+		.nav-wrapper {
+			display: none;
+		}
+
+		.ham-menu-icon {
+			display: flex;
+		}
+
+		.ham-menu {
+			width: 100%;
+			display: flex;
+		}
+	}
+
+	@media (min-width: 50rem) {
+		.links-wrapper {
+			display: flex;
+		}
+
+		.nav-wrapper {
+			display: flex;
+		}
+
+		.ham-menu-icon {
+			display: none;
+		}
+
+		.ham-menu {
+			display: none !important;
+		}
 	}
 </style>

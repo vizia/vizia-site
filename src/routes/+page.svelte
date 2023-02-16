@@ -45,8 +45,8 @@
 
 <style lang="scss">
 	.main-section {
-		width: var(--page-width);
-		height: 38rem;
+		width: 100%;
+		max-width: var(--page-width);
 		margin: 0 auto;
 
 		display: flex;
@@ -62,22 +62,22 @@
 	}
 
 	.main-info {
-		width: 60%;
 		height: fit-content;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-self: center;
+		padding: 2rem;
 
 		gap: 1rem;
 
 		h1 {
-			font-size: 3.5rem;
 			line-height: 125%;
+			transition: all ease-in-out var(--long-transition);
 		}
 
 		p {
-			font-size: 1rem;
+			font-size: 1.2rem;
 			color: #ffffff88;
 			margin-bottom: 1rem;
 		}
@@ -91,10 +91,79 @@
 		}
 
 		.actions-container {
-			width: 100%;
 			display: flex;
-			flex-direction: row;
 			gap: 1rem;
+		}
+	}
+
+	@media (min-width: 0rem) {
+		.main-section {
+			height: 30rem;
+		}
+
+		.main-info {
+			width: 100%;
+			align-items: center;
+
+			h1,
+			p {
+				text-align: center;
+			}
+
+			h1 {
+				font-size: 2.2rem;
+			}
+		}
+
+		.actions-container {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.abstract {
+			display: none;
+		}
+	}
+
+	@media (min-width: 25rem) {
+		.actions-container {
+			flex-direction: row;
+		}
+	}
+
+	@media (min-width: 50rem) {
+		.main-info {
+			h1 {
+				font-size: 3.5rem;
+			}
+		}
+	}
+
+	@media (min-width: 75rem) {
+		.main-section {
+			height: 40rem;
+		}
+
+		.main-info {
+			width: 60%;
+			align-items: flex-start;
+
+			h1,
+			p {
+				text-align: start;
+			}
+
+			h1 {
+				font-size: 3.5rem;
+			}
+		}
+
+		.actions-container {
+			align-items: flex-start;
+		}
+
+		.abstract {
+			display: block;
 		}
 	}
 </style>
