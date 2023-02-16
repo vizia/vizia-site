@@ -23,14 +23,7 @@
 		</div>
 	</div>
 	<div class="abstract">
-		<BgElement
-			color="#51afef44"
-			offset_x={1}
-			offset_y={1}
-			rotation={90}
-			type="circle"
-			size_y={6 * 3}
-		/>
+		<BgElement color="#51afef44" offset_x={1} offset_y={1} rotation={90} type="circle" size_y={3} />
 		<BgElement color="#51afef" offset_x={-1} offset_y={2} type="circle" />
 		<BgElement color="#51afef" offset_x={0} offset_y={1} rotation={90} />
 		<BgElement color="#efcc51" offset_x={0} offset_y={0} rotation={-90} type="circle" />
@@ -50,15 +43,18 @@
 		margin: 0 auto;
 
 		display: flex;
-		flex-direction: row;
 
-		align-content: center;
+		align-items: center;
+		justify-content: space-between;
+		padding: 2rem;
 	}
 
 	.abstract {
 		position: relative;
-		width: 40%;
-		flex: 1;
+		width: calc(4 * var(--size));
+		height: calc(5 * var(--size));
+		display: flex;
+		margin: 2rem;
 	}
 
 	.main-info {
@@ -67,7 +63,6 @@
 		flex-direction: column;
 		justify-content: center;
 		align-self: center;
-		padding: 2rem;
 
 		gap: 1rem;
 
@@ -99,11 +94,13 @@
 	@media (min-width: 0rem) {
 		.main-section {
 			height: 30rem;
+			flex-direction: column;
 		}
 
 		.main-info {
 			width: 100%;
 			align-items: center;
+			padding-top: 4rem;
 
 			h1,
 			p {
@@ -121,7 +118,7 @@
 		}
 
 		.abstract {
-			display: none;
+			--size: 4rem;
 		}
 	}
 
@@ -141,6 +138,7 @@
 
 	@media (min-width: 75rem) {
 		.main-section {
+			flex-direction: row;
 			height: 40rem;
 		}
 
@@ -163,7 +161,7 @@
 		}
 
 		.abstract {
-			display: block;
+			--size: 6rem;
 		}
 	}
 </style>
