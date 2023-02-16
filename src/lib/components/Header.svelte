@@ -170,6 +170,7 @@
 	.ham-menu {
 		position: absolute;
 		top: var(--header-size);
+		width: 100%;
 		height: calc(100% - var(--header-size));
 		background-color: #121212cc;
 		z-index: 999;
@@ -178,14 +179,13 @@
 		gap: 1rem;
 		padding: 2rem;
 
-		left: 100vw;
-
 		transition: all ease-in-out var(--short-transition);
 
 		backdrop-filter: blur(4px);
+		display: none;
 
 		&.open {
-			left: 0;
+			display: flex;
 		}
 	}
 
@@ -203,8 +203,6 @@
 		}
 
 		.ham-menu {
-			width: 100%;
-			display: flex;
 		}
 	}
 
