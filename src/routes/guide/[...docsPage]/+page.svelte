@@ -43,10 +43,12 @@
 	});
 
 	$: {
+		console.log(hash);
 		processDropdownItems();
 	}
 
 	function update() {
+		console.log('update ' + hash);
 		let content_ = document.querySelector('.page-content');
 		if (content_) {
 			content = content_;
@@ -65,6 +67,7 @@
 	}
 
 	function highlight() {
+		console.log('highlight ' + hash);
 		const { top, bottom } = content.getBoundingClientRect();
 		let i = headings.length;
 		while (i--) {
@@ -214,7 +217,7 @@
 		width: calc((100% - var(--page-width)) / 2 + var(--sidebar-width));
 
 		ol {
-			gap: 0.25rem;
+			gap: 0.5rem;
 
 			li {
 				--svg-size: 1.5rem;
@@ -228,6 +231,7 @@
 					color: var(--c-4);
 					width: 100%;
 					height: 100%;
+					line-height: 120%;
 				}
 
 				&.active {
@@ -278,9 +282,6 @@
 
 	.table-of-contents {
 		border-right: 1px solid var(--border-color);
-
-		overflow-x: hidden;
-		overflow-y: auto;
 
 		flex-direction: column;
 		gap: 0.25rem;
@@ -346,18 +347,24 @@
 		.on-this-page {
 			display: flex;
 			width: var(--sidebar-width);
-			margin-left: calc(100vw - var(--sidebar-width));
+			margin-left: calc(var(--sidebar-width) + 100vw - var(--sidebar-width) * 2);
 			padding-right: 2rem;
 		}
 
 		.page-content {
-			position: fixed;
 			margin-left: var(--sidebar-width);
 			width: calc(100vw - var(--sidebar-width) * 2);
 		}
 	}
 
 	@media (min-width: 100rem) {
+		.on-this-page {
+			margin-left: calc(
+				(100vw - var(--page-width)) / 2 + var(--sidebar-width) + var(--page-width) -
+					var(--sidebar-width) * 2
+			);
+		}
+
 		.table-of-contents {
 			padding-left: calc((100% - var(--page-width)) / 2 + 2rem);
 			width: calc((100% - var(--page-width)) / 2 + var(--sidebar-width));
@@ -365,7 +372,6 @@
 		}
 
 		.page-content {
-			position: fixed;
 			margin-left: calc((100vw - var(--page-width)) / 2 + var(--sidebar-width));
 			width: calc(var(--page-width) - var(--sidebar-width) * 2);
 		}
