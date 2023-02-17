@@ -23,20 +23,17 @@
 	let height: number;
 
 	let dropdownItems: DropdownItem[] = [];
-	$: matchDocPage = `guide/${data.docsPage}`;
 
-	console.log({ data });
+	$: matchDocPage = `guide/${data.docsPage}`;
 
 	onMount(async () => {
 		await document.fonts.ready;
-		console.log('... mount');
 		update();
 		highlight();
 		processDropdownItems();
 	});
 
 	afterNavigate(() => {
-		console.log('>> navigate');
 		update();
 		highlight();
 	});
@@ -46,7 +43,6 @@
 	}
 
 	function update() {
-		console.log('>> update');
 		let content_ = document.querySelector('.page-content');
 		if (content_) {
 			content = content_;
@@ -65,7 +61,6 @@
 	}
 
 	function highlight() {
-		console.log('>> scroll');
 		const { top, bottom } = content.getBoundingClientRect();
 		let i = headings.length;
 		while (i--) {
@@ -76,7 +71,6 @@
 			}
 		}
 		hash = '';
-		console.log(hash);
 	}
 
 	function get_text(name: string): string {

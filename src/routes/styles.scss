@@ -51,6 +51,20 @@
 	-webkit-text-size-adjust: 100%;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+	scrollbar-width: thin;
+	box-sizing: inherit;
+	line-height: 150%;
+	color: var(--c-5);
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
 .app {
 	display: flex;
 	flex-direction: column;
@@ -68,38 +82,35 @@ main {
 	flex-direction: row;
 }
 
-code {
-	font-family: Fira Code;
-	line-height: 1.5rem;
-	vertical-align: bottom;
+*::selection {
+	background: #ffffff18;
+}
+
+h1,
+h2,
+h3 h4,
+h5,
+h6 {
+	color: var(--c-6);
+	font-weight: 600;
 }
 
 h1 {
 	font-size: 1.5rem;
-	font-weight: 600;
 	scroll-margin-top: 1rem;
 }
 
 h2 {
-	font-weight: 600;
 	font-size: 1.2rem;
 }
 
 h3 {
-	font-weight: 600;
 	font-size: 1rem;
-}
-
-*::selection {
-	background: #ffffff18;
 }
 
 ul,
 ol {
 	margin-left: 0 !important;
-}
-
-ol {
 	margin: 0;
 	margin-top: 0.5rem;
 	gap: 0.25rem;
@@ -107,46 +118,42 @@ ol {
 	flex-direction: column;
 }
 
-p,
 li {
-	display: block;
-	line-height: 150%;
-	font-size: 1rem;
-	font-weight: 400;
-	color: var(--c-5);
+	margin-left: 2rem;
+	display: inline flow-root list-item;
 
-	code {
-		padding: 0rem 0.25rem;
+	&::marker {
+		color: var(--c-4);
+	}
+
+	& > code {
+		padding: 0.125rem 0.25rem;
 		background-color: var(--background-code);
 		border-radius: 0.25rem;
 		color: var(--c-6);
 	}
+}
 
-	a,
-	p {
-		color: #888;
-
-		&:hover {
-			color: #51afefcc;
-		}
-
-		&.active {
-			color: --accent;
-		}
-
-		&.active:hover {
-			color: --accent;
-		}
-	}
+code {
+	font-family: Fira Code;
+	vertical-align: bottom;
 }
 
 a {
 	font-weight: 500;
-	color: --accent;
+	color: var(--accent);
 	text-decoration: inherit;
 
 	&:hover {
 		color: #51afefaa;
+	}
+
+	&.active {
+		color: --accent;
+	}
+
+	&.active:hover {
+		color: --accent;
 	}
 
 	code {
@@ -154,18 +161,6 @@ a {
 		background-color: var(--background-code);
 		border-radius: 0.25rem;
 		color: --accent;
-	}
-}
-
-ol,
-ul {
-	li {
-		display: inline flow-root list-item;
-		margin-left: 1rem;
-
-		&::marker {
-			color: var(--c-4);
-		}
 	}
 }
 
@@ -248,16 +243,4 @@ ul {
 			}
 		}
 	}
-}
-
-* {
-	margin: 0;
-	padding: 0;
-	scrollbar-width: thin;
-	box-sizing: inherit;
-}
-
-body {
-	width: 100%;
-	height: 100%;
 }
