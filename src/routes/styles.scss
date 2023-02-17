@@ -114,7 +114,7 @@ li {
 h1 {
 	font-size: 1.5rem;
 	font-weight: 600;
-	scroll-margin-top: 6rem;
+	scroll-margin-top: 1rem;
 }
 
 h2 {
@@ -125,36 +125,6 @@ h2 {
 h3 {
 	font-weight: 600;
 	font-size: 1rem;
-}
-
-.table-of-contents {
-	position: fixed;
-	width: var(--sidebar-width);
-	height: calc(100% - var(--header-size));
-	padding: 2rem 8rem;
-	padding-right: 0.5rem;
-	background-color: var(--background-secondary);
-	overflow-x: hidden;
-	overflow-y: auto;
-
-	h2 {
-		font-size: 1rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		color: #aaa;
-		letter-spacing: 0.1em;
-	}
-
-	ol {
-		gap: 0.25rem;
-		li {
-			display: flex;
-			a {
-				width: 100%;
-				height: 100%;
-			}
-		}
-	}
 }
 
 .tutorial-content {
@@ -184,13 +154,9 @@ h3 {
 	}
 }
 
-.on-this-page {
-	background-color: var(--background-secondary);
-}
-
 .page-content,
 .blog-post {
-	background-color: var(--background-secondary);
+	background-color: var(--c-1);
 	flex: 1;
 	padding: 2rem 4rem;
 	padding-top: 5rem;

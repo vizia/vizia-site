@@ -103,7 +103,6 @@ declare module '$env/static/private' {
 	export const QT_ACCESSIBILITY: string;
 	export const GDMSESSION: string;
 	export const LESSCLOSE: string;
-	export const npm_config_open: string;
 	export const GPG_AGENT_INFO: string;
 	export const GJS_DEBUG_OUTPUT: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
@@ -231,7 +230,6 @@ declare module '$env/dynamic/private' {
 		QT_ACCESSIBILITY: string;
 		GDMSESSION: string;
 		LESSCLOSE: string;
-		npm_config_open: string;
 		GPG_AGENT_INFO: string;
 		GJS_DEBUG_OUTPUT: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;

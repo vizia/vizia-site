@@ -9,6 +9,8 @@
 	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
 	import type { DropdownItem, Item } from '$lib/types';
 	import Dropdown from '$lib/components/Dropdown.svelte';
+	import Svg from '$lib/components/Svg.svelte';
+	import { SvgIcon } from '$lib/svg';
 
 	export let data: PageData;
 
@@ -21,22 +23,26 @@
 	let height: number;
 
 	let dropdownItems: DropdownItem[] = [];
-	let currentStep: number[] = [];
-	$: matchDocPage = `guide/${data.docsPage}`;
+	let matchDocPage = `guide/${data.docsPage}`;
+
+	console.log({ data });
 
 	onMount(async () => {
 		await document.fonts.ready;
+		console.log('... mount');
 		update();
 		highlight();
 		processDropdownItems();
 	});
 
 	afterNavigate(() => {
+		console.log('>> navigate');
 		update();
 		highlight();
 	});
 
 	function update() {
+		console.log('>> update');
 		let content_ = document.querySelector('.page-content');
 		if (content_) {
 			content = content_;
@@ -55,6 +61,7 @@
 	}
 
 	function highlight() {
+		console.log('>> scroll');
 		const { top, bottom } = content.getBoundingClientRect();
 		let i = headings.length;
 		while (i--) {
@@ -65,6 +72,7 @@
 			}
 		}
 		hash = '';
+		console.log(hash);
 	}
 
 	function get_text(name: string): string {
@@ -101,8 +109,6 @@
 	}
 </script>
 
-<svelte:window on:resize={update} on:scroll={highlight} />
-
 <nav class="table-of-contents">
 	{#each dropdownItems as item, i}
 		<Dropdown
@@ -111,7 +117,7 @@
 			link={item.link}
 			indexStack={[i + 1]}
 			linkOnClick={true}
-			matcher={(i, h, link) => {
+			matcher={(_i, _h, link) => {
 				return link === matchDocPage;
 			}}
 		/>
@@ -120,11 +126,11 @@
 
 <div class="on-this-page">
 	{#if loaded}
-		<h2>On This Page</h2>
 		<ol>
 			{#each headings as heading}
-				<li>
-					<a href={`#${heading.id}`} class:active={`#${heading.id}` === hash}>
+				<li class:active={`#${heading.id}` === hash}>
+					<Svg icon={`#${heading.id}` === hash ? SvgIcon.Selector : SvgIcon.None} />
+					<a href={`#${heading.id}`}>
 						{get_text(heading.id)}
 					</a>
 				</li>
@@ -150,23 +156,87 @@
 	/>
 </div>
 
+<svelte:window
+	on:scroll={() => console.log('ON SCROLL')}
+	on:resize={() => console.log('ON SCROLL')}
+/>
+
 <style lang="scss">
 	.title {
+		margin-bottom: 3rem;
+
 		font-size: 2.5rem;
 		font-weight: 600;
-		margin-bottom: 3rem;
 	}
 
 	.on-this-page {
 		position: fixed;
 		width: var(--sidebar-width);
 		height: 100%;
+
 		padding-left: 4rem;
 		padding-top: 4rem;
+
 		left: calc(100% - var(--sidebar-width));
+
+		background-color: var(--c-1);
+
+		ol {
+			gap: 0.25rem;
+
+			li {
+				--svg-size: 1.5rem;
+				--svg-fill: var(--c-5);
+				--svg-hover-fill: var(--c-5);
+
+				display: flex;
+				flex-direction: row;
+
+				a {
+					width: 100%;
+					height: 100%;
+				}
+
+				&.active {
+					--svg-fill: var(--accent);
+					--svg-hover-fill: var(--accent);
+
+					a {
+						color: var(--c-6);
+					}
+				}
+			}
+		}
 	}
 
-	a.active {
-		color: var(--accent);
+	.table-of-contents {
+		position: fixed;
+		width: var(--sidebar-width);
+		height: calc(100% - var(--header-size));
+
+		padding: 2rem 8rem;
+		padding-right: 0.5rem;
+
+		background-color: var(--c-2);
+		border-right: 1px solid var(--border-color);
+
+		overflow-x: hidden;
+		overflow-y: auto;
+
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	@media (min-width: 0) {
+		.on-this-page {
+			display: none;
+		}
+	}
+
+	@media (min-width: 90rem) {
+		.on-this-page {
+			display: block;
+		}
 	}
 </style>

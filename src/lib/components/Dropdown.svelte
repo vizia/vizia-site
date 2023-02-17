@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import ChevronDown from '$lib/assets/chevron_down.svg';
+	import { SvgIcon } from '$lib/svg';
 	import type { DropdownItem } from '$lib/types';
+	import Svg from './Svg.svelte';
 
 	export let header = 'dropdown';
 	export let link: string | null = null;
@@ -15,21 +16,13 @@
 	export let onClick = (i: number[]) => {};
 	export let matcher = (idx: number[], header: string, link: string | null) => false;
 
-	let indexString = '';
-
-	for (const idx of indexStack) {
-		indexString += `${idx}.`;
-	}
-
-	const formattedHeader = `${indexString} ${header}`;
+	$: active = matcher(indexStack, header, link);
 </script>
 
-<div
-	class="dropdown-header {open ? 'open' : ''} {matcher(indexStack, header, link) ? 'active' : ''}"
->
+<div class="dropdown-header {open ? 'open' : ''} {active ? 'active' : ''}">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	{#if linkOnClick}
-		<a href="{base}/{link}" class={items.length !== 0 ? 'compact' : ''}>{formattedHeader}</a>
+		<a href="{base}/{link}" class={items.length !== 0 ? 'compact' : ''}>{header}</a>
 	{:else}
 		<p
 			class={items.length !== 0 ? 'compact' : ''}
@@ -37,61 +30,85 @@
 				onClick(indexStack);
 			}}
 		>
-			{formattedHeader}
+			{header}
 		</p>
 	{/if}
 	{#if items.length !== 0}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<img
-			src={ChevronDown}
-			class="logo"
-			alt="v"
+		<div
+			class="svg-button"
 			on:click={() => {
 				open = !open;
 			}}
-		/>
+		>
+			<Svg icon={open ? SvgIcon.ChevronDown : SvgIcon.ChevronRight} />
+		</div>
+	{:else}
+		<Svg icon={active ? SvgIcon.Selector : SvgIcon.None} />
 	{/if}
 </div>
 
 {#if open && items.length !== 0}
 	<div class="dropdown">
-		{#each items as item, i}
-			<svelte:self
-				items={item.items}
-				header={item.name}
-				link={item.link}
-				{enumerate}
-				{linkOnClick}
-				indexStack={[...indexStack, i + 1]}
-				{onClick}
-				{matcher}
-				level={level + 1}
-			/>
-		{/each}
+		<div class="line" />
+		<div class="dropdown-wrapper">
+			{#each items as item, i}
+				<svelte:self
+					items={item.items}
+					header={item.name}
+					link={item.link}
+					{enumerate}
+					{linkOnClick}
+					indexStack={[...indexStack, i + 1]}
+					{onClick}
+					{matcher}
+					level={level + 1}
+				/>
+			{/each}
+		</div>
 	</div>
 {/if}
 
 <style lang="scss">
 	.dropdown {
-		width: auto;
-		flex: 1;
+		width: calc(100% - 0.5rem);
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		margin-left: 0.5rem;
+		pointer-events: none;
+	}
+
+	.line {
+		height: 100%;
+		width: 2px;
+		border-radius: 1px;
+		background-color: var(--c-1);
+		justify-self: stretch;
+	}
+
+	.dropdown-wrapper {
+		width: 100%;
+		height: fit-content;
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
-		margin-left: 0.8rem;
 		pointer-events: none;
 	}
 
 	.dropdown-header {
 		width: 100%;
-		height: auto;
+		height: 1.5rem;
 
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		gap: 0.25rem;
 		border-radius: 0.25rem;
 		pointer-events: none;
+
+		--svg-size: 1.5rem;
+		--svg-fill: var(--c-5);
+		--svg-hover-fill: var(--c-6);
 
 		* {
 			cursor: pointer;
@@ -100,20 +117,18 @@
 
 		a,
 		p {
+			padding-left: 0.5rem;
 			flex: 1;
 			color: #aaa;
 		}
 
-		&.open {
-			img {
-				transform: rotate(0deg);
-			}
-		}
-
 		&.active {
+			background-color: var(--c-1);
+
+			--svg-fill: var(--accent);
 			a,
 			p {
-				color: var(--accent);
+				color: var(--c-6);
 			}
 		}
 	}
@@ -129,14 +144,11 @@
 		color: #fff;
 	}
 
-	img {
-		transform: rotate(-90deg);
-		padding: 0.5rem;
+	.svg-button {
 		border-radius: 0.25rem;
 	}
 
-	img:hover,
 	.dropdown-header:hover {
-		background-color: #ffffff22;
+		background-color: var(--c-1);
 	}
 </style>
