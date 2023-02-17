@@ -60,7 +60,7 @@
 main {
 	position: relative;
 	width: 100%;
-	height: 100vh;
+	min-height: 100%;
 	margin: 0 auto;
 	padding-top: 4rem;
 	overflow: hidden;
@@ -72,6 +72,22 @@ code {
 	font-family: Fira Code;
 	line-height: 1.5rem;
 	vertical-align: bottom;
+}
+
+h1 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	scroll-margin-top: 1rem;
+}
+
+h2 {
+	font-weight: 600;
+	font-size: 1.2rem;
+}
+
+h3 {
+	font-weight: 600;
+	font-size: 1rem;
 }
 
 *::selection {
@@ -91,8 +107,21 @@ ol {
 	flex-direction: column;
 }
 
+p,
 li {
 	display: block;
+	line-height: 150%;
+	font-size: 1rem;
+	font-weight: 400;
+	color: var(--c-5);
+
+	code {
+		padding: 0rem 0.25rem;
+		background-color: var(--background-code);
+		border-radius: 0.25rem;
+		color: var(--c-6);
+	}
+
 	a,
 	p {
 		color: #888;
@@ -111,45 +140,31 @@ li {
 	}
 }
 
-h1 {
-	font-size: 1.5rem;
-	font-weight: 600;
-	scroll-margin-top: 1rem;
-}
+a {
+	font-weight: 500;
+	color: --accent;
+	text-decoration: inherit;
 
-h2 {
-	font-weight: 600;
-	font-size: 1.2rem;
-}
-
-h3 {
-	font-weight: 600;
-	font-size: 1rem;
-}
-
-.tutorial-content {
-	p {
-		font-size: 1rem;
-		font-weight: 400;
-		color: #bbb;
-
-		code {
-			padding: 0.125rem 0.5rem;
-			background-color: var(--background-code);
-			border-radius: 0.25rem;
-			color: #ffffbbdd;
-		}
+	&:hover {
+		color: #51afefaa;
 	}
 
-	ol,
-	ul {
-		li {
-			display: inline flow-root list-item;
-			margin-left: 1rem;
+	code {
+		padding: 0.125rem 0.5rem;
+		background-color: var(--background-code);
+		border-radius: 0.25rem;
+		color: --accent;
+	}
+}
 
-			&::marker {
-				color: #666;
-			}
+ol,
+ul {
+	li {
+		display: inline flow-root list-item;
+		margin-left: 1rem;
+
+		&::marker {
+			color: var(--c-4);
 		}
 	}
 }
@@ -159,7 +174,6 @@ h3 {
 	background-color: var(--c-1);
 	flex: 1;
 	padding: 2rem 4rem;
-	padding-top: 5rem;
 
 	display: flex;
 	flex-direction: column;
@@ -174,34 +188,13 @@ h3 {
 	* {
 		width: 100%;
 	}
+
 	img {
 		padding: 2rem;
 		width: auto;
 		height: auto;
 		max-width: 100%;
 		object-fit: contain;
-	}
-
-	p {
-		font-size: 1rem;
-		font-weight: 400;
-		color: #bbb;
-
-		code {
-			padding: 0.125rem 0.5rem;
-			background-color: var(--background-code);
-			border-radius: 0.25rem;
-			color: #ffffbbdd;
-		}
-	}
-
-	a {
-		code {
-			padding: 0.125rem 0.5rem;
-			background-color: var(--background-code);
-			border-radius: 0.25rem;
-			color: --accent;
-		}
 	}
 
 	.codeblock {
@@ -255,18 +248,6 @@ h3 {
 			}
 		}
 	}
-
-	ol,
-	ul {
-		li {
-			display: inline flow-root list-item;
-			margin-left: 1rem;
-
-			&::marker {
-				color: #666;
-			}
-		}
-	}
 }
 
 * {
@@ -279,13 +260,4 @@ h3 {
 body {
 	width: 100%;
 	height: 100%;
-}
-
-a {
-	font-weight: 500;
-	color: --accent;
-	text-decoration: inherit;
-}
-a:hover {
-	color: #51afefaa;
 }

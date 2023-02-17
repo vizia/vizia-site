@@ -76,6 +76,7 @@
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
+		background-color: transparent;
 
 		box-sizing: border-box;
 
@@ -83,6 +84,7 @@
 
 		&.border {
 			border-bottom: 1px solid var(--border-color);
+			background-color: var(--c-1) !important;
 		}
 	}
 

@@ -23,7 +23,7 @@
 	let height: number;
 
 	let dropdownItems: DropdownItem[] = [];
-	let matchDocPage = `guide/${data.docsPage}`;
+	$: matchDocPage = `guide/${data.docsPage}`;
 
 	console.log({ data });
 
@@ -40,6 +40,10 @@
 		update();
 		highlight();
 	});
+
+	$: {
+		processDropdownItems();
+	}
 
 	function update() {
 		console.log('>> update');
@@ -156,10 +160,7 @@
 	/>
 </div>
 
-<svelte:window
-	on:scroll={() => console.log('ON SCROLL')}
-	on:resize={() => console.log('ON SCROLL')}
-/>
+<svelte:window on:scroll={highlight} on:resize={update} />
 
 <style lang="scss">
 	.title {
