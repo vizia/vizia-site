@@ -18,6 +18,7 @@ export const load = (async ({ params, fetch }) => {
 		const [parsed_markdown, markdown_meta] = parse_doc_markdown(markdown);
 		const items = (await responseGuides.json()) as Item[];
 		return {
+			docsPage: "",
 			markdown: parsed_markdown,
 			markdownMeta: markdown_meta,
 			items,
