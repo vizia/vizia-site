@@ -67,8 +67,8 @@
 		display: grid;
 		place-items: center;
 
-		&:hover {
-			color: #51afef;
+		> p {
+			color: var(--c-6);
 		}
 	}
 
@@ -78,7 +78,7 @@
 
 		position: fixed;
 		top: 3.5rem;
-		background-color: #282828;
+		background-color: var(--c-3);
 		border-radius: 0.25rem;
 
 		margin-left: -2rem;

@@ -29,8 +29,10 @@
 
 <style>
 	.svg {
-		width: var(--svg-size);
-		height: var(--svg-size);
+		min-width: var(--svg-size);
+		max-width: var(--svg-size);
+		min-height: var(--svg-size);
+		max-height: var(--svg-size);
 		display: grid;
 		place-items: center;
 	}

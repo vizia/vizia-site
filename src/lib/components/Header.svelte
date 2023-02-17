@@ -72,7 +72,6 @@
 	.header {
 		width: 100%;
 
-		position: fixed;
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
@@ -90,7 +89,6 @@
 
 	.wrapper {
 		width: 100%;
-		padding: 0 2rem;
 		margin: 0 auto;
 		height: var(--header-size);
 		max-width: var(--page-width);
@@ -98,6 +96,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		padding: 0 2rem;
 	}
 
 	a {
@@ -129,13 +128,13 @@
 	.links-wrapper {
 		flex-direction: row;
 		align-items: center;
-		gap: 0.5rem;
 
 		> a {
 			width: 1.5rem;
 			height: 1.5rem;
 
-			padding: 0rem;
+			padding: 0.5rem;
+			box-sizing: content-box;
 
 			img {
 				width: 1.5rem;
@@ -170,10 +169,10 @@
 	}
 
 	.ham-menu {
-		position: absolute;
+		position: fixed;
 		top: var(--header-size);
 		width: 100%;
-		height: calc(100% - var(--header-size));
+		height: calc(100vh - var(--header-size));
 		background-color: #121212cc;
 		z-index: 999;
 		flex-direction: column;
@@ -192,6 +191,10 @@
 	}
 
 	@media (min-width: 0) {
+		.header {
+			position: flex;
+		}
+
 		.links-wrapper {
 			display: none;
 		}
@@ -203,12 +206,13 @@
 		.ham-menu-icon {
 			display: flex;
 		}
-
-		.ham-menu {
-		}
 	}
 
 	@media (min-width: 50rem) {
+		.header {
+			position: fixed;
+		}
+
 		.links-wrapper {
 			display: flex;
 		}

@@ -26,16 +26,20 @@
 
 	$: matchDocPage = `guide/${data.docsPage}`;
 
+	let tocOpen = false;
+
 	onMount(async () => {
 		await document.fonts.ready;
 		update();
 		highlight();
 		processDropdownItems();
+		tocOpen = false;
 	});
 
 	afterNavigate(() => {
 		update();
 		highlight();
+		tocOpen = false;
 	});
 
 	$: {
@@ -107,7 +111,8 @@
 	}
 </script>
 
-<nav class="table-of-contents">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<nav class="table-of-contents" on:click={() => (tocOpen = false)} class:open={tocOpen}>
 	{#each dropdownItems as item, i}
 		<Dropdown
 			items={item.items}
@@ -121,6 +126,21 @@
 		/>
 	{/each}
 </nav>
+
+<div class="table-of-contents-menu">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div
+		class="svg-button"
+		on:click={() => {
+			tocOpen = !tocOpen;
+		}}
+	>
+		<Svg icon={SvgIcon.HamburgerMenu} />
+		<p>Contents</p>
+	</div>
+	<!-- svelte-ignore a11y-invalid-attribute -->
+	<a href="#">Return to Top</a>
+</div>
 
 <div class="on-this-page">
 	{#if loaded}
@@ -164,17 +184,34 @@
 		font-weight: 600;
 	}
 
+	.page-content {
+		display: flex;
+		flex-direction: column;
+
+		padding: 2rem;
+
+		gap: 1rem;
+		align-items: center;
+
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
 	.on-this-page {
 		position: fixed;
-		width: var(--sidebar-width);
-		height: 100%;
+		height: calc(100% - var(--header-size));
 
-		padding-left: 4rem;
-		padding-top: 4rem;
+		padding: 2rem 8rem;
+		padding-left: 0.5rem;
 
-		left: calc(100% - var(--sidebar-width));
+		overflow-x: hidden;
+		overflow-y: auto;
 
-		background-color: var(--c-1);
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+
+		width: calc((100% - var(--page-width)) / 2 + var(--sidebar-width));
 
 		ol {
 			gap: 0.25rem;
@@ -188,6 +225,7 @@
 				flex-direction: row;
 
 				a {
+					color: var(--c-4);
 					width: 100%;
 					height: 100%;
 				}
@@ -204,34 +242,132 @@
 		}
 	}
 
+	.table-of-contents-menu {
+		top: 0;
+		width: 100%;
+		position: sticky;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.5rem 2rem;
+		border-bottom: 1px solid var(--border-color);
+		background-color: var(--c-1);
+		z-index: 10;
+
+		--svg-size: 1.5rem;
+		--svg-fill: var(--c-5);
+		--svg-hover-fill: var(--c-6);
+
+		.svg-button {
+			display: flex;
+			flex-direction: row;
+			gap: 0.2rem;
+			border-radius: 0.25rem;
+			cursor: pointer;
+			pointer-events: all;
+
+			&:hover {
+				--svg-fill: var(--c-6);
+				p {
+					color: var(--c-6);
+				}
+			}
+		}
+	}
+
 	.table-of-contents {
-		position: fixed;
-		width: var(--sidebar-width);
-		height: calc(100% - var(--header-size));
-
-		padding: 2rem 8rem;
-		padding-right: 0.5rem;
-
-		background-color: var(--c-2);
 		border-right: 1px solid var(--border-color);
 
 		overflow-x: hidden;
 		overflow-y: auto;
 
-		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
+		pointer-events: all;
 	}
 
 	@media (min-width: 0) {
 		.on-this-page {
 			display: none;
 		}
+
+		.table-of-contents {
+			position: fixed;
+			top: 0;
+
+			height: 100vh;
+			display: flex;
+			// transform: translateX(-100%);
+			width: 100%;
+			padding: 2rem;
+			padding-right: calc(100% - var(--sidebar-width));
+
+			z-index: 100;
+			background-color: #121212cc;
+			backdrop-filter: blur(4px);
+
+			transform: translateX(-100%);
+
+			&.open {
+				transform: translateX(0%);
+			}
+		}
+
+		.page-content {
+			margin-left: 0;
+		}
 	}
 
-	@media (min-width: 90rem) {
+	@media (min-width: 50rem) {
+		.table-of-contents-menu {
+			display: none;
+		}
+
+		.table-of-contents {
+			position: fixed;
+			display: flex;
+			padding: 2rem;
+			width: var(--sidebar-width);
+			padding-right: 0.5rem;
+			background-color: var(--c-2);
+			height: calc(100% - var(--header-size));
+			transform: translateX(0%);
+			margin-top: var(--header-size);
+			z-index: 0;
+		}
+
+		.page-content {
+			margin-left: var(--sidebar-width);
+		}
+	}
+
+	@media (min-width: 85rem) {
 		.on-this-page {
-			display: block;
+			display: flex;
+			width: var(--sidebar-width);
+			margin-left: calc(100vw - var(--sidebar-width));
+			padding-right: 2rem;
+		}
+
+		.page-content {
+			position: fixed;
+			margin-left: var(--sidebar-width);
+			width: calc(100vw - var(--sidebar-width) * 2);
+		}
+	}
+
+	@media (min-width: 100rem) {
+		.table-of-contents {
+			padding-left: calc((100% - var(--page-width)) / 2 + 2rem);
+			width: calc((100% - var(--page-width)) / 2 + var(--sidebar-width));
+			padding-right: 0.5rem;
+		}
+
+		.page-content {
+			position: fixed;
+			margin-left: calc((100vw - var(--page-width)) / 2 + var(--sidebar-width));
+			width: calc(var(--page-width) - var(--sidebar-width) * 2);
 		}
 	}
 </style>
