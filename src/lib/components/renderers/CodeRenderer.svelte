@@ -49,3 +49,32 @@
 		<pre class={lang}><code class={'language-' + lang}>{@html text}</code></pre>
 	</div>
 {/if}
+
+<style lang="scss">
+	.codeblock {
+		border-radius: 0.5rem;
+		overflow: hidden;
+		overflow-x: scroll;
+		overflow-y: visible;
+		flex-shrink: 0;
+		background-color: var(--c-2);
+		border: 1px solid var(--c-0);
+
+		.header {
+			padding: 0.25rem 1rem;
+			margin-bottom: 2px;
+			p {
+				color: #888;
+			}
+		}
+
+		pre {
+			border-radius: 0;
+		}
+	}
+
+	code {
+		font-family: Fira Code;
+		vertical-align: bottom;
+	}
+</style>

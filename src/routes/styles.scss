@@ -17,9 +17,6 @@
 	--background-tertiary: #323232;
 	--background-quaternary: #404040;
 
-	--background-code: var(--background-tertiary);
-	--background-code-header: var(--background-quaternary);
-
 	--header-size: 4rem;
 	--sidebar-width: 20rem;
 
@@ -78,7 +75,8 @@ body {
 
 h1,
 h2,
-h3 h4,
+h3,
+h4,
 h5,
 h6 {
 	color: var(--c-6);
@@ -118,15 +116,10 @@ li {
 
 	& > code {
 		padding: 0.125rem 0.25rem;
-		background-color: var(--background-code);
+		background-color: var(--c-2);
 		border-radius: 0.25rem;
 		color: var(--c-6);
 	}
-}
-
-code {
-	font-family: Fira Code;
-	vertical-align: bottom;
 }
 
 a {
@@ -139,18 +132,18 @@ a {
 	}
 
 	&.active {
-		color: --accent;
+		color: var(--accent);
 	}
 
 	&.active:hover {
-		color: --accent;
+		color: var(--accent);
 	}
 
 	code {
-		padding: 0.125rem 0.5rem;
-		background-color: var(--background-code);
+		padding: 0.125rem 0.25rem;
+		background-color: var(--c-3);
 		border-radius: 0.25rem;
-		color: --accent;
+		color: var(--accent);
 	}
 }
 
@@ -160,34 +153,18 @@ a {
 		width: 100%;
 	}
 
+	& > p > code {
+		padding: 0.125rem 0.25rem;
+		background-color: var(--c-3);
+		border-radius: 0.25rem;
+	}
+
 	img {
 		padding: 2rem 0;
 		width: auto;
 		height: auto;
 		max-width: 100%;
 		object-fit: contain;
-	}
-
-	.codeblock {
-		border-radius: 0.5rem;
-		overflow: hidden;
-		overflow-x: scroll;
-		overflow-y: visible;
-		flex-shrink: 0;
-
-		.header {
-			background-color: var(--background-code);
-			padding: 0.25rem 1rem;
-			margin-bottom: 2px;
-			p {
-				color: #888;
-			}
-		}
-
-		pre {
-			background-color: var(--background-code);
-			border-radius: 0;
-		}
 	}
 
 	pre {
@@ -201,7 +178,7 @@ a {
 		padding: 0.5rem 1rem;
 		border-radius: 0.5rem;
 
-		background-color: #121212;
+		background-color: var(--c-0);
 
 		thead {
 			th {
