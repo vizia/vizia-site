@@ -51,7 +51,7 @@
 			height: calc(1.5rem - var(--height-padding));
 			left: calc(var(--left) * 0.5em * 1.2);
 			width: calc(var(--width) * 0.5em * 1.2);
-			top: calc(var(--line) * 1.5rem + var(--line) * 0.05rem + var(--height-padding) * 0.5);
+			top: calc(var(--line) * 1.5rem + var(--height-padding) * 0.5);
 			border-radius: 0.25rem;
 			pointer-events: none;
 		}
@@ -71,7 +71,7 @@
 		}
 
 		.disabled {
-			background-color: var(--background-main);
+			background-color: var(--c-2);
 			opacity: 0.5;
 			z-index: 0;
 		}
