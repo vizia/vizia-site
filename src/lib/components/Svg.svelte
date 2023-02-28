@@ -12,32 +12,24 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="svg">
-	<svg
-		width={vbw}
-		height={vbh}
-		viewBox="0 0 {vbw} {vbh}"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-	>
-		{#each path ?? [] as d}
-			<path fill-rule="evenodd" clip-rule="evenodd" {d} />
-		{/each}
-	</svg>
-</div>
+<svg
+	width={vbw}
+	height={vbh}
+	viewBox="0 0 {vbw} {vbh}"
+	fill="none"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	{#each path ?? [] as d}
+		<path fill-rule="evenodd" clip-rule="evenodd" {d} />
+	{/each}
+</svg>
 
 <style>
-	.svg {
-		min-width: var(--svg-size);
-		max-width: var(--svg-size);
-		min-height: var(--svg-size);
-		max-height: var(--svg-size);
-		display: grid;
-		place-items: center;
-	}
-
 	svg {
+		max-width: var(--svg-size);
+		min-width: var(--svg-size);
+		max-height: var(--svg-size);
+		min-height: var(--svg-size);
 		align-content: center;
 		pointer-events: none;
 	}
@@ -46,7 +38,7 @@
 		fill: var(--svg-fill);
 	}
 
-	.svg:hover path {
+	svg:hover path {
 		fill: var(--svg-hover-fill);
 	}
 </style>

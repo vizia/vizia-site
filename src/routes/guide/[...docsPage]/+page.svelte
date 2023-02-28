@@ -115,7 +115,10 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<nav class="table-of-contents" on:click={() => (tocOpen = false)} class:open={tocOpen}>
+<nav class="table-of-contents" class:open={tocOpen}>
+	<div class="table-of-contents-close" on:click={() => (tocOpen = false)}>
+		<Svg icon={SvgIcon.Cross} />
+	</div>
 	{#each dropdownItems as item, i}
 		<Dropdown
 			items={item.items}
@@ -135,7 +138,7 @@
 	<div
 		class="svg-button"
 		on:click={() => {
-			tocOpen = !tocOpen;
+			tocOpen = true;
 		}}
 	>
 		<Svg icon={SvgIcon.HamburgerMenu} />
@@ -271,6 +274,10 @@
 			cursor: pointer;
 			pointer-events: all;
 
+			* {
+				pointer-events: none;
+			}
+
 			&:hover {
 				--svg-fill: var(--c-6);
 				p {
@@ -286,6 +293,14 @@
 		flex-direction: column;
 		gap: 0.25rem;
 		pointer-events: all;
+
+		.table-of-contents-close {
+			width: 2rem;
+			height: 2rem;
+			--svg-size: 2rem;
+			--svg-fill: var(--c-6);
+			--svg-hover-fill: var(--c-6);
+		}
 	}
 
 	@media (min-width: 0) {
@@ -294,6 +309,7 @@
 		}
 
 		.table-of-contents {
+			overflow-y: scroll;
 			position: fixed;
 			top: 0;
 
@@ -309,6 +325,10 @@
 			backdrop-filter: blur(4px);
 
 			transform: translateX(-100%);
+
+			.table-of-contents-close {
+				display: block;
+			}
 
 			&.open {
 				transform: translateX(0%);
@@ -336,6 +356,10 @@
 			transform: translateX(0%);
 			margin-top: var(--header-size);
 			z-index: 0;
+
+			.table-of-contents-close {
+				display: none;
+			}
 		}
 
 		.page-content {
