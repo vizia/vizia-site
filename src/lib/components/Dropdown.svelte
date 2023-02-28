@@ -145,7 +145,12 @@
 	}
 
 	.svg-button {
+		width: 1.5rem;
+		height: 1.5rem;
+		--svg-size: 1.5rem;
 		border-radius: 0.25rem;
+
+		--svg-hover-fill: var(--c-6);
 	}
 
 	.dropdown-header:hover {

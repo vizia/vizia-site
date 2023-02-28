@@ -261,23 +261,24 @@
 		border-bottom: 1px solid var(--border-color);
 		background-color: var(--c-1);
 		z-index: 10;
-
-		--svg-size: 1.5rem;
-		--svg-fill: var(--c-5);
-		--svg-hover-fill: var(--c-6);
-
+		
 		.svg-button {
+			width: 1.5rem;
+			height: 1.5rem;
+			--svg-size: 1.5rem;
+			--svg-fill: var(--c-5);
+			--svg-hover-fill: var(--c-6);
 			display: flex;
 			flex-direction: row;
 			gap: 0.2rem;
 			border-radius: 0.25rem;
 			cursor: pointer;
 			pointer-events: all;
-
+	
 			* {
 				pointer-events: none;
 			}
-
+	
 			&:hover {
 				--svg-fill: var(--c-6);
 				p {
@@ -286,6 +287,7 @@
 			}
 		}
 	}
+
 
 	.table-of-contents {
 		border-right: 1px solid var(--border-color);
