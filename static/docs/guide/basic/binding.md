@@ -167,7 +167,7 @@ fn main() {
 
 > Note that in this example we're assuming that the string is not empty.
 
-![An empty vizia application window](../docs_img/stylesheet.png)
+![An empty vizia application window](/docs_img/stylesheet.png)
 <img src="../docs_img/stylesheet.png alt="" width="400"/>
 
 Now when the name field of the model changes the label will update to display the new first letter.
