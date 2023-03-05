@@ -4,7 +4,7 @@
 	import ImageRenderer from '$lib/components/renderers/ImageRenderer.svelte';
 	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
-	import TutorialCodeRenderer from '$lib/components/renderers/TutorialCodeRenderer.svelte';
+	import TutorialCodeRenderer from '$lib/components/tutorial/TutorialCodeRenderer.svelte';
 
 	import Svg from '$lib/components/Svg.svelte';
 	import { SvgIcon } from '$lib/svg';
@@ -13,10 +13,17 @@
 	import { onMount } from 'svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import type { PageData } from './$types';
+	import TutorialDropdown from '$lib/components/tutorial/TutorialDropdown.svelte';
 
 	export let data: PageData;
 
 	let loaded = false;
+
+	let openStepDropdown = false;
+
+	$: {
+		console.log(openStepDropdown);
+	}
 
 	let flattenedSteps: Item[] = [];
 	let currentStep: number = 0;
@@ -65,6 +72,8 @@
 	}
 
 	function selectStep(step: number) {
+		console.log(step);
+
 		currentStep = step;
 
 		currentStepDetails = flattenedSteps[step];
@@ -138,10 +147,28 @@
 				{:else}
 					<h1 class="title">{data.tutorial.title}</h1>
 				{/if}
-				<div class="step-display">
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="step-display" on:click={() => (openStepDropdown = !openStepDropdown)}>
 					<p class="step-value">{currentStep + 1}</p>
 					<p>/</p>
 					<p class="step-value">{flattenedSteps.length}</p>
+				</div>
+				<div class="step-dropdown {openStepDropdown ? 'open' : ''}">
+					{#each data.tutorial.items as item}
+						<TutorialDropdown
+							{item}
+							onClick={(it) => {
+								selectStep(
+									flattenedSteps.findIndex((i) => {
+										return i.title === it.title;
+									})
+								);
+							}}
+							matcher={(i) => {
+								return i === currentStepDetails;
+							}}
+						/>
+					{/each}
 				</div>
 			</div>
 			<div class="tutorial-markdown">
@@ -184,6 +211,7 @@
 	}
 
 	.tutorial-header {
+		position: relative;
 		width: 100%;
 		height: 2.2rem;
 		display: flex;
@@ -228,6 +256,28 @@
 				pointer-events: none;
 				color: var(--c-6);
 				user-select: none;
+			}
+		}
+
+		.step-dropdown {
+			pointer-events: none;
+			user-select: none;
+			position: absolute;
+
+			background-color: var(--c-3);
+			border: 1px solid var(--c-0);
+			border-radius: 0.5rem;
+
+			top: 2.5rem;
+			left: 50%;
+			width: 50%;
+			padding: 0.5rem;
+
+			opacity: 0;
+
+			&.open {
+				pointer-events: all;
+				opacity: 1;
 			}
 		}
 	}
