@@ -7,7 +7,7 @@
 	import TutorialCodeRenderer from '$lib/components/tutorial/TutorialCodeRenderer.svelte';
 
 	import Svg from '$lib/components/Svg.svelte';
-	import { SvgIcon } from '$lib/svg';
+	import { iconFromExtension, SvgIcon } from '$lib/svg';
 	import { ALLOWED_CODE_EXTENSIONS } from '$lib/tutorial';
 	import type { DropdownItem, FileItem, Item } from '$lib/types';
 	import { onMount } from 'svelte';
@@ -21,10 +21,6 @@
 
 	let openStepDropdown = false;
 
-	$: {
-		console.log(openStepDropdown);
-	}
-
 	let flattenedSteps: Item[] = [];
 	let currentStep: number = 0;
 	let currentStepDetails: Item;
@@ -34,7 +30,7 @@
 	let selectedFile: FileItem;
 
 	const FILE_EXTENSION_REGEX = /.+?\.([a-z]+)$/;
-	$: selectedFileExtension = selectedFile ? FILE_EXTENSION_REGEX.exec(selectedFile.file)?.[1] : '';
+	$: selectedFileExtension = selectedFile ? extensionFromName(selectedFile.file) : '';
 
 	onMount(() => {
 		flattenedSteps = flattenTutorialSteps(data.tutorial.items);
@@ -51,12 +47,10 @@
 	}
 
 	function nextStep() {
-		console.log({ currentStep });
 		if (currentStep < flattenedSteps.length - 1) {
 			currentStep += 1;
 			selectStep(currentStep);
 		}
-		console.log({ currentStep });
 	}
 
 	function flattenTutorialSteps(steps: Item[]): Item[] {
@@ -72,8 +66,6 @@
 	}
 
 	function selectStep(step: number) {
-		console.log(step);
-
 		currentStep = step;
 
 		currentStepDetails = flattenedSteps[step];
@@ -102,7 +94,11 @@
 	}
 
 	function isFileCode(filename: string): boolean {
-		return ALLOWED_CODE_EXTENSIONS.find((v) => v === selectedFileExtension) !== undefined;
+		return ALLOWED_CODE_EXTENSIONS.find((v) => v === filename) !== undefined;
+	}
+
+	function extensionFromName(name: string): string {
+		return FILE_EXTENSION_REGEX.exec(name)?.[1] ?? '';
 	}
 </script>
 
@@ -116,13 +112,13 @@
 					class:active={selectedFile.file == header.file}
 					on:click={() => (selectedFile = header)}
 				>
-					<Svg icon={SvgIcon.RustLanguage} />
-					<code>{header.file}</code>
+					<Svg icon={iconFromExtension(extensionFromName(header.file))} />
+					<p>{header.file}</p>
 				</div>
 			{/each}
 		</div>
 		{#if loaded}
-			{#if isFileCode(selectedFile.file)}
+			{#if isFileCode(selectedFileExtension)}
 				<div class="tutorial-code">
 					<TutorialCodeRenderer
 						lang="rust"
@@ -372,7 +368,7 @@
 	.file-headers {
 		display: flex;
 		flex-direction: row;
-		background-color: var(--c-0);
+		background-color: var(--c-1);
 
 		--svg-size: 1.5rem;
 		--svg-fill: var(--c-5);
@@ -391,7 +387,7 @@
 		background-color: var(--c-1);
 
 		--svg-fill: var(--c-4);
-		& > code {
+		& > p {
 			color: var(--c-4);
 		}
 
@@ -404,7 +400,7 @@
 			background-color: var(--c-2);
 			--svg-fill: var(--c-5);
 
-			& > code {
+			& > p {
 				color: var(--c-6);
 			}
 		}
