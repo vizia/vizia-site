@@ -29,10 +29,12 @@
 	}
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	class="dropdown-title"
 	on:mouseenter={() => enterHoverTitle()}
 	on:mouseleave={() => exitHoverTitle()}
+	on:click={() => (open = !open)}
 >
 	<p>
 		{dropdownName}
@@ -91,7 +93,8 @@
 
 		position: fixed;
 		top: 3.5rem;
-		background-color: var(--c-3);
+		background-color: var(--c-2);
+		border: 1px solid var(--c-0);
 		border-radius: 0.25rem;
 
 		margin-left: -2rem;
