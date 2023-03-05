@@ -97,7 +97,7 @@
 	}
 
 	function processDropdownItem(step: Item): DropdownItem {
-		let rPath = /(.+?)\.md/.exec(step.markdownFileName)?.[1];
+		let rPath = /(.+?)\.md/.exec(step.markdownFile)?.[1];
 		let item: DropdownItem = {
 			name: step.title,
 			items: [],
@@ -261,7 +261,7 @@
 		border-bottom: 1px solid var(--border-color);
 		background-color: var(--c-1);
 		z-index: 10;
-		
+
 		.svg-button {
 			width: 1.5rem;
 			height: 1.5rem;
@@ -274,11 +274,11 @@
 			border-radius: 0.25rem;
 			cursor: pointer;
 			pointer-events: all;
-	
+
 			* {
 				pointer-events: none;
 			}
-	
+
 			&:hover {
 				--svg-fill: var(--c-6);
 				p {
@@ -287,7 +287,6 @@
 			}
 		}
 	}
-
 
 	.table-of-contents {
 		border-right: 1px solid var(--border-color);
