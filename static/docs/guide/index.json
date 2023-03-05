@@ -1,125 +1,125 @@
 [
     {
         "title": "Welcome",
-        "markdownFileName": "intro.md",
+        "markdownFile": "intro.md",
         "items": [
             {
                 "title": "Pre-requisites",
-                "markdownFileName": "prerequisites.md"
+                "markdownFile": "prerequisites.md"
             },
             {
                 "title": "Architecture",
-                "markdownFileName": "architecture.md"
+                "markdownFile": "architecture.md"
             }
         ]
     },
     {
         "title": "Introduction",
-        "markdownFileName": "introduction/foreword.md",
+        "markdownFile": "introduction/foreword.md",
         "items": [
             {
                 "title": "Getting Started",
-                "markdownFileName": "introduction/getting_started.md"
+                "markdownFile": "introduction/getting_started.md"
             },
             {
                 "title": "Quick Start",
-                "markdownFileName": "introduction/quickstart.md"
+                "markdownFile": "introduction/quickstart.md"
             }
         ]
     },
     {
         "title": "Basic",
-        "markdownFileName": "basic/basic.md",
+        "markdownFile": "basic/basic.md",
         "items": [
             {
                 "title": "Application",
-                "markdownFileName": "basic/application.md"
+                "markdownFile": "basic/application.md"
             },
             {
                 "title": "Views",
-                "markdownFileName": "basic/views.md"
+                "markdownFile": "basic/views.md"
             },
             {
                 "title": "Styling",
-                "markdownFileName": "basic/styling.md"
+                "markdownFile": "basic/styling.md"
             },
             {
                 "title": "Layout",
-                "markdownFileName": "basic/layout.md"
+                "markdownFile": "basic/layout.md"
             },
             {
                 "title": "Models",
-                "markdownFileName": "basic/models.md"
+                "markdownFile": "basic/models.md"
             },
             {
                 "title": "Binding",
-                "markdownFileName": "basic/binding.md"
+                "markdownFile": "basic/binding.md"
             },
             {
                 "title": "Events",
-                "markdownFileName": "basic/events.md"
+                "markdownFile": "basic/events.md"
             },
             {
                 "title": "Custom Views",
-                "markdownFileName": "basic/custom_views.md"
+                "markdownFile": "basic/custom_views.md"
             },
             {
                 "title": "Environment",
-                "markdownFileName": "basic/environment.md"
+                "markdownFile": "basic/environment.md"
             },
             {
                 "title": "Resources",
-                "markdownFileName": "basic/resources.md"
+                "markdownFile": "basic/resources.md"
             },
             {
                 "title": "Animation",
-                "markdownFileName": "basic/animation.md"
+                "markdownFile": "basic/animation.md"
             },
             {
                 "title": "Localization",
-                "markdownFileName": "basic/localization.md"
+                "markdownFile": "basic/localization.md"
             },
             {
                 "title": "Accesibility",
-                "markdownFileName": "basic/accessibility.md"
+                "markdownFile": "basic/accessibility.md"
             },
             {
                 "title": "Keymap",
-                "markdownFileName": "basic/keymap.md"
+                "markdownFile": "basic/keymap.md"
             },
             {
                 "title": "List",
-                "markdownFileName": "basic/list.md"
+                "markdownFile": "basic/list.md"
             },
             {
                 "title": "Overview",
-                "markdownFileName": "basic/overview.md"
+                "markdownFile": "basic/overview.md"
             },
             {
                 "title": "View Event Handling",
-                "markdownFileName": "basic/view_event_handling.md"
+                "markdownFile": "basic/view_event_handling.md"
             },
             {
                 "title": "View Model Data",
-                "markdownFileName": "basic/view_model_data.md"
+                "markdownFile": "basic/view_model_data.md"
             },
             {
                 "title": "View Tree",
-                "markdownFileName": "basic/view_tree.md"
+                "markdownFile": "basic/view_tree.md"
             }
         ]
     },
     {
         "title": "Advanced",
-        "markdownFileName": "advanced/advanced.md",
+        "markdownFile": "advanced/advanced.md",
         "items": [
             {
                 "title": "Custom Views",
-                "markdownFileName": "advanced/custom_views.md"
+                "markdownFile": "advanced/custom_views.md"
             },
             {
                 "title": "Localization",
-                "markdownFileName": "advanced/localization.md"
+                "markdownFile": "advanced/localization.md"
             }
         ]
     }
