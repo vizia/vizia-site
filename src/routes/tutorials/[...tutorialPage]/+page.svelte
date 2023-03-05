@@ -1,33 +1,39 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import CodeRenderer from '$lib/components/renderers/CodeRenderer.svelte';
 	import ImageRenderer from '$lib/components/renderers/ImageRenderer.svelte';
 	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import TutorialCodeRenderer from '$lib/components/renderers/TutorialCodeRenderer.svelte';
-	import { parseHighlight } from '$lib/highlight';
-	import type { DropdownItem, Item, StepCodeHighlight } from '$lib/types';
+
+	import Svg from '$lib/components/Svg.svelte';
+	import { SvgIcon } from '$lib/svg';
+	import { ALLOWED_CODE_EXTENSIONS } from '$lib/tutorial';
+	import type { DropdownItem, FileItem, Item } from '$lib/types';
 	import { onMount } from 'svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
+	let loaded = false;
+
 	let flattenedSteps: Item[] = [];
 	let currentStep: number = 0;
-	let currentStepDetails: Item | null = null;
+	let currentStepDetails: Item;
 	let dropdownItems: DropdownItem[] = [];
-	let processedCodeHighlight: StepCodeHighlight[] = [];
 
-	console.log({ data });
+	$: fileHeaders = currentStepDetails ? currentStepDetails.files : [];
+	let selectedFile: FileItem;
 
-	$: {
-		console.log({ currentStep, flattenedSteps });
-	}
+	const FILE_EXTENSION_REGEX = /.+?\.([a-z]+)$/;
+	$: selectedFileExtension = selectedFile ? FILE_EXTENSION_REGEX.exec(selectedFile.file)?.[1] : '';
 
 	onMount(() => {
 		flattenedSteps = flattenTutorialSteps(data.tutorial.items);
 		selectStep(0);
 		processDropdownItems();
+		loaded = true;
 	});
 
 	function previousStep() {
@@ -38,10 +44,12 @@
 	}
 
 	function nextStep() {
+		console.log({ currentStep });
 		if (currentStep < flattenedSteps.length - 1) {
 			currentStep += 1;
 			selectStep(currentStep);
 		}
+		console.log({ currentStep });
 	}
 
 	function flattenTutorialSteps(steps: Item[]): Item[] {
@@ -61,12 +69,7 @@
 
 		currentStepDetails = flattenedSteps[step];
 
-		console.log({ currentStepDetails });
-
-		processedCodeHighlight =
-			currentStepDetails.codeHighlight
-				?.map((v) => parseHighlight(currentStepDetails?.codeData ?? '', v))
-				.flat() ?? [];
+		selectedFile = currentStepDetails.files[0];
 	}
 
 	function processDropdownItems() {
@@ -88,21 +91,46 @@
 
 		return item;
 	}
+
+	function isFileCode(filename: string): boolean {
+		return ALLOWED_CODE_EXTENSIONS.find((v) => v === selectedFileExtension) !== undefined;
+	}
 </script>
 
 <div class="tutorial-wrapper">
-	<div class="tutorial-code">
-		{#if currentStepDetails}
-			<TutorialCodeRenderer
-				lang="rust"
-				text={currentStepDetails.codeData ?? ''}
-				highlight={processedCodeHighlight}
-			/>
+	<div class="tutorial-code-wrapper">
+		<div class="file-headers">
+			{#each fileHeaders as header}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div
+					class="file-header"
+					class:active={selectedFile.file == header.file}
+					on:click={() => (selectedFile = header)}
+				>
+					<Svg icon={SvgIcon.RustLanguage} />
+					<code>{header.file}</code>
+				</div>
+			{/each}
+		</div>
+		{#if loaded}
+			{#if isFileCode(selectedFile.file)}
+				<div class="tutorial-code">
+					<TutorialCodeRenderer
+						lang="rust"
+						text={selectedFile.fileData}
+						highlight={selectedFile.highlights}
+					/>
+				</div>
+			{:else}
+				<div class="tutorial-image">
+					<img src="{base}/tutorials/tutorial_one/{selectedFile.file}" alt="" />
+				</div>
+			{/if}
 		{/if}
 	</div>
 
 	<div class="tutorial-content">
-		{#if currentStepDetails}
+		{#if loaded}
 			<div class="tutorial-header">
 				{#if currentStepDetails.title}
 					<h1 class="title">{currentStepDetails.title}</h1>
@@ -116,15 +144,17 @@
 					<p class="step-value">{flattenedSteps.length}</p>
 				</div>
 			</div>
-			<SvelteMarkdown
-				source={currentStepDetails.markdownData}
-				renderers={{
-					code: CodeRenderer,
-					tablecell: TableCellRenderer,
-					image: ImageRenderer,
-					link: LinkRenderer
-				}}
-			/>
+			<div class="tutorial-markdown">
+				<SvelteMarkdown
+					source={currentStepDetails.markdownFileData}
+					renderers={{
+						code: CodeRenderer,
+						tablecell: TableCellRenderer,
+						image: ImageRenderer,
+						link: LinkRenderer
+					}}
+				/>
+			</div>
 			<div class="divisor" />
 			<div class="step-actions">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -213,6 +243,16 @@
 		padding: 2rem;
 	}
 
+	.tutorial-markdown {
+		overflow-x: hidden;
+		overflow-y: auto;
+		flex: 1;
+
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
 	.divisor {
 		height: 1px;
 		width: 100%;
@@ -238,20 +278,89 @@
 		}
 	}
 
+	.tutorial-code-wrapper {
+		display: flex;
+		flex-direction: column;
+		width: 50%;
+		border-bottom: 0px;
+		border: 1px solid var(--c-0);
+	}
+
 	.tutorial-code {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		align-items: flex-start;
-
 		background-color: var(--c-2);
-		border: 1px solid var(--c-0);
-		border-bottom: 0px;
-		padding: 1rem;
+		align-items: flex-start;
+		outline: 1px solid var(--c-0);
 
 		overflow-x: hidden;
 		overflow-y: auto;
-		width: 50%;
+		padding: 1rem;
+	}
+
+	.tutorial-image {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		background-color: var(--c-2);
+		align-items: flex-start;
+		outline: 1px solid var(--c-0);
+
+		overflow-x: hidden;
+		overflow-y: auto;
+
+		padding: 1rem;
+
+		img {
+			max-width: 100%;
+		}
+	}
+
+	.file-headers {
+		display: flex;
+		flex-direction: row;
+		background-color: var(--c-0);
+
+		--svg-size: 1.5rem;
+		--svg-fill: var(--c-5);
+		--svg-hover-fill: var(--c-6);
+	}
+
+	.file-header {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 0.25rem;
+		padding: 0.5rem;
+		cursor: pointer;
+		outline: 1px solid var(--c-0);
+		background-color: var(--c-1);
+
+		--svg-fill: var(--c-4);
+		& > code {
+			color: var(--c-4);
+		}
+
+		* {
+			pointer-events: none;
+			user-select: none;
+		}
+
+		&.active {
+			background-color: var(--c-2);
+			--svg-fill: var(--c-5);
+
+			& > code {
+				color: var(--c-6);
+			}
+		}
+
+		&:hover {
+			background-color: var(--c-3);
+		}
 	}
 </style>

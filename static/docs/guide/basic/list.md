@@ -51,4 +51,4 @@ Application::new(|cx|{
 
 This produces the following output:
 
-<img src="../docs_img/list.png alt="" width="400"/>
+![/docs/img/list.png]("")

@@ -3,51 +3,78 @@
     "description": "In this tutorial we're going to show you how to do some amazing stuff with Vizia",
     "items": [
         {
-            "markdownFileName": "index.md",
-            "codeFileName": "step_one.rs"
+            "markdownFile": "index.md",
+            "files": [
+                {
+                    "file": "step_one.rs"
+                },
+                {
+                    "file": "test.rs"
+                }
+            ]
         },
         {
             "title": "Pre",
-            "markdownFileName": "index.md",
-            "codeFileName": "step_one.rs"
+            "markdownFile": "index.md",
+            "files": [
+                {
+                    "file": "step_one.rs"
+                },
+                {
+                    "file": "test_image.png"
+                }
+            ]
         },
         {
             "title": "Section test",
-            "markdownFileName": "step_one.md",
+            "markdownFile": "step_one.md",
+            "files": [
+                {
+                    "file": "step_one.rs"
+                }
+            ],
             "items": [
                 {
                     "title": "Step One",
-                    "markdownFileName": "step_one.md",
-                    "codeFileName": "step_one.rs"
+                    "markdownFile": "step_one.md",
+                    "files": [
+                        {
+                            "file": "step_one.rs"
+                        }
+                    ]
                 },
                 {
                     "title": "Step Two",
-                    "markdownFileName": "step_two.md",
-                    "codeFileName": "step_one.rs",
-                    "codeHighlight": [
+                    "markdownFile": "step_two.md",
+                    "files": [
                         {
-                            "type": "range",
-                            "highlightType": "basic",
-                            "line": 0,
-                            "start": 0,
-                            "end": 8
-                        },
-                        {
-                            "type": "range",
-                            "highlightType": "error",
-                            "line": 1,
-                            "start": 7,
-                            "end": 16
-                        },
-                        {
-                            "type": "regex",
-                            "highlightType": "basic",
-                            "regex": "usize"
-                        },
-                        {
-                            "type": "line",
-                            "highlightType": "error",
-                            "line": 2
+                            "file": "step_one.rs",
+                            "highlights": [
+                                {
+                                    "type": "range",
+                                    "highlightType": "basic",
+                                    "line": 0,
+                                    "start": 0,
+                                    "end": 8
+                                },
+                                {
+                                    "type": "range",
+                                    "highlightType": "error",
+                                    "line": 1,
+                                    "start": 7,
+                                    "end": 16
+                                },
+                                {
+                                    "type": "regex",
+                                    "highlightType": "basic",
+                                    "regex": "usize"
+                                },
+                                {
+                                    "type": "line",
+                                    "highlightType": "error",
+                                    "line": 2
+                                }   
+                            ]
                         }
                     ]
                 }

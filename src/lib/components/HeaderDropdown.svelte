@@ -5,29 +5,34 @@
 		['Option 2', '/']
 	];
 
-	$: open = false;
+	let open = false;
 	let hoveringTitle = false;
 	let hoveringContainer = false;
 
-	function hoverTitle(bool: boolean) {
-		hoveringTitle = bool;
-		updateOpen();
+	function enterHoverTitle() {
+		hoveringTitle = true;
+		open = true;
 	}
 
-	function hoverContainer(bool: boolean) {
-		hoveringContainer = bool;
-		updateOpen();
+	function exitHoverTitle() {
+		hoveringTitle = false;
+		open = hoveringContainer;
 	}
 
-	function updateOpen() {
-		open = hoveringTitle || hoveringContainer;
+	function enterHoverContainer() {
+		hoveringContainer = true;
+	}
+
+	function exitHoverContainer() {
+		hoveringContainer = false;
+		open = false;
 	}
 </script>
 
 <div
 	class="dropdown-title"
-	on:mouseenter={() => hoverTitle(true)}
-	on:mouseleave={() => hoverTitle(false)}
+	on:mouseenter={() => enterHoverTitle()}
+	on:mouseleave={() => exitHoverTitle()}
 >
 	<p>
 		{dropdownName}
@@ -37,9 +42,9 @@
 <div
 	class="dropdown-contents"
 	class:open
-	on:pointerenter={() => hoverContainer(true)}
-	on:pointerleave={() => hoverContainer(false)}
-	on:click={() => hoverContainer(false)}
+	on:pointerenter={() => enterHoverContainer()}
+	on:pointerleave={() => exitHoverContainer()}
+	on:click={() => (open = false)}
 >
 	{#each options as [name, link]}
 		<a href={link}>{name}</a>
@@ -67,12 +72,20 @@
 		display: grid;
 		place-items: center;
 
-		> p {
+		& > p {
 			color: var(--c-6);
+		}
+
+		&:hover {
+			& > p {
+				color: var(--accent);
+			}
 		}
 	}
 
 	.dropdown-contents {
+		user-select: none;
+		pointer-events: none;
 		width: 10rem;
 		transition: all ease-in-out 100ms;
 
@@ -99,6 +112,7 @@
 	}
 
 	.dropdown-contents.open {
+		pointer-events: all;
 		opacity: 1;
 	}
 </style>

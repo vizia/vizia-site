@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { SvgIcon, svgs } from '$lib/svg';
+	import { SvgIcon, SVGS } from '$lib/svg';
 
 	export let icon: SvgIcon = SvgIcon.None;
 
-	let [path, vb] = svgs.get(icon) ?? [];
+	let [path, vb] = SVGS.get(icon) ?? [];
 	let [vbw, vbh] = vb ?? [1, 1];
 
 	$: {
-		[path, vb] = svgs.get(icon) ?? [];
+		[path, vb] = SVGS.get(icon) ?? [];
 		[vbw, vbh] = vb ?? [1, 1];
 	}
 </script>

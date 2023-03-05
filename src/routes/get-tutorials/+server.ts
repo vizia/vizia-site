@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import type { HighlightUnprocessed, StepCodeHighlight, Tutorial, Item } from '$lib/types';
+import type { StepCodeHighlight, Tutorial, Item, UnparsedItem, UnparsedTutorial, UnparsedFileItem, FileItem } from '$lib/types';
 import fs from 'fs';
 import { json } from '@sveltejs/kit';
 import hljs from 'highlight.js';
@@ -13,50 +13,46 @@ export const GET = (async () => {
 
 	let files = getItems("tutorials")
 
-	let tutorials = []
+	return json(files.map(v => {
 
-	for (const tutorial of files) {
+		let basePath = path.join(base, v)
 
-		let basePath = path.join(base, tutorial)
+		let tut = JSON.parse(fs.readFileSync(path.join(basePath, "index.json")).toString()) as UnparsedTutorial
+		tut.dir = v;
 
-		let tut = JSON.parse(fs.readFileSync(path.join(basePath, "index.json")).toString()) as Tutorial
-		tut.dir = tutorial;
-
-
-		for (let step of tut.items) {
-			step = updateStep(step, basePath);
-		}
-
-		tutorials.push(tut)
-	}
-
-	return json(tutorials);
-
+		return {
+			title: tut.title,
+			description: tut.description,
+			dir: tut.dir,
+			items: tut.items.map(vi => updateStep(vi, v))
+		} as Tutorial;
+	}));
 }) satisfies RequestHandler;
 
-function updateStep(step: Item, tutorial: string): Item {
+function updateStep(item: UnparsedItem, tutorial: string): Item {
 
-	if (step.markdownFileName) {
-		step.markdownData = fs.readFileSync(path.join(tutorial, step.markdownFileName)).toString()
-	}
+	function processFile(file: UnparsedFileItem): FileItem {
 
-	if (step.codeFileName) {
-		step.codeData = fs.readFileSync(path.join(tutorial, step.codeFileName)).toString()
-	}
+		let highlights: StepCodeHighlight[] = []
 
-	if (step.items) {
-		for (let subStep of step.items) {
-			subStep = updateStep(subStep, tutorial)
+		let codeData = fs.readFileSync(path.join(base, tutorial, file.file)).toString()
+
+		for (let hl of file.highlights ?? []) {
+			highlights = highlights.concat(parseHighlight(codeData, hl))
+		}
+
+		return {
+			file: file.file,
+			fileData: codeData,
+			highlights: highlights
 		}
 	}
 
-	let highlights = []
-
-	if (step.codeHighlight) {
-		for (let hl of step.codeHighlight) {
-			highlights.push(parseHighlight(step.codeData ?? "", hl))
-		}
-	}
-
-	return step;
+	return {
+		title: item.title,
+		markdownFile: item.markdownFile,
+		markdownFileData: fs.readFileSync(path.join(base, tutorial, item.markdownFile)).toString(),
+		files: item.files ? item.files.map(v => processFile(v)) : [],
+		items: item.items ? item.items.map(v => updateStep(v, tutorial)) : []
+	};
 }

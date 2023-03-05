@@ -16,16 +16,16 @@
 	$: {
 		if (highlight) {
 			disabledRanges = inverse_ranges(highlight, text);
+
+			text.trim();
+
+			if (lang !== '' && lang !== 'none') {
+				textHightlighted = hljs.highlight(text, {
+					language: lang,
+					ignoreIllegals: true
+				}).value;
+			}
 		}
-	}
-
-	text.trim();
-
-	if (lang !== '' && lang !== 'none') {
-		textHightlighted = hljs.highlight(text, {
-			language: lang,
-			ignoreIllegals: true
-		}).value;
 	}
 </script>
 

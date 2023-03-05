@@ -1,5 +1,9 @@
 import type { StepCodeHighlight } from "./types";
 
+export const ALLOWED_CODE_EXTENSIONS = ["rs", "css", "scss"]
+
+export const ALLOWED_IMAGE_EXTENSIONS = ["png"]
+
 export function simplify_ranges(ranges: StepCodeHighlight[]): StepCodeHighlight[] {
     while (true) {
         let changed = false;

@@ -14,7 +14,7 @@ export interface FileMeta {
 	show?: boolean;
 }
 
-export const fileMetaAttrs = [
+export const FILE_META_ATTRS = [
 	"order", "title", "show"
 ]
 
@@ -28,7 +28,7 @@ export interface File {
 }
 
 
-export const highlightTypes = [
+export const HIGHLIGHT_TYPES = [
 	"range", "regex", "line"
 ]
 
@@ -48,16 +48,37 @@ export interface Tutorial {
 	items: Item[];
 }
 
+export interface UnparsedTutorial {
+	title: string,
+	description: string,
+	dir: string,
+	items: UnparsedItem[];
+}
 
 export interface Item {
 	title: string,
-	markdownFileName: string,
-	codeFileName?: string,
-	codeHighlight?: HighlightUnprocessed[],
-	processedCodeHighlight?: StepCodeHighlight[]
-	markdownData?: string,
-	codeData?: string
+	markdownFile: string,
+	markdownFileData: string,
+	files: FileItem[],
 	items: Item[]
+}
+
+export interface FileItem {
+	file: string,
+	fileData: string,
+	highlights: StepCodeHighlight[]
+}
+
+export interface UnparsedItem {
+	title: string,
+	markdownFile: string,
+	files: UnparsedFileItem[],
+	items: UnparsedItem[]
+}
+
+export interface UnparsedFileItem {
+	file: string,
+	highlights?: HighlightUnprocessed[]
 }
 
 export interface StepCodeHighlight {
