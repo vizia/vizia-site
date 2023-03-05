@@ -51,4 +51,4 @@ Application::new(|cx|{
 
 This produces the following output:
 
-![/docs/img/list.png]("")
+![An output](/docs_img/list.png)
