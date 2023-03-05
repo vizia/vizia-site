@@ -21,6 +21,8 @@
 
 	let openStepDropdown = false;
 
+	let mobilePageShowMarkdown = true;
+
 	let flattenedSteps: Item[] = [];
 	let currentStep: number = 0;
 	let currentStepDetails: Item;
@@ -103,7 +105,7 @@
 </script>
 
 <div class="tutorial-wrapper">
-	<div class="tutorial-code-wrapper">
+	<div class="tutorial-content-wrapper" class:mobile-show={!mobilePageShowMarkdown}>
 		<div class="file-headers">
 			{#each fileHeaders as header}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -134,7 +136,7 @@
 		{/if}
 	</div>
 
-	<div class="tutorial-content">
+	<div class="tutorial-markdown-wrapper" class:mobile-show={mobilePageShowMarkdown}>
 		{#if loaded}
 			<div class="tutorial-header">
 				{#if currentStepDetails.title}
@@ -193,6 +195,11 @@
 				</p>
 			</div>
 		{/if}
+	</div>
+
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="mobile-switch" on:click={() => (mobilePageShowMarkdown = !mobilePageShowMarkdown)}>
+		<p>{mobilePageShowMarkdown ? 'Code' : 'Tutorial'}</p>
 	</div>
 </div>
 
@@ -265,27 +272,26 @@
 			border-radius: 0.5rem;
 
 			top: 2.5rem;
-			left: 50%;
-			width: 50%;
-			padding: 0.5rem;
+			width: 100%;
+			padding: 1rem;
 
 			opacity: 0;
 
+			display: none;
+
 			&.open {
-				pointer-events: all;
+				display: block;
 				opacity: 1;
 			}
 		}
 	}
 
-	.tutorial-content {
+	.tutorial-markdown-wrapper {
 		overflow-x: hidden;
 		overflow-y: auto;
 
-		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		width: 50%;
 		padding: 2rem;
 	}
 
@@ -324,10 +330,8 @@
 		}
 	}
 
-	.tutorial-code-wrapper {
-		display: flex;
+	.tutorial-content-wrapper {
 		flex-direction: column;
-		width: 50%;
 		border-bottom: 0px;
 		border: 1px solid var(--c-0);
 	}
@@ -341,8 +345,7 @@
 		align-items: flex-start;
 		outline: 1px solid var(--c-0);
 
-		overflow-x: hidden;
-		overflow-y: auto;
+		overflow: auto;
 		padding: 1rem;
 	}
 
@@ -407,6 +410,67 @@
 
 		&:hover {
 			background-color: var(--c-3);
+		}
+	}
+
+	.mobile-switch {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translate(-50%, calc(-100% - 1rem));
+		cursor: pointer;
+
+		padding: 0.5rem 1rem;
+
+		background-color: var(--c-3);
+		border: 1px solid var(--c-0);
+		border-radius: 0.5rem;
+
+		* {
+			user-select: none;
+			pointer-events: none;
+		}
+	}
+
+	@media (min-width: 0) {
+		.tutorial-markdown-wrapper {
+			display: none;
+			width: 100%;
+
+			&.mobile-show {
+				display: flex;
+			}
+		}
+
+		.tutorial-content-wrapper {
+			display: none;
+			width: 100%;
+
+			&.mobile-show {
+				display: flex;
+			}
+		}
+
+		.mobile-switch {
+			display: block;
+			pointer-events: all;
+		}
+	}
+
+	@media (min-width: 60rem) {
+		.tutorial-markdown-wrapper {
+			display: flex;
+			width: 50%;
+		}
+
+		.tutorial-content-wrapper {
+			display: flex;
+			width: 50%;
+		}
+
+		.mobile-switch {
+			display: none;
+			pointer-events: none;
 		}
 	}
 </style>

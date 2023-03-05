@@ -53,6 +53,7 @@
 <style lang="scss">
 	.codeblock {
 		border-radius: 0.5rem;
+		padding: 1rem;
 		overflow: hidden;
 		overflow-x: scroll;
 		overflow-y: visible;
