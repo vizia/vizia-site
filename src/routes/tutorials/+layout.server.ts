@@ -2,7 +2,7 @@ import { base } from "$app/paths";
 import type { Tutorial } from "$lib/types";
 import type { LayoutServerLoad } from "./$types";
 
-export const load = (async ({ fetch, params }) => {
+export const load = (async ({ fetch }) => {
 
     const response = await fetch(`${base}/get-tutorials`, {
         method: "GET",

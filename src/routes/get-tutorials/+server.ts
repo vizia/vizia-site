@@ -5,6 +5,8 @@ import { json } from '@sveltejs/kit';
 import { getItems } from '$lib/search';
 import path from "path"
 
+export const prerender = true;
+
 const base = "static/tutorials"
 
 export const GET = (async () => {
