@@ -4,6 +4,7 @@
     "items": [
         {
             "title": "Tutorial One",
+            "queryName": "index",
             "markdownFile": "index.md",
             "files": [
                 {
@@ -16,6 +17,7 @@
         },
         {
             "title": "Pre",
+            "queryName": "pre",
             "markdownFile": "index.md",
             "files": [
                 {
@@ -28,6 +30,7 @@
         },
         {
             "title": "Section test",
+            "queryName": "section_test",
             "markdownFile": "step_one.md",
             "files": [
                 {
@@ -37,6 +40,7 @@
             "items": [
                 {
                     "title": "Step One",
+                    "queryName": "step_one",
                     "markdownFile": "step_one.md",
                     "files": [
                         {
@@ -46,6 +50,7 @@
                 },
                 {
                     "title": "Step Two",
+                    "queryName": "step_two",
                     "markdownFile": "step_two.md",
                     "files": [
                         {

@@ -5,109 +5,32 @@
 	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import TutorialCodeRenderer from '$lib/components/tutorial/TutorialCodeRenderer.svelte';
-
-	import Svg from '$lib/components/Svg.svelte';
-	import { iconFromExtension, SvgIcon } from '$lib/svg';
-	import { ALLOWED_CODE_EXTENSIONS } from '$lib/tutorial';
-	import type { DropdownItem, FileItem, Item } from '$lib/types';
-	import { onMount } from 'svelte';
 	import SvelteMarkdown from 'svelte-markdown';
-	import type { PageData } from './$types';
+	import Svg from '$lib/components/Svg.svelte';
 	import TutorialDropdown from '$lib/components/tutorial/TutorialDropdown.svelte';
+
+	import { iconFromExtension } from '$lib/svg';
+	import { extensionFromName } from '$lib/tutorial';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	let loaded = false;
+	$: FILE_HEADERS = data.step.files;
 
 	let openStepDropdown = false;
-
 	let mobilePageShowMarkdown = true;
 
-	let flattenedSteps: Item[] = [];
-	let currentStep: number = 0;
-	let currentStepDetails: Item;
-	let dropdownItems: DropdownItem[] = [];
+	$: stepIndex = data.totalStepsFlattened.findIndex((v) => v.queryName === data.step.queryName);
+	$: selectedFile = FILE_HEADERS[0];
 
-	$: fileHeaders = currentStepDetails ? currentStepDetails.files : [];
-	let selectedFile: FileItem;
-
-	const FILE_EXTENSION_REGEX = /.+?\.([a-z]+)$/;
-	$: selectedFileExtension = selectedFile ? extensionFromName(selectedFile.file) : '';
-
-	onMount(() => {
-		flattenedSteps = flattenTutorialSteps(data.tutorial.items);
-		selectStep(0);
-		processDropdownItems();
-		loaded = true;
-	});
-
-	function previousStep() {
-		if (currentStep > 0) {
-			currentStep -= 1;
-			selectStep(currentStep);
-		}
-	}
-
-	function nextStep() {
-		if (currentStep < flattenedSteps.length - 1) {
-			currentStep += 1;
-			selectStep(currentStep);
-		}
-	}
-
-	function flattenTutorialSteps(steps: Item[]): Item[] {
-		let flatten: Item[] = [];
-		for (let step of steps) {
-			flatten.push(step);
-
-			if (step.items) {
-				flatten = flatten.concat(flattenTutorialSteps(step.items));
-			}
-		}
-		return flatten;
-	}
-
-	function selectStep(step: number) {
-		currentStep = step;
-
-		currentStepDetails = flattenedSteps[step];
-
-		selectedFile = currentStepDetails.files[0];
-	}
-
-	function processDropdownItems() {
-		dropdownItems = [];
-
-		for (const step of data.tutorial.items) {
-			dropdownItems.push(processDropdownItem(step));
-		}
-	}
-
-	function processDropdownItem(step: Item): DropdownItem {
-		let item: DropdownItem = { name: step.title ?? data.tutorial.title, items: [] };
-
-		if (step.items) {
-			for (const subStep of step.items) {
-				item.items.push(processDropdownItem(subStep));
-			}
-		}
-
-		return item;
-	}
-
-	function isFileCode(filename: string): boolean {
-		return ALLOWED_CODE_EXTENSIONS.find((v) => v === filename) !== undefined;
-	}
-
-	function extensionFromName(name: string): string {
-		return FILE_EXTENSION_REGEX.exec(name)?.[1] ?? '';
-	}
+	$: nextStep = data.totalStepsFlattened[stepIndex + 1];
+	$: prevStep = data.totalStepsFlattened[stepIndex - 1];
 </script>
 
 <div class="tutorial-wrapper">
 	<div class="tutorial-content-wrapper" class:mobile-show={!mobilePageShowMarkdown}>
 		<div class="file-headers">
-			{#each fileHeaders as header}
+			{#each FILE_HEADERS as header}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
 					class="file-header"
@@ -119,59 +42,53 @@
 				</div>
 			{/each}
 		</div>
-		{#if loaded}
-			{#if isFileCode(selectedFileExtension)}
+		{#if selectedFile.fileData}
+			{#await selectedFile.fileData}
+				<p>...</p>
+			{:then ve}
 				<div class="tutorial-code">
-					<TutorialCodeRenderer
-						lang="rust"
-						text={selectedFile.fileData}
-						highlight={selectedFile.highlights}
-					/>
+					<TutorialCodeRenderer lang="rust" text={ve} highlight={selectedFile.highlights} />
 				</div>
-			{:else}
-				<div class="tutorial-image">
-					<img src="{base}/tutorials/tutorial_one/{selectedFile.file}" alt="" />
-				</div>
-			{/if}
+			{/await}
+		{:else}
+			<div class="tutorial-image">
+				<img src="{base}/tutorials/tutorial_one/{selectedFile.file}" alt="" />
+			</div>
 		{/if}
 	</div>
 
 	<div class="tutorial-markdown-wrapper" class:mobile-show={mobilePageShowMarkdown}>
-		{#if loaded}
-			<div class="tutorial-header">
-				{#if currentStepDetails.title}
-					<h1 class="title">{currentStepDetails.title}</h1>
-					<h2>{data.tutorial.title}</h2>
-				{:else}
-					<h1 class="title">{data.tutorial.title}</h1>
-				{/if}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="step-display" on:click={() => (openStepDropdown = !openStepDropdown)}>
-					<p class="step-value">{currentStep + 1}</p>
-					<p>/</p>
-					<p class="step-value">{flattenedSteps.length}</p>
-				</div>
-				<div class="step-dropdown {openStepDropdown ? 'open' : ''}">
-					{#each data.tutorial.items as item}
-						<TutorialDropdown
-							{item}
-							onClick={(it) => {
-								selectStep(
-									flattenedSteps.findIndex((i) => {
-										return i.title === it.title;
-									})
-								);
-							}}
-							matcher={(i) => {
-								return i === currentStepDetails;
-							}}
-						/>
-					{/each}
-				</div>
+		<div class="tutorial-header">
+			{#if data.step.title}
+				<h1 class="title">{data.step.title}</h1>
+				<h2>{data.tutorial.title}</h2>
+			{:else}
+				<h1 class="title">{data.tutorial.title}</h1>
+			{/if}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="step-display" on:click={() => (openStepDropdown = !openStepDropdown)}>
+				<p class="step-value">{stepIndex + 1}</p>
+				<p>/</p>
+				<p class="step-value">{data.totalStepsFlattened.length}</p>
 			</div>
-			<div class="tutorial-markdown">
+			<div class="step-dropdown {openStepDropdown ? 'open' : ''}">
+				{#each data.tutorial.items as item}
+					<TutorialDropdown
+						{item}
+						tutorial={data.tutorial}
+						matcher={(i) => {
+							return i === data.step;
+						}}
+					/>
+				{/each}
+			</div>
+		</div>
+		<div class="tutorial-markdown">
+			{#await data.markdown}
+				<p>...</p>
+			{:then v}
 				<SvelteMarkdown
-					source={currentStepDetails.markdownFileData}
+					source={v}
 					renderers={{
 						code: CodeRenderer,
 						tablecell: TableCellRenderer,
@@ -179,22 +96,27 @@
 						link: LinkRenderer
 					}}
 				/>
-			</div>
-			<div class="divisor" />
-			<div class="step-actions">
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<p class="step-action {currentStep > 0 ? '' : 'disabled'}" on:click={previousStep}>
+			{:catch e}
+				<p>Error: {e}</p>
+			{/await}
+		</div>
+		<div class="divisor" />
+		<div class="step-actions">
+			{#if prevStep}
+				<a class="step-action " href="{base}/tutorials/{data.tutorial.dir}/{prevStep.queryName}">
 					Previous
-				</p>
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<p
-					class="step-action {currentStep < flattenedSteps.length - 1 ? '' : 'disabled'}"
-					on:click={nextStep}
-				>
+				</a>
+			{:else}
+				<p class="step-action disabled">Previous</p>
+			{/if}
+			{#if nextStep}
+				<a class="step-action " href="{base}/tutorials/{data.tutorial.dir}/{nextStep.queryName}">
 					Next
-				</p>
-			</div>
-		{/if}
+				</a>
+			{:else}
+				<p class="step-action disabled">Next</p>
+			{/if}
+		</div>
 	</div>
 
 	<!-- svelte-ignore a11y-click-events-have-key-events -->

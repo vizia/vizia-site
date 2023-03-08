@@ -1,35 +1,30 @@
 <script lang="ts">
-	import type { Item } from '$lib/types';
+	import { base } from '$app/paths';
+	import type { Item, Tutorial } from '$lib/types';
 
+	export let tutorial: Tutorial;
 	export let item: Item;
 	export let level = 0;
 	export let open = true;
 
-	export let onClick = (item: Item) => {};
 	export let matcher = (item: Item) => false;
 
 	$: active = matcher(item);
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div
+<a
 	class="dropdown-header {open ? 'open' : ''} {active ? 'active' : ''}"
-	on:click={() => {
-		console.log({ onClick });
-		onClick(item);
-	}}
+	href="{base}/tutorials/{tutorial.dir}/{item.queryName}"
 >
-	<p>
-		{item.title}
-	</p>
-</div>
+	{item.title}
+</a>
 
-{#if open && item.items.length !== 0}
+{#if open && item.items && item.items.length !== 0}
 	<div class="dropdown">
 		<div class="line" />
 		<div class="dropdown-wrapper">
 			{#each item.items as i}
-				<svelte:self item={i} {onClick} {matcher} level={level + 1} />
+				<svelte:self item={i} {tutorial} {matcher} level={level + 1} />
 			{/each}
 		</div>
 	</div>
@@ -71,26 +66,14 @@
 		align-items: center;
 		border-radius: 0.25rem;
 		pointer-events: all;
+		color: #aaa;
+		padding-left: 0.5rem;
 
 		cursor: pointer;
 
-		* {
-			cursor: pointer;
-			pointer-events: none;
-		}
-
-		p {
-			padding-left: 0.5rem;
-			flex: 1;
-			color: #aaa;
-		}
-
 		&.active {
 			background-color: var(--c-2);
-
-			p {
-				color: var(--accent);
-			}
+			color: var(--accent);
 		}
 	}
 

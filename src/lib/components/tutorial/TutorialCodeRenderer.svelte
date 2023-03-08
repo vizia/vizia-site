@@ -16,21 +16,25 @@
 	$: {
 		if (highlight) {
 			disabledRanges = inverse_ranges(highlight, text);
+		}
 
-			text.trim();
+		text.trim();
 
-			if (lang !== '' && lang !== 'none') {
-				textHightlighted = hljs.highlight(text, {
-					language: lang,
-					ignoreIllegals: true
-				}).value;
-			}
+		if (lang !== '' && lang !== 'none') {
+			textHightlighted = hljs.highlight(text, {
+				language: lang,
+				ignoreIllegals: true
+			}).value;
 		}
 	}
 </script>
 
 <div class="codeblock">
-	<pre class={lang}><code class={'language-' + lang}>{@html textHightlighted}</code></pre>
+	{#if lang}
+		<pre class={lang}><code class={'language-' + lang}>{@html textHightlighted}</code></pre>
+	{:else}
+		<pre class={lang}><code class={'none'}>{@html text}</code></pre>
+	{/if}
 	{#if highlight && highlight.length != 0}
 		{#each highlight as { start, highlightType, end, line }}
 			<div class={highlightType} style="--left: {start}; --width: {end - start}; --line: {line};" />

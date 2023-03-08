@@ -4,6 +4,12 @@ export const ALLOWED_CODE_EXTENSIONS = ["rs", "css", "scss"]
 
 export const ALLOWED_IMAGE_EXTENSIONS = ["png"]
 
+export const FILE_EXTENSION_REGEX = /.+?\.([a-z]+)$/;
+
+export function extensionFromName(file: string): string {
+    return FILE_EXTENSION_REGEX.exec(file)?.[1] ?? ""
+}
+
 export function simplify_ranges(ranges: StepCodeHighlight[]): StepCodeHighlight[] {
     while (true) {
         let changed = false;

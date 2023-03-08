@@ -8,9 +8,10 @@ export type RequiredKeys<T> = { [K in keyof T]-?: {} extends { [P in K]: T[K] } 
 type OutputDataShape<T> = MaybeWithVoid<Omit<App.PageData, RequiredKeys<T>> & Partial<Pick<App.PageData, keyof T & keyof App.PageData>> & Record<string, any>>
 type EnsureDefined<T> = T extends null | undefined ? {} : T;
 type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends U ? keyof U : never> = U extends unknown ? { [P in Exclude<A, keyof U>]?: never } & U : never;
+export type Snapshot<T = any> = Kit.Snapshot<T>;
 type PageParentData = EnsureDefined<LayoutData>;
-type LayoutRouteId = RouteId | "/" | "/about" | "/blogs" | "/blogs/[...blogPage]" | "/examples" | "/faq" | "/guide" | "/guide/[...docsPage]" | "/tutorials" | "/tutorials/[...tutorialPage]" | null
-type LayoutParams = RouteParams & { blogPage?: string,docsPage?: string,tutorialPage?: string }
+type LayoutRouteId = RouteId | "/" | "/about" | "/blogs" | "/blogs/[...blogPage]" | "/examples" | "/faq" | "/guide" | "/guide/[...docsPage]" | "/tutorials" | "/tutorials/[tutorial]" | "/tutorials/[tutorial]/[...tutorialPage]" | null
+type LayoutParams = RouteParams & { blogPage?: string,docsPage?: string,tutorial?: string,tutorialPage?: string }
 type LayoutParentData = EnsureDefined<{}>;
 
 export type PageServerData = null;

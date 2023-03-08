@@ -57,6 +57,7 @@ export interface UnparsedTutorial {
 
 export interface Item {
 	title: string,
+	queryName: string,
 	markdownFile: string,
 	markdownFileData: string,
 	files: FileItem[],
@@ -65,7 +66,7 @@ export interface Item {
 
 export interface FileItem {
 	file: string,
-	fileData: string,
+	fileData: Promise<string>,
 	highlights: StepCodeHighlight[]
 }
 
