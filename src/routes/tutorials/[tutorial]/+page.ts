@@ -7,7 +7,7 @@ export const load = (async ({ parent }) => {
 	const parentData = await parent();
 
 	if (parentData && parentData.tutorial) {
-		throw redirect(308, `${base}/tutorials/${parentData.tutorial.dir}/index`)
+		throw redirect(301, `${base}/tutorials/${parentData.tutorial.dir}/index`)
 	}
 
 	error(404, "Not found")
