@@ -7,6 +7,7 @@ import type { PageLoad } from './$types';
 export const load = (async ({ params, fetch }) => {
 
 	const pathToFetch = `${base}/docs/guide/${params.docsPage}.md`
+	console.log(pathToFetch)
 
 	const responseFile = await fetch(pathToFetch);
 	const responseGuides = await fetch(`${base}/get-guides`, {

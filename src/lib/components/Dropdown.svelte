@@ -17,10 +17,6 @@
 	export let matcher = (idx: number[], header: string, link: string | null) => false;
 
 	$: active = matcher(indexStack, header, link);
-
-	if (link && link.indexOf('introduction') != -1) {
-		console.log(link);
-	}
 </script>
 
 <div class="dropdown-header {open ? 'open' : ''} {active ? 'active' : ''}">
