@@ -1,12 +1,11 @@
 <script lang="ts">
 	import GithubLogo from '$lib/assets/Github.svg';
 	import DiscordLogo from '$lib/assets/Discord.svg';
+	import ViziaLogo from '$lib/assets/vizia_logo.svg';
 	import HamburgerMenu from '$lib/assets/HamburgerMenu.svg';
 
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import { base } from '$app/paths';
-
-	export let border = false;
 
 	let hamMenuOpen = false;
 
@@ -15,10 +14,10 @@
 	}
 </script>
 
-<div class="header {border ? 'border' : ''} " aria-label="Primary">
+<div class="header" aria-label="Primary">
 	<div class="wrapper">
-		<a class="logo-wrapper" href="{base}/">
-			<img src="{base}/vizia_logo.svg" class="logo" alt="Vizia Logo" />
+		<a class="logo-wrapper" href={base}>
+			<img src={ViziaLogo} class="logo" alt="Vizia Logo" />
 		</a>
 
 		<div class="links-wrapper">
@@ -75,16 +74,12 @@
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
-		background-color: transparent;
-
 		box-sizing: border-box;
 
 		z-index: 100;
 
-		&.border {
-			border-bottom: 1px solid var(--border-color);
-			background-color: var(--c-1) !important;
-		}
+		border-bottom: 1px solid var(--border-color);
+		background-color: var(--c-1) !important;
 	}
 
 	.wrapper {
