@@ -16,7 +16,7 @@
 
 <div class="header" aria-label="Primary">
 	<div class="wrapper">
-		<a class="logo-wrapper" href={base}>
+		<a class="logo-wrapper" href="{base}/">
 			<img src={ViziaLogo} class="logo" alt="Vizia Logo" />
 		</a>
 
