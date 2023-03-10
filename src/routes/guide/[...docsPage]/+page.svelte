@@ -101,8 +101,6 @@
 			link: `guide/${rPath}`
 		};
 
-		if (item.link?.indexOf('introduction') != -1) console.log(item.link);
-
 		if (step.items) {
 			for (const subStep of step.items) {
 				item.items.push(processDropdownItem(subStep));
