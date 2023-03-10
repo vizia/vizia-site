@@ -2,7 +2,6 @@ import type { RequestHandler } from './$types';
 import type { UnparsedTutorial } from '$lib/types';
 import fs from 'fs';
 import { json } from '@sveltejs/kit';
-import { getItems } from '$lib/search';
 import path from "path"
 
 export const prerender = true;
@@ -11,7 +10,7 @@ const base = "static/tutorials"
 
 export const GET = (async () => {
 
-	let files = getItems("tutorials")
+	let files = fs.readdirSync(base)
 
 	return json(files.map(v => {
 

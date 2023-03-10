@@ -4,14 +4,13 @@ import type { RequestHandler } from './$types';
 import type { BlogPost } from '$lib/types';
 import fs from 'fs';
 import { json } from '@sveltejs/kit';
-import { getItems } from '$lib/search';
 import path from "path"
 
 const base = 'static/blogs';
 
 export const GET = (async () => {
 
-	let files = getItems("blogs")
+	let files = fs.readdirSync(base)
 
 	let posts: BlogPost[] = [];
 
