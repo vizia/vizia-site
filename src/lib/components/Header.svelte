@@ -2,6 +2,7 @@
 	import GithubLogo from '$lib/assets/Github.svg';
 	import DiscordLogo from '$lib/assets/Discord.svg';
 	import HamburgerMenu from '$lib/assets/HamburgerMenu.svg';
+	import ViziaLogo from '$lib/assets/vizia_logo.svg';
 
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import { base } from '$app/paths';
