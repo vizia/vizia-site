@@ -30,8 +30,6 @@ export const load = (async ({ params, fetch, data, parent }) => {
 
 			})
 
-			console.log({ files: step.files })
-
 			return {
 				tutorial: parentData.tutorial,
 				page: params.tutorialPage,

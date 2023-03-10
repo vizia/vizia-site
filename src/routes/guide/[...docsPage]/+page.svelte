@@ -43,12 +43,10 @@
 	});
 
 	$: {
-		console.log(hash);
 		processDropdownItems();
 	}
 
 	function update() {
-		console.log('update ' + hash);
 		let content_ = document.querySelector('.page-content');
 		if (content_) {
 			content = content_;
@@ -67,7 +65,6 @@
 	}
 
 	function highlight() {
-		console.log('highlight ' + hash);
 		const { top, bottom } = content.getBoundingClientRect();
 		let i = headings.length;
 		while (i--) {
