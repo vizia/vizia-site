@@ -1,7 +1,9 @@
-import type { LayoutLoad } from './$types'
+export const prerender = true;
 
-export const prerender = true
+import type { LayoutLoad } from './$types';
 
-export const load = (async ({ route, url }) => {
-    console.log(`${route.id} . ${url}`)
+export const load = (async ({ route }) => {
+    return {
+        route
+    }
 }) satisfies LayoutLoad;

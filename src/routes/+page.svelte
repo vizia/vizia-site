@@ -1,4 +1,5 @@
 <script lang="ts">
+	import './styles.scss';
 	import BgElement from '$lib/components/BGElement.svelte';
 	import LandingPageButton from '$lib/components/LandingPageButton.svelte';
 
