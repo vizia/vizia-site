@@ -88,7 +88,7 @@ function recursive_search_dir(base_dir: string, base_link: string): File | null 
 const base = 'static/docs/guide';
 
 export const GET = (async () => {
-	let guides = JSON.parse(fs.readFileSync(path.join(base, "index.json")).toString()) as Item[]
+	let guides = JSON.parse(fs.readFileSync(`${base}/index.json`).toString()) as Item[]
 
 	return json(guides);
 }) satisfies RequestHandler;
