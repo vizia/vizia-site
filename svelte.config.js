@@ -18,7 +18,7 @@ const config = {
 			strict: true,
 		}),
 		paths: {
-			base: dev ? '' : '/vizia-site'
+			base: '/vizia-site'
 		},
 		appDir: 'internal'
 	}
