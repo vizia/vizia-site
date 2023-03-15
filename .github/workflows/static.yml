@@ -40,7 +40,7 @@ jobs:
           export DEPLOY=true
           [ "$GITHUB_EVENT_NAME" != "pull_request" ] && rm -rf docs/_app/
           npm install
-          npm build
+          npm run build
           cd ..
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
