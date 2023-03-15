@@ -7,6 +7,7 @@ const logger: Handle = async ({ event, resolve }) => {
 
     const date = new Date(requestStartTime);
     console.log(
+        event.params,
         `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
         event.request.method,
         event.url.pathname,

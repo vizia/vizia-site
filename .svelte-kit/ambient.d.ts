@@ -28,6 +28,7 @@
 declare module '$env/static/private' {
 	export const GJS_DEBUG_TOPICS: string;
 	export const LESSOPEN: string;
+	export const CONDA_PROMPT_MODIFIER: string;
 	export const USER: string;
 	export const npm_config_user_agent: string;
 	export const STARSHIP_SHELL: string;
@@ -39,6 +40,7 @@ declare module '$env/static/private' {
 	export const npm_config_noproxy: string;
 	export const HOME: string;
 	export const CHROME_DESKTOP: string;
+	export const CONDA_SHLVL: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const DESKTOP_SESSION: string;
 	export const npm_package_json: string;
@@ -56,6 +58,7 @@ declare module '$env/static/private' {
 	export const DBUS_SESSION_BUS_ADDRESS: string;
 	export const npm_config_engine_strict: string;
 	export const COLORTERM: string;
+	export const _CE_M: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 	export const COLOR: string;
 	export const NVM_DIR: string;
@@ -72,6 +75,7 @@ declare module '$env/static/private' {
 	export const npm_config_cache: string;
 	export const GNOME_DESKTOP_SESSION_ID: string;
 	export const DOTNET_ROOT: string;
+	export const _CE_CONDA: string;
 	export const WINDOWPATH: string;
 	export const npm_config_node_gyp: string;
 	export const PATH: string;
@@ -96,6 +100,8 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_script: string;
 	export const SSH_AGENT_LAUNCHER: string;
 	export const SSH_AUTH_SOCK: string;
+	export const GSETTINGS_SCHEMA_DIR: string;
+	export const CONDA_PYTHON_EXE: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const SHELL: string;
 	export const npm_package_version: string;
@@ -103,6 +109,7 @@ declare module '$env/static/private' {
 	export const QT_ACCESSIBILITY: string;
 	export const GDMSESSION: string;
 	export const LESSCLOSE: string;
+	export const CONDA_DEFAULT_ENV: string;
 	export const GPG_AGENT_INFO: string;
 	export const GJS_DEBUG_OUTPUT: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
@@ -113,12 +120,15 @@ declare module '$env/static/private' {
 	export const PWD: string;
 	export const npm_execpath: string;
 	export const XDG_CONFIG_DIRS: string;
+	export const CONDA_EXE: string;
 	export const NVM_CD_FLAGS: string;
 	export const XDG_DATA_DIRS: string;
 	export const npm_config_global_prefix: string;
 	export const STARSHIP_SESSION_KEY: string;
 	export const HOMEBREW_REPOSITORY: string;
 	export const npm_command: string;
+	export const CONDA_PREFIX: string;
+	export const GSETTINGS_SCHEMA_DIR_CONDA_BACKUP: string;
 	export const MANPATH: string;
 	export const NVM_RC_VERSION: string;
 	export const INIT_CWD: string;
@@ -155,6 +165,7 @@ declare module '$env/dynamic/private' {
 	export const env: {
 		GJS_DEBUG_TOPICS: string;
 		LESSOPEN: string;
+		CONDA_PROMPT_MODIFIER: string;
 		USER: string;
 		npm_config_user_agent: string;
 		STARSHIP_SHELL: string;
@@ -166,6 +177,7 @@ declare module '$env/dynamic/private' {
 		npm_config_noproxy: string;
 		HOME: string;
 		CHROME_DESKTOP: string;
+		CONDA_SHLVL: string;
 		TERM_PROGRAM_VERSION: string;
 		DESKTOP_SESSION: string;
 		npm_package_json: string;
@@ -183,6 +195,7 @@ declare module '$env/dynamic/private' {
 		DBUS_SESSION_BUS_ADDRESS: string;
 		npm_config_engine_strict: string;
 		COLORTERM: string;
+		_CE_M: string;
 		GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 		COLOR: string;
 		NVM_DIR: string;
@@ -199,6 +212,7 @@ declare module '$env/dynamic/private' {
 		npm_config_cache: string;
 		GNOME_DESKTOP_SESSION_ID: string;
 		DOTNET_ROOT: string;
+		_CE_CONDA: string;
 		WINDOWPATH: string;
 		npm_config_node_gyp: string;
 		PATH: string;
@@ -223,6 +237,8 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_script: string;
 		SSH_AGENT_LAUNCHER: string;
 		SSH_AUTH_SOCK: string;
+		GSETTINGS_SCHEMA_DIR: string;
+		CONDA_PYTHON_EXE: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		SHELL: string;
 		npm_package_version: string;
@@ -230,6 +246,7 @@ declare module '$env/dynamic/private' {
 		QT_ACCESSIBILITY: string;
 		GDMSESSION: string;
 		LESSCLOSE: string;
+		CONDA_DEFAULT_ENV: string;
 		GPG_AGENT_INFO: string;
 		GJS_DEBUG_OUTPUT: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
@@ -240,12 +257,15 @@ declare module '$env/dynamic/private' {
 		PWD: string;
 		npm_execpath: string;
 		XDG_CONFIG_DIRS: string;
+		CONDA_EXE: string;
 		NVM_CD_FLAGS: string;
 		XDG_DATA_DIRS: string;
 		npm_config_global_prefix: string;
 		STARSHIP_SESSION_KEY: string;
 		HOMEBREW_REPOSITORY: string;
 		npm_command: string;
+		CONDA_PREFIX: string;
+		GSETTINGS_SCHEMA_DIR_CONDA_BACKUP: string;
 		MANPATH: string;
 		NVM_RC_VERSION: string;
 		INIT_CWD: string;
