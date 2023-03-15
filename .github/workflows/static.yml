@@ -30,15 +30,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Build & Deploy
         run: |
           export DEPLOY=true
           [ "$GITHUB_EVENT_NAME" != "pull_request" ] && rm -rf docs/_app/
-          yarn install
-          version=$(yarn version --patch --no-git-tag-version | grep "New version" | cut -d':' -f 2)
-          yarn build
+          npm install
+          npm build
           cd ..
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
