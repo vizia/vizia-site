@@ -10,15 +10,15 @@ const base = "static/tutorials"
 
 export const GET = (async () => {
 
-	let files = fs.readdirSync(base)
+    let files = fs.readdirSync(base)
 
-	return json(files.map(v => {
+    return json(files.map(v => {
 
-		let basePath = path.join(base, v)
+        let basePath = path.join(base, v)
 
-		let tut = JSON.parse(fs.readFileSync(path.join(basePath, "index.json")).toString()) as UnparsedTutorial
-		tut.dir = v;
+        let tut = JSON.parse(fs.readFileSync(path.join(basePath, "index.json")).toString()) as UnparsedTutorial
+        tut.dir = v;
 
-		return tut;
-	}));
+        return tut;
+    }));
 }) satisfies RequestHandler;

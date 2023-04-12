@@ -1,7 +1,7 @@
 [
     {
         "title": "Welcome",
-        "markdownFile": "intro.md",
+        "markdownFile": "introduction.md",
         "items": [
             {
                 "title": "Pre-requisites",
@@ -13,20 +13,20 @@
             }
         ]
     },
-{
-    "title": "Introduction",
-    "markdownFile": "introduction/foreword.md",
-    "items": [
-        {
-            "title": "Getting Started",
-            "markdownFile": "introduction/getting_started.md"
-        },
-        {
-            "title": "Quick Start",
-            "markdownFile": "introduction/quickstart.md"
-        }
-    ]
-},
+    {
+        "title": "Introduction",
+        "markdownFile": "introduction/foreword.md",
+        "items": [
+            {
+                "title": "Getting Started",
+                "markdownFile": "introduction/getting_started.md"
+            },
+            {
+                "title": "Quick Start",
+                "markdownFile": "introduction/quickstart.md"
+            }
+        ]
+    },
     {
         "title": "Basic",
         "markdownFile": "basic/basic.md",
