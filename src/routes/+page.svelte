@@ -4,6 +4,9 @@
 	import LandingPageButton from '$lib/components/LandingPageButton.svelte';
 
 	import { base } from '$app/paths';
+
+	console.log('IDX');
+	console.log(base);
 </script>
 
 <section class="main-section">

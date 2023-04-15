@@ -5,6 +5,9 @@
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
+	import { base } from '$app/paths';
+
+	console.log(base);
 </script>
 
 <div class="app">
