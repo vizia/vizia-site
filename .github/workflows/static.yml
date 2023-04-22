@@ -22,31 +22,51 @@ concurrency:
 
 jobs:
   # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build_site:
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-      - name: Build & Deploy
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      # - name: Setup Pages
+      #   uses: actions/configure-pages@v2
+      - name: Build
+        env:
+          BASE_PATH: '/vizia-site'
         run: |
-          export DEPLOY=true
-          [ "$GITHUB_EVENT_NAME" != "pull_request" ] && rm -rf docs/_app/
-          npm install
           npm run build
-          cd ..
+          touch build/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # Upload entire repository
-          path: './build/'
-      - name: Deploy to GitHub Pages
+          path: 'build/'
+
+  deploy:
+    needs: build_site
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v1
