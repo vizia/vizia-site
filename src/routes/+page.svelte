@@ -31,8 +31,6 @@
 		<BgElement color="#efcc51" offset_x={-1} offset_y={-1} rotation={180} />
 		<BgElement color="#51afef" offset_x={2} offset_y={0} rotation={180} />
 		<BgElement color="#ef5151" offset_x={1} offset_y={-2} rotation={-90} type="circle" />
-
-		<!-- <div class="blur" /> -->
 	</div>
 </section>
 
@@ -117,40 +115,55 @@
 			align-items: center;
 		}
 
-		.abstract {
-			--size: 4rem;
-		}
+		
 	}
 
 	@media (min-width: 25rem) {
+		.main-section {
+			height: 35rem;
+		}
+
+		.main-info {
+			width: 50%;
+		}
+
 		.actions-container {
 			flex-direction: row;
 		}
 	}
 
-	@media (min-width: 50rem) {
+	@media (min-width: 55rem) {
 		.main-info {
-			h1 {
-				font-size: 3.5rem;
-			}
-		}
-	}
-
-	@media (min-width: 75rem) {
-		.main-section {
-			flex-direction: row;
-			height: 40rem;
-		}
-
-		.main-info {
-			width: 60%;
 			align-items: flex-start;
+			width: 60%;
 
 			h1,
 			p {
 				text-align: start;
 			}
 
+			h1 {
+				font-size: 3.5rem;
+			}
+		}
+
+		.main-section {
+			flex-direction: row;
+		}
+
+		.abstract {
+			--size: 4rem;
+			display: initial;
+			width: 30%;
+		}
+	}
+
+	@media (min-width: 75rem) {
+		.main-section {
+			height: 40rem;
+		}
+
+		.main-info {
 			h1 {
 				font-size: 3.5rem;
 			}

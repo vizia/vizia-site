@@ -209,7 +209,7 @@
 		}
 	}
 
-	@media (min-width: 50rem) {
+	@media (min-width: 55rem) {
 		.header {
 			position: fixed;
 		}
