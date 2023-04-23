@@ -1,5 +1,5 @@
 <script lang="ts">
-	import BlogPost from '$lib/components/Card.svelte';
+	import Card from '$lib/components/Card.svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
@@ -14,7 +14,7 @@
 	<h1>Blogs</h1>
 	{#if data.posts}
 		{#each data.posts as post}
-			<BlogPost {post} />
+			<Card title={post.title} link="blogs/{post.path}" desc={post.description} />
 		{/each}
 	{/if}
 </div>

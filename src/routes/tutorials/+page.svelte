@@ -119,15 +119,6 @@
 		/>
 	{/each}
 
-	<Card title="Tutorial 0" desc="tutorial description" id="tutorial0" link="" />
-	<Card title="Tutorial 1" desc="tutorial description" id="tutorial1" link="" />
-	<Card title="Tutorial 2" desc="tutorial description" id="tutorial2" link="" />
-	<Card title="Tutorial 3" desc="tutorial description" id="tutorial3" link="" />
-	<Card title="Tutorial 4" desc="tutorial description" id="tutorial4" link="" />
-	<Card title="Tutorial 5" desc="tutorial description" id="tutorial5" link="" />
-	<Card title="Tutorial 6" desc="tutorial description" id="tutorial6" link="" />
-	<Card title="Tutorial 7" desc="tutorial description" id="tutorial7" link="" />
-	<Card title="Tutorial 8" desc="tutorial description" id="tutorial8" link="" />
 </div>
 
 <svelte:window on:scroll={highlight} on:resize={update} />
