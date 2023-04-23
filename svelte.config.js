@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static'; // https ://github.com/sveltejs/kit/tree/master/packages/adapter-static
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
