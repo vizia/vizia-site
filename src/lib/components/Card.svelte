@@ -1,137 +1,113 @@
 <script lang="ts">
 	import type { BlogPost, Tutorial } from '$lib/types';
 	import { base } from '$app/paths';
+    import ViziaLogo from '$lib/assets/vizia_logo.svg';
 
-	export let post: BlogPost | undefined = undefined;
-	export let tutorial: Tutorial | undefined = undefined;
+    export let decorations: "none" = "none"
+    export let id = ""
+	export let link = ""
+	export let title = "Card title"
+	export let desc = "Description here"
+	export let img = ""
+	export let date: string | null = null;
+    export let invertInfo = false
+    export let imgLayout: "side" | "bottom" = "side"
+    export let style = ""
 </script>
 
-{#if post}
-	<a class="post" style={`--bg: url("${base}${post.image}");`} href="{base}/blogs/{post.path}">
-		<div class="wrapper main">
-			<h1>{post.title}</h1>
-			<p>by {post.author}</p>
-		</div>
-		<p>{post.description}</p>
-		<div class="wrapper">
-			<p class="chip {post.type}">{post.type}</p>
-			<p>{post.date}</p>
-		</div>
-	</a>
-{:else if tutorial}
-	<a class="tutorial" href="{base}/tutorials/{tutorial.dir}">
-		<h1>{tutorial.title}</h1>
-		<!-- <div class="wrapper">
-			<p class="chip {tutorial.type}">{tutorial.type}</p>
-			<p>by {tutorial.author}</p>
-		</div> -->
-		<p>{tutorial.description}</p>
-	</a>
-{/if}
+<a class="card img{imgLayout}" href="{base}/{link}" style={style}>
+	<div class="info" class:invert={invertInfo}>
+        <h1 id="{id}">{title}</h1>
+        <p>{desc}</p>
+    </div>
+	<!-- <div class="wrapper">
+		<p class="chip {tutorial.type}">{tutorial.type}</p>
+		<p>by {tutorial.author}</p>
+	</div> -->
+    <div class="sub">
+        {#if img === ""}
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<svg class="default-img" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.158 2.21573C14.2526 1.9924 14.4716 1.84734 14.7142 1.84734H17.3953C17.8288 1.84734 18.1212 2.2904 17.9507 2.68897L13.907 12.1433C13.8118 12.3656 13.5933 12.5098 13.3515 12.5098H12.2596C12.0156 12.5098 11.7957 12.3631 11.7019 12.138L10.9328 10.2911C10.8704 10.1412 10.8709 9.97258 10.9343 9.82313L14.158 2.21573Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.30452 1.87885C5.55001 1.877 5.77219 2.02392 5.86664 2.25051L10.7797 14.0375C10.8735 14.2625 11.0935 14.4091 11.3373 14.4091H12.147C12.5724 14.4091 12.8646 14.8371 12.7096 15.2333L11.7157 17.7734C11.6251 18.005 11.4018 18.1574 11.1532 18.1574H8.92831C8.68511 18.1574 8.46562 18.0115 8.37141 17.7873L2.04782 2.73727C1.88128 2.34097 2.17033 1.90244 2.60019 1.8992L5.30452 1.87885Z" fill="white"/>
+            </svg>
+
+        {/if}
+
+        
+        <slot />
+    </div>
+</a>
 
 <style lang="scss">
-	.tutorial,
-	.post {
-		position: relative;
-		width: 100%;
-		height: 8rem;
+	.card {
+        --backgroundColor: var(--c-0);
+        --textColor: #fff;
+
+        position: relative;
 		border-radius: 0.5rem;
-		padding: 1rem;
-		background-color: var(--background-secondary);
+		padding: 2rem;
+		background: var(--backgroundColor);
+        box-sizing: border-box;
+        border: 0.125rem solid;
+        border-color: transparent;
+        transition: all 0.25s ease-in-out;
 
-		transition: all ease-in-out 100ms;
+        
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
 
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+            h1 {
+                scroll-margin-top: 8rem;
+            }
+            * {
+                color: var(--textColor);
+            }
+        }
 
-		* {
-			z-index: 2;
-		}
+        &:hover {
+            border-color: white;
+        }
 
-		h1 {
-			pointer-events: none;
-			font-weight: 600;
-			color: #ffffff;
-			margin: 0;
-			margin-top: 0.5rem;
-		}
+        &.imgside {
+            .info {
+                width: calc(100% - 12rem);
 
-		> p {
-			flex: 1;
-		}
+            }
+        }
 
-		p {
-			pointer-events: none;
-			color: #ffffff;
-		}
-
-		.wrapper {
-			display: flex;
-			flex-direction: row;
-			align-items: baseline;
-			gap: 0.5rem;
-			width: 100%;
-			height: auto;
-		}
-
-		.chip {
-			font-size: 0.8rem;
-			font-weight: 800;
-			text-transform: uppercase;
-			padding: 0rem 0.5rem;
-			border-radius: 2rem;
-			width: auto;
-			height: auto;
-
-			&.update {
-				color: #5a3232;
-				background-color: #ff7979;
-			}
-		}
-
-		&:hover {
-			background-color: var(--background-tertiary);
-			box-shadow: 0 0.5rem 0.5rem #00000022;
-		}
+        &.imgside:hover {
+            .default-img {
+                opacity: 1;
+            }
+        }
 	}
 
-	.tutorial {
-		height: 8rem;
-		background-color: var(--background-secondary);
-	}
+    .sub {
+        position: absolute;
+        display: block;
+        border-radius: 0.5rem;
+        width: 100%;
+        height: 100%;
+        padding: 0.125rem;
+        box-sizing: content-box;
+        left: -0.125rem;
+        top: -0.125rem;
+        overflow: hidden;
+    }
 
-	.post {
-		height: 12rem;
-		background: var(--bg);
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: 75vw;
+    .default-img {
+        width: 11rem;
+        margin-left: 100%;
+        transform: translate(-100%, 0);
+        opacity: 0.1;
+        transition: all 0.25s ease-in-out;
 
-		transition: background-position ease-in-out 0.5s;
-
-		&::after {
-			content: '';
-			width: 100%;
-			height: 100%;
-			position: absolute;
-			pointer-events: none;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			border-radius: 0.5rem;
-			background: linear-gradient(to bottom, #00000044, #00000088 100%);
-			background-position: 100% 100%;
-			background-size: 200% 200%;
-			backdrop-filter: blur(1px);
-			transition: backdrop-filter 250ms ease;
-			transition: background-position 250ms ease;
-		}
-
-		&:hover::after {
-			background-position: 0% 0%;
-			backdrop-filter: blur(0px);
-		}
-	}
+        * {
+            fill: #fff;
+            color: #fff;
+        }
+    }
 </style>

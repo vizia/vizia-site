@@ -1,9 +1,9 @@
 {
-    "title": "Tutorial One",
-    "description": "In this tutorial we're going to show you how to do some amazing stuff with Vizia",
+    "title": "Getting Started",
+    "description": "Learn to set up a project, basic concepts and the basics of working with Vizia.",
     "items": [
         {
-            "title": "Tutorial One",
+            "title": "Getting Started",
             "queryName": "index",
             "markdownFile": "index.md",
             "files": [
