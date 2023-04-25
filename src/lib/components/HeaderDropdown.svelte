@@ -16,7 +16,12 @@
 
 	function exitHoverTitle() {
 		hoveringTitle = false;
-		open = hoveringContainer;
+
+		setTimeout(() => {
+			if (!hoveringContainer) {
+				open = false;
+			}
+		}, 1000)
 	}
 
 	function enterHoverContainer() {
