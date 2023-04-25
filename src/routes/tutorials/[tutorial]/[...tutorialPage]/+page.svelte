@@ -52,7 +52,7 @@
 			{/await}
 		{:else}
 			<div class="tutorial-image">
-				<img src="{base}/tutorials/tutorial_one/{selectedFile.file}" alt="" />
+				<img src="{base}/tutorials/{data.tutorial.dir}/{selectedFile.file}" alt="" />
 			</div>
 		{/if}
 	</div>
