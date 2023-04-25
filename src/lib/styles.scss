@@ -58,6 +58,10 @@
 	color: var(--c-5);
 }
 
+*::-webkit-scrollbar {
+	display: none;
+}
+
 body {
 	width: 100%;
 	height: 100%;
