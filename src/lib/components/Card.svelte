@@ -67,6 +67,14 @@
             }
         }
 
+        .sub {
+            display: block;
+            border-radius: 0.5rem;
+            padding: 0.125rem;
+            box-sizing: content-box;
+            overflow: hidden;
+    }
+
         &:hover {
             border-color: white;
         }
@@ -74,35 +82,44 @@
         &.imgside {
             .info {
                 width: calc(100% - 12rem);
+            }
 
+            .sub {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: -0.125rem;
+                top: -0.125rem;
+            }
+
+            .default-img {
+                opacity: 0.1;
+                margin-left: 100%;
+                transform: translate(-100%, 0);
             }
         }
 
         &.imgside:hover {
             .default-img {
-                opacity: 1;
+                opacity: 0.5;
+            }
+        }
+
+        &.imgbottom {
+            .info {
+                width: 100%;
+            }
+
+            .sub {
+                margin-top: 1rem;
+                display: grid;
+                place-items: center;
             }
         }
 	}
 
-    .sub {
-        position: absolute;
-        display: block;
-        border-radius: 0.5rem;
-        width: 100%;
-        height: 100%;
-        padding: 0.125rem;
-        box-sizing: content-box;
-        left: -0.125rem;
-        top: -0.125rem;
-        overflow: hidden;
-    }
-
     .default-img {
         width: 11rem;
-        margin-left: 100%;
-        transform: translate(-100%, 0);
-        opacity: 0.1;
         transition: all 0.25s ease-in-out;
 
         * {
