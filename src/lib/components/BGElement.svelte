@@ -69,35 +69,5 @@
 			background-position: 0% 0%;
 			opacity: 100%;
 		}
-
-		&::after {
-			content: '';
-			width: 100%;
-			height: 100%;
-			position: absolute;
-
-			background: linear-gradient(
-				to left,
-				rgba(84, 81, 239, 0) 0%,
-				var(--color) 50%,
-				var(--color) 100%
-			);
-			background-position: 100% 100%;
-			background-size: 200% 200%;
-			transition: background-position 250ms ease;
-
-			transition: all ease-in-out 1s;
-
-			
-			background-blend-mode: luminosity;
-		}
-		
-		&.animated::after {
-			filter: blur(128px);
-		}
-
-		&.circle::after {
-			border-radius: calc(var(--size) / 2);
-		}
 	}
 </style>
