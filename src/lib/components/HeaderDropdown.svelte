@@ -18,7 +18,7 @@
 		hoveringTitle = false;
 
 		setTimeout(() => {
-			if (!hoveringContainer) {
+			if (!hoveringContainer && !hoveringTitle) {
 				open = false;
 			}
 		}, 1000)
