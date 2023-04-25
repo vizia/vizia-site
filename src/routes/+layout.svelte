@@ -20,7 +20,7 @@
 	main {
 		position: relative;
 		width: 100%;
-		min-height: 100%;
+		height: calc(100vh - var(--header-size));
 		margin: 0 auto;
 		display: flex;
 	}
@@ -28,7 +28,7 @@
 	@media (min-width: 0) {
 		main {
 			flex-direction: column;
-			padding-top: 0;
+			margin-top: 0;
 			overflow-y: visible;
 		}
 	}
@@ -36,7 +36,7 @@
 	@media (min-width: 50rem) {
 		main {
 			flex-direction: row;
-			padding-top: var(--header-size);
+			margin-top: var(--header-size);
 			overflow: hidden;
 		}
 	}
