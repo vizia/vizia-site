@@ -117,6 +117,8 @@
 		flex-direction: row;
 		background-color: transparent;
 		backdrop-filter: blur(8px);
+		border-bottom: 1px solid;
+		border-color: transparent;
 
 		box-sizing: border-box;
 
@@ -124,8 +126,9 @@
 	}
 
 	.header.sticking {
+		transition: all 0.25s ease-in-out;
 		background-color: var(--c-1);
-		border-bottom: 1px solid var(--border-color);
+		border-color: var(--border-color);
 	}
 
 	.wrapper {
