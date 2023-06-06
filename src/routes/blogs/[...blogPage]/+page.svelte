@@ -4,8 +4,8 @@
 	import TableCellRenderer from '$lib/components/renderers/TableCellRenderer.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { onMount } from 'svelte';
-	import { base } from '$app/paths';
 	import LinkRenderer from '$lib/components/renderers/LinkRenderer.svelte';
+	import { base } from '$app/paths';
 
 	export let data: PageData;
 
@@ -17,18 +17,19 @@
 <div class="blog-post-wrapper">
 	<div class="blog-post-info">
 		<h1>
-			{data.blogPageMeta.title}
+			{data.blogPost.title}
 		</h1>
 		<p>
-			{data.blogPageMeta.date}
+			{data.blogPost.date}
 		</p>
 
 		<h2>
-			{data.blogPageMeta.author}
+			{data.blogPost.author}
 		</h2>
 	</div>
 
-	<img class="post-img" src={base + data.blogPageMeta.image} />
+	<!-- svelte-ignore a11y-missing-attribute -->
+	<img class="post-img" src="{base}/imgs/{data.blogPost.image}" />
 	<div class="blog-post">
 		<SvelteMarkdown
 			source={data.markdown}

@@ -7,8 +7,6 @@
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import { base } from '$app/paths';
 
-	export let border = false;
-
 	let hamMenuOpen = false;
 
 	function hamMenuClick() {
@@ -16,7 +14,7 @@
 	}
 </script>
 
-<div class="header {border ? 'border' : ''} " aria-label="Primary">
+<div class="header" aria-label="Primary">
 	<div class="wrapper">
 		<a class="logo-wrapper" href="{base}/">
 			<img src={ViziaLogo} class="logo" alt="Vizia Logo" />
@@ -32,7 +30,7 @@
 		</div>
 
 		<nav class="nav-wrapper">
-			<a href="{base}/tutorials">Tutorials</a>
+			<a href="{base}/tutorial">Tutorials</a>
 			<HeaderDropdown
 				dropdownName="Docs"
 				options={[
@@ -53,7 +51,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="ham-menu {hamMenuOpen ? 'open' : ''}" on:click={() => (hamMenuOpen = false)}>
-	<a href="{base}/tutorials">Tutorials</a>
+	<a href="{base}/tutorial">Tutorial</a>
 	<a href="{base}/guide">Guide</a>
 	<a href="{base}/examples">Examples</a>
 	<a href="{base}/blogs">Blogs</a>
@@ -76,16 +74,12 @@
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
-		background-color: transparent;
+		background-color: var(--c-1) !important;
+		border-bottom: 1px solid var(--border-color);
 
 		box-sizing: border-box;
 
 		z-index: 100;
-
-		&.border {
-			border-bottom: 1px solid var(--border-color);
-			background-color: var(--c-1) !important;
-		}
 	}
 
 	.wrapper {

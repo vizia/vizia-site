@@ -1,0 +1,9 @@
+[
+    {
+        "title": "Getting Started",
+        "identifier": "getting_started",
+        "description": "Learn to set up a project, basic concepts and the basics of working with Vizia.",
+        "indexPath": "getting_started/index.json",
+        "directory": "getting_started/"
+    }
+]

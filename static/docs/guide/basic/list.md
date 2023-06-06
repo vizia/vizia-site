@@ -51,4 +51,4 @@ Application::new(|cx|{
 
 This produces the following output:
 
-![An output](/docs_img/list.png)
+![An output](/imgs/docs_img/list.png)

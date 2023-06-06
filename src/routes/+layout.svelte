@@ -5,11 +5,10 @@
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
-	import { base } from '$app/paths';
 </script>
 
 <div class="app">
-	<Header border={data.route.id !== '/'} />
+	<Header />
 
 	<main>
 		<slot />
@@ -19,15 +18,15 @@
 <style lang="scss">
 	main {
 		position: relative;
+		height: 100%;
 		width: 100%;
-		height: calc(100vh - var(--header-size));
 		margin: 0 auto;
 		display: flex;
+		flex-direction: column;
 	}
 
 	@media (min-width: 0) {
 		main {
-			flex-direction: column;
 			margin-top: 0;
 			overflow-y: visible;
 		}
@@ -35,7 +34,6 @@
 
 	@media (min-width: 50rem) {
 		main {
-			flex-direction: row;
 			margin-top: var(--header-size);
 			overflow: hidden;
 		}

@@ -14,7 +14,7 @@
 	<h1>Blogs</h1>
 	{#if data.posts}
 		{#each data.posts as post}
-			<Card title={post.title} link="blogs/{post.path}" desc={post.description} />
+			<Card title={post.title} link="blogs/{post.queryName}" desc={post.description} />
 		{/each}
 	{/if}
 </div>

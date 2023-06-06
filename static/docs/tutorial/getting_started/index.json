@@ -1,0 +1,54 @@
+[
+    {
+        "title": "Getting Started",
+        "queryName": "index",
+        "markdownPath": "index.md",
+        "files": [
+            "step_one.rs",
+            "test.rs"
+        ]
+    },
+    {
+        "title": "Pre",
+        "queryName": "pre",
+        "markdownPath": "index.md",
+        "files": [
+            "step_one.rs",
+            "test_image.png"
+        ]
+    },
+    {
+        "title": "Section test",
+        "queryName": "section_test",
+        "markdownPath": "step_one.md",
+        "files": [
+            "step_one.rs"
+        ],
+        "steps": [
+            {
+                "title": "Step One",
+                "queryName": "step_one",
+                "markdownPath": "step_one.md",
+                "files": [
+                    "step_one.rs"
+                ]
+            },
+            {
+                "title": "Step Two",
+                "queryName": "step_two",
+                "markdownPath": "step_two.md",
+                "files": [
+                    {
+                        "file": "step_one.rs",
+                        "highlights": [
+                            "[b]0=0-8",
+                            "[e]1=7-16",
+                            "[b]r/usize/",
+                            "[e]l2"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

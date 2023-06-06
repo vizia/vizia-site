@@ -1,33 +1,28 @@
 import { base } from '$app/paths';
-import { parse_doc_markdown } from '$lib/doc';
-import type { Item } from '$lib/types';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load = (async ({ params, fetch, route }) => {
+export const load = (async ({ parent, params, fetch }) => {
 
-    const pathToFetch = `${base}/docs/guide/${params.docsPage}.md`
+    const assertExists = (x: any) => { if (!x) { throw error(404, 'Not Found') } }
 
-    console.log({ pathToFetch })
+    const parentData = await parent()
+    assertExists(parentData)
 
-    const responseFile = await fetch(pathToFetch);
-    const responseGuides = await fetch(`${base}/get-guides`, {
-        method: 'GET'
-    });
+    const currentPage = parentData.flattenedItems.find(v => v.filePath.replace(".md", "") === `${base}/docs/guide/${params.docsPage}`);
+    assertExists(currentPage)
+    // @ts-ignore
+    const responseFile = await fetch(currentPage.filePath)
 
-    if (responseFile.ok && responseGuides.ok) {
-        const markdown = await responseFile.text();
-        const [parsed_markdown, markdown_meta] = parse_doc_markdown(markdown);
-        const items = (await responseGuides.json()) as Item[];
-        return {
-            docsPage: params.docsPage,
-            markdown: parsed_markdown,
-            markdownMeta: markdown_meta,
-            items,
-        };
+    assertExists(responseFile)
+
+    const markdown = await responseFile.text();
+    assertExists(markdown)
+
+    return {
+        docsPage: params.docsPage,
+        currentPage,
+        markdown,
     }
 
-    console.log({ route })
-
-    throw error(404, 'Not found');
 }) satisfies PageLoad;

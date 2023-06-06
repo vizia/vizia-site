@@ -1,24 +1,26 @@
-import { base } from '$app/paths';
-import type { BlogPost } from '$lib/types';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load = (async ({ params, fetch }) => {
-	const pathToFetchFile = `${base}/blogs/${params.blogPage}/index.md`
-	const pathToFetchMeta = `${base}/blogs/${params.blogPage}/index.json`
+export const load = (async ({ params, fetch, parent }) => {
+	const assertExists = (x: any) => { if (!x) { throw error(404, 'Not Found') } }
 
-	const responseMarkdown = await fetch(pathToFetchFile);
-	const responseMeta = await fetch(pathToFetchMeta);
+	const parentData = await parent()
+	assertExists(parentData)
 
-	if (responseMarkdown.ok && responseMeta.ok) {
-		const markdown = await responseMarkdown.text();
-		const meta = JSON.parse(await responseMeta.text()) as BlogPost;
-		return {
-			blogPage: params.blogPage,
-			markdown: markdown,
-			blogPageMeta: meta
-		};
+	const blogPost = parentData.posts.find(v => v.queryName === params.blogPage)
+	if (!blogPost)
+		throw error(404, 'Not found');
+
+	const markdownReq = await fetch(`../docs/blogs/${blogPost.markdown}`)
+
+	if (!markdownReq.ok)
+		throw error(404, 'Not found');
+
+	const markdown = await markdownReq.text()
+
+	return {
+		blogPost,
+		markdown
 	}
 
-	throw error(404, 'Not found');
 }) satisfies PageLoad;

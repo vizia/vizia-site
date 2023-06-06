@@ -17,7 +17,7 @@ fn main() {
 
 Calling `run()` on the `Application` causes the program to enter the event loop and for the main window to display.
 
-![An empty vizia application window](/docs_img/application.png)
+![An empty vizia application window](/imgs/docs_img/application.png)
 
 # Window Modifiers
 
@@ -41,7 +41,7 @@ fn main() {
 }
 ```
 
-![A window with the title 'My Awesome Application'" width="400](/docs_img/window_title.png)
+![A window with the title 'My Awesome Application'" width="400](/imgs/docs_img/window_title.png)
 
 ### Window Size Modifier
 
@@ -59,4 +59,4 @@ fn main() {
 }
 ```
 
-![A window with its size set to 400 by 200" width="400](/docs_img/inner_size.png)
+![A window with its size set to 400 by 200" width="400](/imgs/docs_img/inner_size.png)

@@ -1,0 +1,32 @@
+[
+    {
+        "date": "12/12/2022",
+        "title": "BlogPost 1",
+        "queryName": "blog_1",
+        "author": "test author",
+        "image": "blogs_img/image.png",
+        "description": "A short description explaining what the blog is about",
+        "type": "update",
+        "markdown": "blog_1/index.md"
+    },
+    {
+        "date": "12/12/2022",
+        "title": "BlogPost 2",
+        "queryName": "blog_2",
+        "author": "test author",
+        "image": "blogs_img/image.png",
+        "description": "A short description explaining what the blog is about",
+        "type": "update",
+        "markdown": "blog_2/index.md"
+    },
+    {
+        "date": "12/12/2022",
+        "title": "BlogPost 3",
+        "queryName": "blog_3",
+        "author": "test author",
+        "image": "blogs_img/image.png",
+        "description": "A short description explaining what the blog is about",
+        "type": "update",
+        "markdown": "blog_3/index.md"
+    }
+]

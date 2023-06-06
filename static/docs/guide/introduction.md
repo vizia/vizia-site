@@ -1,5 +1,3 @@
-# Vizia
-
 # Quickstart
 
 Vizia is a data-driven reactive framework, which means that the UI can be considered a mapping from application data to graphical elements called views. When the data is modified, either by interacting with a view or externally, such as a mouse or keyboard event, the views in the application update to present the new state.

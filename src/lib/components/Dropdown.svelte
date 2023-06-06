@@ -1,28 +1,28 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import type { ItemJSON } from '$lib/parser';
 	import { SvgIcon } from '$lib/svg';
-	import type { DropdownItem } from '$lib/types';
 	import Svg from './Svg.svelte';
 
-	export let header = 'dropdown';
-	export let link: string | null = null;
-	export let items: DropdownItem[];
+	export let item: ItemJSON;
+	export let items: ItemJSON[];
 	export let level = 0;
-	export let open = true;
+	export let open = false;
 	export let linkOnClick = false;
 	export let indexStack: number[] = [];
 	export let enumerate = false;
 
-	export let onClick = (i: number[]) => {};
-	export let matcher = (idx: number[], header: string, link: string | null) => false;
+	const link = item.filePath.replace('.md', '').replace('docs/', '');
 
-	$: active = matcher(indexStack, header, link);
+	export let onClick = (i: number[]) => {};
+	export let matcher = (idx: number[], header: string, link: string) => false;
+
+	$: active = matcher(indexStack, item.headerName, link);
 </script>
 
 <div class="dropdown-header {open ? 'open' : ''} {active ? 'active' : ''}">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	{#if linkOnClick}
-		<a href="{base}/{link}" class={items.length !== 0 ? 'compact' : ''}>{header}</a>
+		<a href={link} class={items.length !== 0 ? 'compact' : ''}>{item.headerName}</a>
 	{:else}
 		<p
 			class={items.length !== 0 ? 'compact' : ''}
@@ -30,7 +30,7 @@
 				onClick(indexStack);
 			}}
 		>
-			{header}
+			{item.headerName}
 		</p>
 	{/if}
 	{#if items.length !== 0}
@@ -54,9 +54,8 @@
 		<div class="dropdown-wrapper">
 			{#each items as item, i}
 				<svelte:self
-					items={item.items}
-					header={item.name}
-					link={item.link}
+					{item}
+					items={item.subItems}
 					{enumerate}
 					{linkOnClick}
 					indexStack={[...indexStack, i + 1]}

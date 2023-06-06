@@ -1,23 +1,19 @@
 <script lang="ts">
 	import '$lib/components/md_style.scss';
-	import { inverse_ranges } from '$lib/tutorial';
-	import type { StepCodeHighlight } from '$lib/types';
+	import type { StepHighlight } from '$lib/tutorial';
 	import hljs from 'highlight.js';
 	import rust from 'highlight.js/lib/languages/rust';
+
 	hljs.registerLanguage('rust', rust);
 
 	export let lang: string;
 	export let text: string;
-	export let highlight: StepCodeHighlight[];
+	export let highlights: StepHighlight[] = [];
+	export let disabledHighlights: StepHighlight[] = [];
 
-	let disabledRanges: StepCodeHighlight[] = [];
 	let textHightlighted = '';
 
 	$: {
-		if (highlight) {
-			disabledRanges = inverse_ranges(highlight, text);
-		}
-
 		text.trim();
 
 		if (lang !== '' && lang !== 'none') {
@@ -35,12 +31,19 @@
 	{:else}
 		<pre class={lang}><code class={'none'}>{@html text}</code></pre>
 	{/if}
-	{#if highlight && highlight.length != 0}
-		{#each highlight as { start, highlightType, end, line }}
-			<div class={highlightType} style="--left: {start}; --width: {end - start}; --line: {line};" />
+	{#if highlights && highlights.length != 0}
+		{#each highlights as { start, highlightType, end, line }}
+			<div
+				class={highlightType}
+				style="--left: {start()}; --width: {end() -
+					start()}; --line(): {line()}; --end(): {end()}; --start(): {start()}"
+			/>
 		{/each}
-		{#each disabledRanges as { start, end, line }}
-			<div class="disabled" style="--left: {start}; --width: {end - start}; --line: {line};" />
+		{#each disabledHighlights as { start, end, line }}
+			<div
+				class="disabled"
+				style="--left: {start()}; --width: {end() - start()}; --line(): {line()};"
+			/>
 		{/each}
 	{/if}
 </div>
