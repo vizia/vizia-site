@@ -6,15 +6,55 @@
 
 	import HeaderDropdown from './HeaderDropdown.svelte';
 	import { base } from '$app/paths';
+	import { afterUpdate, onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
 
 	let hamMenuOpen = false;
+
+	let header: Element | null = null;
+	let scrollWatcher: Element | null = null;
 
 	function hamMenuClick() {
 		hamMenuOpen = !hamMenuOpen;
 	}
+
+	onMount(() => {
+		updateStickingBehaviour();
+	});
+
+	afterUpdate(() => {
+		updateStickingBehaviour();
+	});
+
+	afterNavigate(() => {
+		updateStickingBehaviour();
+	});
+
+	function updateStickingBehaviour() {
+		header = document.querySelector('.header');
+		scrollWatcher = document.querySelector('.main-section');
+
+		if (scrollWatcher && header && scrollWatcher) {
+			scrollWatcher.setAttribute('data-scroll-watcher', '');
+			header?.before(scrollWatcher);
+
+			const navObserver = new IntersectionObserver(
+				(entries) => {
+					if (!entries[0].isIntersecting) {
+						header?.classList.add('sticking');
+					} else {
+						header?.classList.remove('sticking');
+					}
+				},
+				{ rootMargin: '-500px 0px 0px 0px' }
+			);
+
+			navObserver.observe(scrollWatcher);
+		}
+	}
 </script>
 
-<div class="header" aria-label="Primary">
+<div class="header sticking" aria-label="Primary">
 	<div class="wrapper">
 		<a class="logo-wrapper" href="{base}/">
 			<img src={ViziaLogo} class="logo" alt="Vizia Logo" />
@@ -70,16 +110,22 @@
 <style lang="scss">
 	.header {
 		width: 100%;
+		position: fixed;
 
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
-		background-color: var(--c-1) !important;
-		border-bottom: 1px solid var(--border-color);
+		background-color: transparent;
+		backdrop-filter: blur(8px);
 
 		box-sizing: border-box;
 
 		z-index: 100;
+	}
+
+	.header.sticking {
+		background-color: var(--c-1);
+		border-bottom: 1px solid var(--border-color);
 	}
 
 	.wrapper {
@@ -186,10 +232,6 @@
 	}
 
 	@media (min-width: 0) {
-		.header {
-			position: flex;
-		}
-
 		.links-wrapper {
 			display: none;
 		}
@@ -204,10 +246,6 @@
 	}
 
 	@media (min-width: 55rem) {
-		.header {
-			position: fixed;
-		}
-
 		.links-wrapper {
 			display: flex;
 		}

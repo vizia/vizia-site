@@ -1,42 +1,22 @@
 <script lang="ts">
-	import BgElement from '$lib/components/BGElement.svelte';
 	import LandingPageButton from '$lib/components/landing_page/LandingPageButton.svelte';
 </script>
 
 <section class="main-section">
-	<div class="wrapper">
-		<div class="main-info">
-			<h1>
-				Declarative <b>GUI Framework</b>
-				for <i>any</i> kind of applications.
-			</h1>
-			<p>Combine versatility, modularity and speed in one</p>
+	<div class="main-info">
+		<h1>
+			Declarative <b>GUI Framework</b>
+			for <i>any</i> kind of applications.
+		</h1>
+		<p>Combine versatility, modularity and speed in one</p>
 
-			<div class="actions-container">
-				<LandingPageButton
-					text="Get Started"
-					link="/guide/introduction/getting_started#getting-started"
-					style="accent"
-				/>
-				<LandingPageButton text="Tutorial" link="/tutorial" />
-			</div>
-		</div>
-		<div class="abstract">
-			<BgElement
-				color="#51afef44"
-				offset_x={1}
-				offset_y={1}
-				rotation={90}
-				type="circle"
-				size_y={3}
+		<div class="actions-container">
+			<LandingPageButton
+				text="Get Started"
+				link="/guide/introduction/getting_started#getting-started"
+				style="accent"
 			/>
-			<BgElement color="#51afef" offset_x={-1} offset_y={2} type="circle" />
-			<BgElement color="#51afef" offset_x={0} offset_y={1} rotation={90} />
-			<BgElement color="#efcc51" offset_x={0} offset_y={0} rotation={-90} type="circle" />
-			<BgElement color="#ef5151" offset_x={-1} offset_y={0} />
-			<BgElement color="#efcc51" offset_x={-1} offset_y={-1} rotation={180} />
-			<BgElement color="#51afef" offset_x={2} offset_y={0} rotation={180} />
-			<BgElement color="#ef5151" offset_x={1} offset_y={-2} rotation={-90} type="circle" />
+			<LandingPageButton text="Tutorial" link="/tutorial" />
 		</div>
 	</div>
 </section>
@@ -50,30 +30,12 @@
 		place-items: center;
 
 		background: radial-gradient(
-				75% 100% at 50% 100%,
-				rgba(81, 175, 239, 0.25) 0%,
+				75% 150% at 50% 100%,
+				rgba(81, 175, 239, 0.33) 0%,
 				rgba(0, 0, 0, 0) 100%
 			),
 			var(--background-main);
 		background-blend-mode: color-dodge;
-	}
-
-	.wrapper {
-		width: 100%;
-		max-width: var(--page-width);
-		display: flex;
-
-		align-items: center;
-		justify-content: space-between;
-		padding: 2rem;
-	}
-
-	.abstract {
-		position: relative;
-		width: calc(4 * var(--size));
-		height: calc(5 * var(--size));
-		display: flex;
-		margin: 2rem;
 	}
 
 	.main-info {
@@ -91,13 +53,21 @@
 		}
 
 		p {
-			font-size: 1.2rem;
-			color: #ffffff88;
+			font-size: 1.4rem;
+			color: #ffffffaa;
 			margin-bottom: 1rem;
 		}
 
 		b {
 			background: linear-gradient(to right, #51afef, #5451ef);
+			color: transparent;
+			background-clip: text;
+			-webkit-background-clip: text;
+			font-weight: 600;
+		}
+
+		i {
+			background: linear-gradient(to right, #ef5151, #e3c351);
 			color: transparent;
 			background-clip: text;
 			-webkit-background-clip: text;
@@ -143,7 +113,7 @@
 		}
 
 		.main-info {
-			width: 50%;
+			width: calc(var(--page-width) / 2);
 		}
 
 		.actions-container {
@@ -153,14 +123,6 @@
 
 	@media (min-width: 55rem) {
 		.main-info {
-			align-items: flex-start;
-			width: 60%;
-
-			h1,
-			p {
-				text-align: start;
-			}
-
 			h1 {
 				font-size: 3.5rem;
 			}
@@ -168,12 +130,6 @@
 
 		.main-section {
 			flex-direction: row;
-		}
-
-		.abstract {
-			--size: 4rem;
-			display: initial;
-			width: 30%;
 		}
 	}
 
@@ -190,10 +146,6 @@
 
 		.actions-container {
 			align-items: flex-start;
-		}
-
-		.abstract {
-			--size: 6rem;
 		}
 	}
 </style>
