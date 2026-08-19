@@ -1,0 +1,974 @@
+/* ------------------------------------------------------------------ */
+/*  Design tokens, shadcn-style. Light is the default theme; dark      */
+/*  kicks in only when <html data-theme="dark"> is set (see index.html */
+/*  and ThemeToggle.vue).                                              */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --background: oklch(0.988 0.003 250);
+  --foreground: oklch(0.16 0.015 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.015 260);
+  --primary: oklch(0.545 0.2 250);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-hover: oklch(0.49 0.19 250);
+  --secondary: oklch(0.955 0.004 250);
+  --secondary-foreground: oklch(0.25 0.015 260);
+  --muted: oklch(0.962 0.004 250);
+  --muted-foreground: oklch(0.5 0.02 260);
+  --accent: oklch(0.945 0.01 250);
+  --accent-foreground: oklch(0.22 0.02 260);
+  --border: oklch(0.905 0.008 250);
+  --input: oklch(0.905 0.008 250);
+  --ring: oklch(0.545 0.2 250);
+  --code-bg: oklch(0.965 0.004 250);
+  --code-text: oklch(0.28 0.02 260);
+  --syntax-k: oklch(0.5 0.19 250);
+  --syntax-t: oklch(0.42 0.14 265);
+  --syntax-s: oklch(0.5 0.14 150);
+  --syntax-c: oklch(0.68 0.01 260);
+  --syntax-p: oklch(0.52 0.2 310);
+  --radius: 0.5rem;
+  color-scheme: light;
+
+  font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--foreground);
+  background: var(--background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme='dark'] {
+  --background: oklch(0.155 0.012 260);
+  --foreground: oklch(0.965 0.004 250);
+  --card: oklch(0.195 0.015 260);
+  --card-foreground: oklch(0.965 0.004 250);
+  --primary: oklch(0.68 0.15 250);
+  --primary-foreground: oklch(0.13 0.02 260);
+  --primary-hover: oklch(0.73 0.14 250);
+  --secondary: oklch(0.27 0.015 260);
+  --secondary-foreground: oklch(0.93 0.006 250);
+  --muted: oklch(0.24 0.015 260);
+  --muted-foreground: oklch(0.7 0.015 255);
+  --accent: oklch(0.28 0.02 260);
+  --accent-foreground: oklch(0.95 0.004 250);
+  --border: oklch(0.28 0.02 260);
+  --input: oklch(0.28 0.02 260);
+  --ring: oklch(0.68 0.15 250);
+  --code-bg: oklch(0.13 0.01 260);
+  --code-text: oklch(0.85 0.01 250);
+  --syntax-k: oklch(0.72 0.13 250);
+  --syntax-t: oklch(0.8 0.1 250);
+  --syntax-s: oklch(0.78 0.12 150);
+  --syntax-c: oklch(0.55 0.01 260);
+  --syntax-p: oklch(0.75 0.15 310);
+  color-scheme: dark;
+}
+
+/* Fallback when JS is unavailable: follow the OS preference. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: oklch(0.155 0.012 260);
+    --foreground: oklch(0.965 0.004 250);
+    --card: oklch(0.195 0.015 260);
+    --card-foreground: oklch(0.965 0.004 250);
+    --primary: oklch(0.68 0.15 250);
+    --primary-foreground: oklch(0.13 0.02 260);
+    --primary-hover: oklch(0.73 0.14 250);
+    --secondary: oklch(0.27 0.015 260);
+    --secondary-foreground: oklch(0.93 0.006 250);
+    --muted: oklch(0.24 0.015 260);
+    --muted-foreground: oklch(0.7 0.015 255);
+    --accent: oklch(0.28 0.02 260);
+    --accent-foreground: oklch(0.95 0.004 250);
+    --border: oklch(0.28 0.02 260);
+    --input: oklch(0.28 0.02 260);
+    --ring: oklch(0.68 0.15 250);
+    --code-bg: oklch(0.13 0.01 260);
+    --code-text: oklch(0.85 0.01 250);
+    --syntax-k: oklch(0.72 0.13 250);
+    --syntax-t: oklch(0.8 0.1 250);
+    --syntax-s: oklch(0.78 0.12 150);
+    --syntax-c: oklch(0.55 0.01 260);
+    --syntax-p: oklch(0.75 0.15 310);
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--primary) 25%, transparent);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--foreground);
+}
+
+p {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Button (src/ui/Button.vue)                                         */
+/* ------------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  height: 36px;
+  padding: 0 16px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  outline: none;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+.btn-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.btn svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.btn-secondary:hover {
+  background: color-mix(in oklab, var(--secondary) 78%, var(--foreground));
+}
+
+.btn-outline {
+  border-color: var(--input);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.btn-ghost {
+  color: var(--foreground);
+}
+
+.btn-ghost:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.btn-sm {
+  height: 30px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.btn-lg {
+  height: 42px;
+  padding: 0 22px;
+  font-size: 15px;
+}
+
+.btn-icon {
+  height: 34px;
+  width: 34px;
+  padding: 0;
+}
+
+/* Buttons next to an icon button (e.g. GitHub next to the theme
+   toggle in the nav) match its height. */
+.nav-right .btn {
+  height: 34px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Button group (src/ui/ButtonGroup.vue)                              */
+/* ------------------------------------------------------------------ */
+
+.btn-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--background);
+}
+
+.btn-group .btn {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.btn-group .btn:hover,
+.btn-group .btn:focus-visible {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Layout                                                             */
+/* ------------------------------------------------------------------ */
+
+.container {
+  width: min(1080px, 92vw);
+  margin: 0 auto;
+}
+
+.section {
+  padding: 88px 0;
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+
+.section-head h2 {
+  font-size: clamp(26px, 3.6vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.section-head p {
+  color: var(--muted-foreground);
+  font-size: 16px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Nav                                                                */
+/* ------------------------------------------------------------------ */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in oklab, var(--background) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  height: 56px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-self: start;
+  gap: 9px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.brand img {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.nav-group {
+  display: flex;
+  justify-self: center;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: end;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Hero                                                               */
+/* ------------------------------------------------------------------ */
+
+.hero {
+  padding: 76px 0 0;
+  text-align: center;
+}
+
+.hero-mark {
+  margin: 0 auto 30px;
+  display: block;
+  filter: drop-shadow(0 12px 32px rgba(81, 175, 239, 0.28));
+  transition: transform 0.25s ease;
+}
+
+.hero-mark:hover {
+  transform: scale(1.06);
+}
+
+/* AnimatedLogo (src/ui/AnimatedLogo.vue): the mark draws itself when the
+   .playing class is present, and re-draws on hover. */
+.animated-logo .mark-bg {
+  transform-origin: 50% 50%;
+}
+
+.animated-logo .mark-draw {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+}
+
+.animated-logo .mark-draw-blue {
+  stroke: #51afef;
+}
+
+.animated-logo .mark-draw-white {
+  stroke: #f8fafc;
+}
+
+.animated-logo .mark-fill {
+  opacity: 0;
+}
+
+.animated-logo.playing .mark-bg {
+  animation: mark-bg 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animated-logo.playing .mark-draw-blue {
+  animation: mark-draw 0.65s cubic-bezier(0.55, 0, 0.35, 1) 0.4s both;
+}
+
+.animated-logo.playing .mark-draw-white {
+  animation: mark-draw 0.75s cubic-bezier(0.55, 0, 0.35, 1) 0.62s both;
+}
+
+.animated-logo.playing .mark-fill-blue {
+  animation: mark-fill 0.4s ease-out 1.05s both;
+}
+
+.animated-logo.playing .mark-fill-white {
+  animation: mark-fill 0.4s ease-out 1.3s both;
+}
+
+@keyframes mark-bg {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mark-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes mark-fill {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-logo.playing * {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+  }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  margin-bottom: 24px;
+}
+
+.hero-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34b35a;
+  box-shadow: 0 0 0 3px color-mix(in oklab, #34b35a 18%, transparent);
+}
+
+.hero h1 {
+  font-size: clamp(36px, 5.6vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  max-width: 720px;
+  margin: 0 auto 20px;
+}
+
+.hero h1 .accent {
+  color: var(--primary);
+}
+
+.hero-sub {
+  max-width: 620px;
+  margin: 0 auto;
+  font-size: 17.5px;
+  color: var(--muted-foreground);
+}
+
+.hero-ctas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  flex-wrap: wrap;
+  margin-top: 64px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat .value {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.stat .label {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Screenshot                                                         */
+/* ------------------------------------------------------------------ */
+
+.hero-shot {
+  padding: 64px 0 0;
+}
+
+.shot-frame {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 40px -12px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.shot-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--muted);
+}
+
+.shot-bar .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--foreground) 14%, transparent);
+}
+
+.shot-bar .url {
+  margin-left: 10px;
+  font-size: 12.5px;
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
+  color: var(--muted-foreground);
+}
+
+.shot-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.shot-caption {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Features                                                           */
+/* ------------------------------------------------------------------ */
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.feature {
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.feature:hover {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--border));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.feature h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.feature .feature-icon {
+  color: var(--primary);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+
+.feature .os-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+/* The Apple logo ships white; tint it with the text color so it stays
+   visible on both light and dark backgrounds. */
+.feature .os-apple {
+  fill: var(--foreground);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Code                                                               */
+/* ------------------------------------------------------------------ */
+
+.code-wrap {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 44px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .code-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+.code-block {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--code-bg);
+  overflow: hidden;
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.code-block .code-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--muted) 60%, transparent);
+  font-size: 12.5px;
+  color: var(--muted-foreground);
+  font-family: inherit;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  color: var(--code-text);
+}
+
+.code-block .k {
+  color: var(--syntax-k);
+}
+
+.code-block .t {
+  color: var(--syntax-t);
+}
+
+.code-block .s {
+  color: var(--syntax-s);
+}
+
+.code-block .c {
+  color: var(--syntax-c);
+  font-style: italic;
+}
+
+.code-block .p {
+  color: var(--syntax-p);
+}
+
+.code-side h3 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.code-side .counter-shot {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  margin: 4px 0 18px;
+}
+
+.code-side .run {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+
+.code-side .run .arrow {
+  color: var(--primary);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Showcase                                                           */
+/* ------------------------------------------------------------------ */
+
+.showcase {
+  background: color-mix(in oklab, var(--muted) 55%, var(--background));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.show-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+a.show-card:hover {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--border));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+}
+
+.show-card .shot {
+  display: block;
+  border-bottom: 1px solid var(--border);
+  background: var(--code-bg);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  width: 100%;
+}
+
+.show-card .body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.show-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.show-card p {
+  font-size: 14px;
+  color: var(--muted-foreground);
+  flex: 1;
+}
+
+.show-card .link {
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.show-card .link-arrow {
+  transition: transform 0.15s ease;
+}
+
+.show-card:hover .link-arrow {
+  transform: translateX(3px);
+}
+
+.show-card .badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.show-card .badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+/* ------------------------------------------------------------------ */
+/*  CTA                                                                */
+/* ------------------------------------------------------------------ */
+
+.cta-panel {
+  text-align: center;
+  padding: 64px 40px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  background: var(--card);
+}
+
+.cta-panel h2 {
+  font-size: clamp(26px, 3.6vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.cta-panel > p {
+  color: var(--muted-foreground);
+  max-width: 520px;
+  margin: 0 auto 28px;
+}
+
+.cta-install {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto 28px;
+  padding: 9px 16px;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
+  font-size: 14px;
+  color: var(--code-text);
+}
+
+.cta-install .prompt {
+  color: var(--muted-foreground);
+}
+
+.cta-install .cmd {
+  color: var(--primary);
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Footer                                                             */
+/* ------------------------------------------------------------------ */
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.footer-brand img {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+
+.footer-links a:hover {
+  color: var(--foreground);
+}
+
+.footer-note {
+  flex-basis: 100%;
+  font-size: 12.5px;
+  color: var(--muted-foreground);
+  text-align: center;
+  margin-top: 26px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Responsive                                                         */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 720px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav-group .btn-group {
+    display: none;
+  }
+
+  .hero {
+    padding: 56px 0 0;
+  }
+
+  .stats {
+    gap: 28px;
+    margin-top: 48px;
+  }
+
+  .cta-panel {
+    padding: 48px 24px;
+  }
+}
