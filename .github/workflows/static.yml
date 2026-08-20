@@ -23,13 +23,10 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   build_site:
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -40,17 +37,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # - name: Setup Pages
-      #   uses: actions/configure-pages@v2
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Build
-        env:
-          BASE_PATH: '/vizia-site'
         run: |
           npm run build
           touch build/.nojekyll
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'build/'
 
@@ -69,4 +65,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
