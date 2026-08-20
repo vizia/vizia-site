@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon-64.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vizia · A declarative GUI library for Rust</title>
+    <meta
+      name="description"
+      content="Vizia is a declarative, reactive GUI framework for Rust. Build cross-platform desktop apps for Windows, macOS and Linux in pure Rust, no DSL, no macros. MIT licensed."
+    />
+    <meta property="og:title" content="Vizia · A declarative GUI library for Rust" />
+    <meta
+      property="og:description"
+      content="Declarative desktop UI, in pure Rust. Cross-platform, reactive, powered by Skia."
+    />
+    <meta property="og:type" content="website" />
+    <script>
+      // Follows the OS theme by default; an explicit choice (via the
+      // ThemeToggle button) overrides it. Runs before first paint and
+      // always sets an explicit attribute so the toggle stays in sync.
+      try {
+        var stored = localStorage.getItem('vizia-theme')
+        var dark =
+          stored === 'dark' ||
+          (stored === null && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
